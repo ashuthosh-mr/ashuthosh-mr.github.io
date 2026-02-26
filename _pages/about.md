@@ -6,7 +6,7 @@ subtitle: Senior Design Engineer at <a href='https://calligotech.com/'>Calligo T
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: profpic.jpeg
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>Senior Design Engineer</p>
