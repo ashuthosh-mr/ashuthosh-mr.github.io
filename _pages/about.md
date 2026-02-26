@@ -6,7 +6,7 @@ subtitle: Senior Design Engineer at Calligo Technologies | Computer Architecture
 
 profile:
   align: right
-  image: techcon.jpg   # replace with your actual image filename inside assets/img/
+  image: prof_pic.jpg   # replace with your actual image filename inside assets/img/
   image_circular: false
   more_info: >
     <p>Senior Design Engineer</p>
