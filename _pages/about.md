@@ -2,33 +2,35 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: Senior Design Engineer at Calligo Technologies | Computer Architecture & RISC-V Systems
 
 profile:
   align: right
-  image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
+  image: techcon.jpg   # replace with your actual image filename inside assets/img/
+  image_circular: false
   more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+    <p>Senior Design Engineer</p>
+    <p>Calligo Technologies</p>
+    <p>Bengaluru, India</p>
 
-selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true # includes social icons at the bottom of the page
+selected_papers: true
+social: true
 
 announcements:
-  enabled: true # includes a list of news items
-  scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-  limit: 5 # leave blank to include all the news in the `_news` folder
+  enabled: false
 
 latest_posts:
-  enabled: true
-  scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
-  limit: 3 # leave blank to include all the blog posts
+  enabled: false
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](https://www.reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+I am a hardware researcher and systems engineer working at the intersection of computer architecture, performance modeling, and hardware–software co-design.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+My work focuses on building efficient compute systems through architectural insight and rigorous performance analysis. I have developed analytical models, profiling frameworks, and custom compute kernels for RISC-V and FPGA-based platforms, with a focus on accelerating sparse and dense linear algebra as well as graph workloads.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+I am particularly interested in microarchitectural bottleneck analysis, memory hierarchy behavior, and compute–memory trade-offs in many-core systems. I genuinely enjoy working hands-on with FPGAs — using them as experimental platforms to prototype architectural ideas, validate performance models, and explore design-space trade-offs before silicon.
+
+Currently, I serve as a **Senior Design Engineer at Calligo Technologies**, contributing to advanced hardware system design. I am also actively involved with **CHIPS Lab, PES University**, where I mentor students and pursue independent open-source research in computer architecture.
+
+Beyond performance metrics and benchmarks, I am motivated by a broader mission: building computing systems that are efficient, responsible, and purposeful. I believe architecture should enable meaningful scientific and engineering progress — from large-scale computation to sustainable infrastructure and space-grade systems — not merely short-term trends.
+
+Outside engineering, I explore photography as a way of observing structure, light, and perspective from a different lens.
