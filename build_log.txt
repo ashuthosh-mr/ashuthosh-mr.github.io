@@ -1,0 +1,54 @@
+Configuration file: /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/_config.yml
+            Source: /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io
+       Destination: /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+[31m                    ------------------------------------------------[0m
+[31m      Jekyll 4.4.1   Please append `--trace` to the `build` command [0m
+[31m                     for any additional information or backtrace. [0m
+[31m                    ------------------------------------------------[0m
+/opt/hostedtoolcache/Ruby/3.3.5/x64/lib/ruby/3.3.0/psych/parser.rb:62:in `_native_parse': (/home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/_data/cv.yml): mapping values are not allowed in this context at line 79 column 31 (Psych::SyntaxError)
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/lib/ruby/3.3.0/psych/parser.rb:62:in `parse'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/safe_yaml-1.0.5/lib/safe_yaml/load.rb:143:in `load'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/safe_yaml-1.0.5/lib/safe_yaml/load.rb:157:in `block in load_file'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/safe_yaml-1.0.5/lib/safe_yaml/load.rb:157:in `open'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/safe_yaml-1.0.5/lib/safe_yaml/load.rb:157:in `load_file'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/readers/data_reader.rb:66:in `read_data_file'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/readers/data_reader.rb:49:in `block in read_data_to'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/readers/data_reader.rb:41:in `each'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/readers/data_reader.rb:41:in `read_data_to'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/readers/data_reader.rb:23:in `read'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/reader.rb:31:in `read_data'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/reader.rb:21:in `read'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/site.rb:181:in `read'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/site.rb:78:in `process'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/command.rb:28:in `process_site'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/commands/build.rb:65:in `build'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/commands/build.rb:36:in `process'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/command.rb:91:in `block in process_with_graceful_fail'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/command.rb:91:in `each'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/command.rb:91:in `process_with_graceful_fail'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/lib/jekyll/commands/build.rb:18:in `block (2 levels) in init_with_program'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/mercenary-0.4.0/lib/mercenary/command.rb:221:in `block in execute'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/mercenary-0.4.0/lib/mercenary/command.rb:221:in `each'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/mercenary-0.4.0/lib/mercenary/command.rb:221:in `execute'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/mercenary-0.4.0/lib/mercenary/program.rb:44:in `go'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/mercenary-0.4.0/lib/mercenary.rb:21:in `program'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/gems/jekyll-4.4.1/exe/jekyll:15:in `<top (required)>'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/bin/jekyll:25:in `load'
+	from /home/runner/work/ashuthosh-mr.github.io/ashuthosh-mr.github.io/vendor/bundle/ruby/3.3.0/bin/jekyll:25:in `<top (required)>'
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/lib/ruby/3.3.0/bundler/cli/exec.rb:58:in `load'
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/lib/ruby/3.3.0/bundler/cli/exec.rb:58:in `kernel_load'
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/lib/ruby/3.3.0/bundler/cli/exec.rb:23:in `run'
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/lib/ruby/3.3.0/bundler/cli.rb:455:in `exec'
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/lib/ruby/3.3.0/bundler/vendor/thor/lib/thor/command.rb:28:in `run'
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/lib/ruby/3.3.0/bundler/vendor/thor/lib/thor/invocation.rb:127:in `invoke_command'
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/lib/ruby/3.3.0/bundler/vendor/thor/lib/thor.rb:527:in `dispatch'
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/lib/ruby/3.3.0/bundler/cli.rb:35:in `dispatch'
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/lib/ruby/3.3.0/bundler/vendor/thor/lib/thor/base.rb:584:in `start'
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/lib/ruby/3.3.0/bundler/cli.rb:29:in `start'
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/lib/ruby/gems/3.3.0/gems/bundler-2.5.16/exe/bundle:28:in `block in <top (required)>'
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/lib/ruby/3.3.0/bundler/friendly_errors.rb:117:in `with_friendly_errors'
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/lib/ruby/gems/3.3.0/gems/bundler-2.5.16/exe/bundle:20:in `<top (required)>'
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/bin/bundle:25:in `load'
+	from /opt/hostedtoolcache/Ruby/3.3.5/x64/bin/bundle:25:in `<main>'
