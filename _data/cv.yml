@@ -76,7 +76,7 @@ cv:
       - title: Best Paper Award
         awarder: 35th International Conference on VLSI Design (VLSID)
         date: 2022-01-01
-        summary: For "MAPPARAT: A resource constrained FPGA-based accelerator for sparse-dense matrix multiplication."
+        summary: 'For "MAPPARAT: A resource constrained FPGA-based accelerator for sparse-dense matrix multiplication."'
 
       - title: Best Lightning Talk Award
         awarder: HiPC Student Research Symposium
