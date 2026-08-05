@@ -33,7 +33,7 @@ My work focuses on building efficient compute systems through architectural insi
 
 I am particularly interested in microarchitectural bottleneck analysis, memory hierarchy behavior, and compute–memory trade-offs in many-core systems. I genuinely enjoy working hands-on with FPGAs — using them as experimental platforms to prototype architectural ideas, validate performance models, and explore design-space trade-offs before silicon.
 
-Currently, I serve as a **Senior Design Engineer at Calligo Technologies**, contributing to advanced hardware system design. I am also actively involved with **CHIPS Lab, PES University**, where I mentor students and pursue independent open-source research in computer architecture.
+Currently, I serve as a **Senior Design Engineer at Calligo Technologies**, contributing to advanced hardware system design. Previously, I was a Research Assistant at the **CHIPS Lab, PES University**, where I mentored students and pursued independent open-source research in computer architecture.
 
 Beyond performance metrics and benchmarks, I am motivated by a broader mission: building computing systems that are efficient, responsible, and purposeful. I believe architecture should enable meaningful scientific and engineering progress — from large-scale computation to sustainable infrastructure and space-grade systems — not merely short-term trends.
 
