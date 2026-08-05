@@ -93,7 +93,12 @@ jobs:
           sudo apt-get update && sudo apt-get install -y imagemagick
           pip3 install --upgrade nbconvert
           export JEKYLL_ENV=production
-          bundle exec jekyll build
+          bundle exec jekyll build > build_log.txt 2>&1 || true
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add build_log.txt
+          git commit -m "Upload build log" || true
+          git push origin HEAD || true
       - name: Purge unused CSS 🧹
         run: |
           npm install -g purgecss
