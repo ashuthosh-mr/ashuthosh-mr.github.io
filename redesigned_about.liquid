@@ -1,0 +1,90 @@
+﻿---
+layout: default
+---
+<div class="post">
+  <!-- Hero Section -->
+  <div class="hero-wrapper text-center">
+    {% if page.profile and page.profile.image %}
+      {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
+      <div class="hero-avatar-frame mb-3">
+        <img src="{{ profile_image_path | relative_url }}" alt="{{ site.title }}" />
+      </div>
+    {% endif %}
+
+    <h1 class="hero-title">
+      {% if site.title == 'blank' %}
+        {{ site.first_name }} {{ site.last_name }}
+      {% else %}
+        {{ site.title }}
+      {% endif %}
+    </h1>
+
+    <div class="hero-subtitle">
+      {{ page.subtitle }}
+    </div>
+
+    <!-- Key Skill / Highlight Pills -->
+    <div class="hero-pills">
+      <span class="custom-pill"><i class="fa-solid fa-microchip"></i> RISC-V SoC Integration</span>
+      <span class="custom-pill"><i class="fa-solid fa-server"></i> Computer Architecture & Performance Modeling</span>
+      <span class="custom-pill"><i class="fa-solid fa-bolt"></i> FPGA Accelerators</span>
+      <span class="custom-pill"><i class="fa-solid fa-code"></i> HW/SW Co-Design</span>
+    </div>
+
+    <!-- Quick Call to Actions -->
+    <div class="hero-actions">
+      <a href="{{ '/projects/' | relative_url }}" class="btn-custom-primary">
+        <i class="fa-solid fa-microchip"></i> Explore Projects
+      </a>
+      <a href="{{ '/publications/' | relative_url }}" class="btn-custom-outline">
+        <i class="fa-solid fa-book-open"></i> Publications
+      </a>
+      <a href="{{ '/cv/' | relative_url }}" class="btn-custom-outline">
+        <i class="fa-solid fa-file-lines"></i> View CV
+      </a>
+    </div>
+  </div>
+
+  <article class="mt-4">
+    <!-- About Bio Card -->
+    <div class="custom-card">
+      <div class="section-header">
+        <div class="section-icon"><i class="fa-solid fa-user-astronaut"></i></div>
+        <h2>About Me</h2>
+      </div>
+      <div class="clearfix hero-bio-text">{{ content }}</div>
+    </div>
+
+    <!-- Latest News -->
+    {% if page.announcements and page.announcements.enabled %}
+      <div class="custom-card">
+        <div class="section-header">
+          <div class="section-icon"><i class="fa-solid fa-newspaper"></i></div>
+          <h2><a href="{{ '/news/' | relative_url }}" style="color: inherit">Latest News</a></h2>
+        </div>
+        {% include news.liquid limit=true %}
+      </div>
+    {% endif %}
+
+    <!-- Selected Publications -->
+    {% if page.selected_papers %}
+      <div class="custom-card">
+        <div class="section-header">
+          <div class="section-icon"><i class="fa-solid fa-bookmark"></i></div>
+          <h2><a href="{{ '/publications/' | relative_url }}" style="color: inherit">Selected Publications</a></h2>
+        </div>
+        {% include selected_papers.liquid %}
+      </div>
+    {% endif %}
+
+    <!-- Social Links -->
+    {% if page.social %}
+      <div class="social text-center mt-4">
+        <div class="contact-icons">{% social_links %}</div>
+        {% if site.contact_note %}
+          <div class="contact-note text-muted small mt-2">{{ site.contact_note }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </article>
+</div>
