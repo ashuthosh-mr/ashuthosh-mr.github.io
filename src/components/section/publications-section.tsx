@@ -32,7 +32,13 @@ export default function PublicationsSection({
             {pub.badges.length > 0 && (
               <div className="flex flex-wrap gap-1 mt-1">
                 {pub.badges.map((badge) => (
-                  <Badge key={badge} variant="secondary" className="text-[10px]">
+                  <Badge
+                    key={badge}
+                    // Awards carry the filled treatment; descriptors like
+                    // "Poster" stay quiet so they read as metadata.
+                    variant={badge.includes("Award") ? "default" : "outline"}
+                    className="text-[10px]"
+                  >
                     {badge}
                   </Badge>
                 ))}

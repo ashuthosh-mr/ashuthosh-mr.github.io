@@ -43,6 +43,27 @@ const SKILLS: Skill[] = [
 const PUBLICATIONS: Publication[] = [
   {
     title:
+      "MATANALYZE: A custom accelerator generator for sparse-dense and dense-sparse matrix multiplication",
+    authors: "M. Sahel, M. R. Ashuthosh, and M. Purnaprajna",
+    venue:
+      "2025 IEEE 32nd International Conference on High Performance Computing, Data and Analytics Workshop (HiPCW), pp. 307-308",
+    year: "2025",
+    badges: [],
+    href: "",
+  },
+  {
+    title:
+      "PARISCV: A RISC-V profiler for application-specific hardware optimization",
+    authors:
+      "S. Spoorthi, M. R. Ashuthosh, K. Bharadhwaj, V. Reddy, and M. Purnaprajna",
+    venue:
+      "2025 IEEE 32nd International Conference on High Performance Computing, Data and Analytics Workshop (HiPCW), pp. 303-304",
+    year: "2025",
+    badges: [],
+    href: "",
+  },
+  {
+    title:
       "Predicting the performance of graph algorithms on a RISC-V based multi-core processor cluster",
     authors: "M. R. Ashuthosh, A. Vinay, K. K. Nagar, and M. Purnaprajna",
     venue: "TECHCON 2024, Austin, TX, USA",
@@ -61,9 +82,18 @@ const PUBLICATIONS: Publication[] = [
     href: "https://ashuthosh.de/pariscv-site/",
   },
   {
+    title: "Accelerating BFS algorithm on a RISC-V based many-core cluster",
+    authors: "M. R. Ashuthosh, A. Vinay, K. K. Nagar, and M. Purnaprajna",
+    venue: "HiPC Student Research Symposium (HiPC-SRS '23), Goa, India",
+    year: "2023",
+    badges: ["Poster", "Best Lightning Talk Award"],
+    href: "",
+  },
+  {
     title:
       "Enabling high-level design strategies for high-throughput and low-power NB-LDPC decoders",
-    authors: "S. Subramaniyan, O. Ferraz, M. R. Ashuthosh, et al.",
+    authors:
+      "S. Subramaniyan, O. Ferraz, M. R. Ashuthosh, S. Krishna, G. Wang, J. R. Cavallaro, V. Silva, G. Falcao, and M. Purnaprajna",
     venue: "IEEE Design & Test, vol. 40",
     year: "2022",
     badges: [],
@@ -80,6 +110,17 @@ const PUBLICATIONS: Publication[] = [
     badges: ["Best Paper Award"],
     href: "",
   },
+  {
+    title:
+      "Pushing the limits of energy efficiency for non-binary LDPC decoders on GPUs and FPGAs",
+    authors:
+      "S. Subramaniyan, O. Ferraz, M. R. Ashuthosh, S. Krishna, G. Wang, J. R. Cavallaro, V. Silva, G. Falcao, and M. Purnaprajna",
+    venue:
+      "2020 IEEE Workshop on Signal Processing Systems (SiPS), pp. 1-6",
+    year: "2020",
+    badges: [],
+    href: "",
+  },
 ];
 
 export const DATA = {
@@ -91,8 +132,9 @@ export const DATA = {
   description:
     "Senior Hardware Design Engineer at Calligo Technologies. I work on many-core RISC-V SoCs, computer architecture, and performance modeling for compute-intensive workloads.",
   summary:
-    "I am a hardware design engineer and researcher working at the intersection of computer architecture, performance modeling, and hardware–software co-design.\n\nRight now I am integrating a multi-core RISC-V SoC for AI/ML acceleration — adapting an open-source many-core framework to production needs across interface specification, cache hierarchy, memory subsystem integration, and synthesis-ready design releases.\n\nBefore that I spent four years at the CHIPS Lab, PES University, building analytical performance models, trace-driven profilers, and FPGA accelerators for sparse and dense linear algebra and graph workloads. I am particularly drawn to microarchitectural bottleneck analysis, memory hierarchy behaviour, and compute–memory trade-offs in many-core systems — and I genuinely enjoy working hands-on with FPGAs as experimental platforms to validate architectural ideas before silicon.\n\nOutside engineering, I explore photography as a way of observing structure, light, and perspective from a different lens.",
+    "I am a hardware design engineer and researcher working at the intersection of computer architecture, performance modeling, and hardware–software co-design.\n\nRight now I am integrating a multi-core RISC-V SoC for AI/ML acceleration — adapting an open-source many-core framework to production needs across interface specification, cache hierarchy, memory subsystem integration, and synthesis-ready design releases.\n\nBefore that I spent four years at the Centre for Heterogeneous and Intelligent Processing Systems (CHIPS) Lab, PES University, building analytical performance models, trace-driven profilers, and FPGA accelerators for sparse and dense linear algebra and graph workloads. I am particularly drawn to microarchitectural bottleneck analysis, memory hierarchy behaviour, and compute–memory trade-offs in many-core systems — and I genuinely enjoy working hands-on with FPGAs as experimental platforms to validate architectural ideas before silicon.\n\nOutside engineering, I explore photography as a way of observing structure, light, and perspective from a different lens.",
   avatarUrl: "/me.jpg",
+  scholarUrl: "https://scholar.google.com/citations?user=PHT5rD8AAAAJ&hl=en",
   skills: SKILLS,
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -135,23 +177,24 @@ export const DATA = {
       badges: [],
       location: "Bengaluru, India",
       title: "Senior Hardware Design Engineer",
-      logoUrl: "",
+      logoUrl: "/logos/calligo.png",
       start: "Jan 2025",
       end: "Present",
       description:
         "• Drove platform selection for a multi-core RISC-V SoC targeting AI/ML acceleration, surveying open-source many-core frameworks and benchmarking projected core performance.\n• Specified and documented the core-to-cache interface, validating each transaction type against RTL waveforms and supporting an external team integrating a custom core.\n• Explored cache hierarchy configurations to improve cache performance while containing area.\n• Built out the memory subsystem and peripherals, including controller placement and a custom AXI4 peripheral.\n• Delivered periodic design releases and added automation scripts that simplified integration and simulation of the design.\n• Mentored an intern on a systolic-array matrix multiplier for DNN acceleration.",
     },
     {
-      company: "CHIPS Lab, PES University",
+      company:
+        "Centre for Heterogeneous and Intelligent Processing Systems (CHIPS) Lab, PES University",
       href: "https://research.pes.edu/",
       badges: ["Research"],
       location: "Bengaluru, India",
       title: "Research Assistant",
-      logoUrl: "",
+      logoUrl: "/logos/chips.png",
       start: "Sep 2020",
       end: "Jan 2025",
       description:
-        "Centre for Heterogeneous and Intelligent Processing Systems.\n\n• Designed FPGA-based accelerators for sparse-dense matrix multiplication, enabling high-throughput AI/ML kernel execution under resource constraints.\n• Developed an analytical performance model for RISC-V many-core architectures, enabling design-space exploration for graph-algorithm workloads.\n• Built a trace-driven profiler for RISC-V, identifying instruction-level extensions and application-specific accelerators to improve ML workload performance and efficiency.\n• Collaborated with the Semiconductor Research Corporation (SRC) on a funded project on domain-optimised RISC-V FPGA overlays.\n• Conducted RISC-V-on-FPGA lab sessions and mentored B.Tech students through processor-design and hardware-acceleration capstone projects.\n• Received the Best Lightning Talk Award at the HiPC Student Research Symposium 2023.",
+        "• Designed FPGA-based accelerators for sparse-dense matrix multiplication, enabling high-throughput AI/ML kernel execution under resource constraints.\n• Developed an analytical performance model for RISC-V many-core architectures, enabling design-space exploration for graph-algorithm workloads.\n• Built a trace-driven profiler for RISC-V, identifying instruction-level extensions and application-specific accelerators to improve ML workload performance and efficiency.\n• Collaborated with the Semiconductor Research Corporation (SRC) on a funded project on domain-optimised RISC-V FPGA overlays.\n• Conducted RISC-V-on-FPGA lab sessions and mentored B.Tech students through processor-design and hardware-acceleration capstone projects.\n• Received the Best Lightning Talk Award at the HiPC Student Research Symposium 2023.",
     },
     {
       company: "Amrita Vishwa Vidyapeetham",
@@ -159,7 +202,7 @@ export const DATA = {
       badges: ["Internship"],
       location: "Remote",
       title: "Research Assistant — Intern",
-      logoUrl: "",
+      logoUrl: "/logos/amrita.png",
       start: "Jan 2020",
       end: "May 2020",
       description:
@@ -174,7 +217,7 @@ export const DATA = {
       degree: "M.Tech (by Research), Electronics and Communication Engineering",
       description:
         'Thesis: "Performance Prediction of Graph Algorithms on RISC-V Multi-Cores", advised by Prof. Madhura Purnaprajna. CGPA 8.14/10.',
-      logoUrl: "",
+      logoUrl: "/logos/pes.png",
       start: "May 2022",
       end: "Jul 2026",
     },
@@ -183,7 +226,7 @@ export const DATA = {
       href: "https://pes.edu/",
       degree: "B.E., Electronics and Communication Engineering",
       description: "Graduated with 7.96/10 CGPA.",
-      logoUrl: "",
+      logoUrl: "/logos/pes.png",
       start: "Aug 2016",
       end: "Jul 2020",
     },
@@ -268,10 +311,11 @@ export const DATA = {
 
   volunteering: [
     {
-      title: "Teaching & Mentoring — CHIPS Lab, PES University",
+      title:
+        "Teaching & Mentoring — Centre for Heterogeneous and Intelligent Processing Systems (CHIPS) Lab, PES University",
       location: "Bengaluru, India",
       dates: "2020 - 2025",
-      image: "",
+      image: "/logos/chips.png",
       description:
         "Conducted RISC-V-on-FPGA lab sessions and mentored B.Tech students through processor-design and hardware-acceleration capstone projects.",
     },
@@ -279,7 +323,7 @@ export const DATA = {
       title: "Intern Mentorship — Calligo Technologies",
       location: "Bengaluru, India",
       dates: "2025",
-      image: "",
+      image: "/logos/calligo.png",
       description:
         "Mentored an intern on the design and evaluation of a systolic-array matrix multiplier for DNN acceleration.",
     },
@@ -287,7 +331,7 @@ export const DATA = {
       title: "SRC Collaboration — Domain-Optimised RISC-V FPGA Overlays",
       location: "Bengaluru, India",
       dates: "2022 - 2024",
-      image: "",
+      image: "/logos/src.png",
       description:
         "Collaborated with the Semiconductor Research Corporation (SRC) on a funded research project exploring domain-optimised RISC-V FPGA overlays.",
     },

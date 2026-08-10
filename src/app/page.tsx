@@ -148,7 +148,21 @@ export default function Page() {
       <section id="publications">
         <div className="flex min-h-0 flex-col gap-y-6">
           <BlurFade delay={BLUR_FADE_DELAY * 12}>
-            <h2 className="text-xl font-bold">Publications</h2>
+            <div className="flex items-baseline justify-between gap-4">
+              <h2 className="text-xl font-bold">Publications</h2>
+              <Link
+                href={DATA.scholarUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1 group flex-none"
+              >
+                Google Scholar
+                <ArrowUpRight
+                  className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden
+                />
+              </Link>
+            </div>
           </BlurFade>
           <PublicationsSection baseDelay={BLUR_FADE_DELAY * 13} />
         </div>
