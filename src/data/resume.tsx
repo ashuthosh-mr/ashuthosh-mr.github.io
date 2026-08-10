@@ -260,7 +260,7 @@ export const DATA = {
         },
       ],
       image: "",
-      video: "",
+      video: "/project/pariscv.mp4",
     },
     {
       title: "Ginger-V",
