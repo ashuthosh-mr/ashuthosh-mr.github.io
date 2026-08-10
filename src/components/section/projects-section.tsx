@@ -6,7 +6,10 @@ import { DATA } from "@/data/resume";
 import { useMemo, useState } from "react";
 
 const BLUR_FADE_DELAY = 0.04;
-const INITIAL_VISIBLE_PROJECTS = 2;
+// Cards below this count are only rendered after the reader expands, so they
+// stay out of the static HTML and out of search results. Keep it at two full
+// rows of the 2-column grid so most of the work is visible and indexable.
+const INITIAL_VISIBLE_PROJECTS = 4;
 
 export default function ProjectsSection() {
   const [showAll, setShowAll] = useState(false);
@@ -33,7 +36,7 @@ export default function ProjectsSection() {
           <div className="flex flex-col gap-y-3 items-center justify-center">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Check out my latest work</h2>
             <p className="text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed text-balance text-center">
-              Accelerators, profilers, and performance models for RISC-V and FPGA platforms. Here is what I have built, measured, and learned from.
+              Profilers, accelerators, and teaching material for RISC-V and FPGA platforms. Here is what I have built, measured, and learned from.
             </p>
           </div>
         </div>

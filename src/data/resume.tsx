@@ -236,16 +236,16 @@ export const DATA = {
     {
       title: "PARISCV",
       href: "https://ashuthosh.de/pariscv-site/",
-      dates: "2024",
+      dates: "2024 - Present",
       active: true,
       description:
-        "A trace-driven profiler for RISC-V that identifies instruction-level extensions and application-specific accelerators to improve the performance and efficiency of ML workloads. By analysing execution traces, it surfaces the hotspots and instruction patterns that are the best candidates for custom hardware. Presented at OSCAR, ISCA'24.",
+        "A trace-driven profiler for RISC-V that analyses execution traces to recommend which ISA extensions and custom sub-instructions are actually worth putting in hardware. It reports cycle counts and instruction mix per extension across the Embench suite, so a speed-up can be weighed against the area and power an extension would cost. Presented as a poster at OSCAR (ISCA'24) and at HiPCW 2025.",
       technologies: [
         "RISC-V",
         "Python",
         "Trace Analysis",
         "Embench",
-        "Workload Profiling",
+        "ISA Extensions",
       ],
       links: [
         {
@@ -253,35 +253,47 @@ export const DATA = {
           href: "https://ashuthosh.de/pariscv-site/",
           icon: <Icons.globe className="h-4 w-4" />,
         },
+        {
+          type: "GitHub",
+          href: "https://github.com/ashuthosh-mr/profiler",
+          icon: <Icons.github className="h-4 w-4" />,
+        },
       ],
       image: "",
       video: "",
     },
     {
-      title: "Graph Algorithm Performance Model",
-      href: "#",
-      dates: "2022 - 2026",
+      title: "Ginger-V",
+      href: "https://github.com/ashuthosh-mr/ginger-v",
+      dates: "2026 - Present",
       active: true,
       description:
-        "An analytical performance model for RISC-V many-core architectures that enables design-space exploration for graph-algorithm workloads. Instead of relying on lengthy cycle-accurate simulation, the model predicts how graph workloads scale across cores, capturing the compute-memory trade-offs that shape performance on a multi-core cluster. Core of my M.Tech thesis; published at TECHCON 2024.",
+        "A ParaGato Labs project on architecture- and memory-centric design space exploration for DNN-based genomic basecalling on heterogeneous RISC-V systems at the edge. Nanopore basecallers normally lean on GPUs to keep pace with sequencing rates; Ginger-V asks when an FPGA-backed RISC-V platform can sustain them instead, under real power and memory budgets. GEMM-dominant kernels are offloaded to RedMulE, the PULP platform's outer-product systolic GEMM accelerator, while control, activations and decoding stay on the RISC-V host with selective custom instructions. The study centres on memory traffic and data movement, tiling and reuse, arithmetic intensity, and real-time feasibility against nanopore signal rates.",
       technologies: [
         "RISC-V",
-        "Performance Modeling",
-        "Graph Algorithms",
-        "Many-core",
-        "Python",
+        "Genomic Basecalling",
+        "DNN Inference",
+        "RedMulE",
+        "PULP",
+        "Memory Analysis",
       ],
-      links: [],
-      image: "",
+      links: [
+        {
+          type: "GitHub",
+          href: "https://github.com/ashuthosh-mr/ginger-v",
+          icon: <Icons.github className="h-4 w-4" />,
+        },
+      ],
+      image: "/project/ginger-v.png",
       video: "",
     },
     {
       title: "MAPPARAT",
-      href: "#",
-      dates: "2022",
+      href: "https://github.com/santoshkrishna4138/Sparse_Dense_Matrix_Multiplication",
+      dates: "2021 - 2022",
       active: false,
       description:
-        "A resource-constrained FPGA accelerator for sparse-dense matrix multiplication, designed to deliver high-throughput AI/ML kernel execution under tight resource constraints. Explores dataflow and memory-access strategies that keep utilisation high when one operand is sparse and the other dense. Received the Best Paper Award at VLSID 2022.",
+        "A resource-constrained FPGA accelerator for sparse-dense matrix multiplication, implemented for 560x560 matrices. It explores the dataflow and memory-access strategies that keep utilisation high when one operand is sparse and the other dense, so high-throughput AI/ML kernels still fit on modest FPGA fabric. Received the Best Paper Award at VLSID 2022.",
       technologies: [
         "FPGA",
         "Verilog",
@@ -289,19 +301,56 @@ export const DATA = {
         "Accelerator Design",
         "Best Paper",
       ],
-      links: [],
+      links: [
+        {
+          type: "GitHub",
+          href: "https://github.com/santoshkrishna4138/Sparse_Dense_Matrix_Multiplication",
+          icon: <Icons.github className="h-4 w-4" />,
+        },
+      ],
       image: "",
       video: "",
     },
     {
-      title: "NB-LDPC Decoders on FPGA",
-      href: "#",
+      title: "RISC-V on FPGA Labs",
+      href: "https://github.com/ashuthosh-mr/RISC-V-On-FPGA-Labs",
+      dates: "2022",
+      active: false,
+      description:
+        "Course material I built and taught for undergraduate electronics students at the CHIPS Lab, PES University. It ships Vivado project files for the Pinaka SoC - a 32-bit Shakti RISC-V core targeting Arty A7-35 and A7-100 boards - alongside labs that take students from running C on the Spike simulator and measuring cycle counts, through programming the board, to designing and packaging their own custom AXI4 peripheral and running code against it.",
+      technologies: [
+        "RISC-V",
+        "Shakti",
+        "Vivado",
+        "Bluespec",
+        "AXI4",
+        "Teaching",
+      ],
+      links: [
+        {
+          type: "GitHub",
+          href: "https://github.com/ashuthosh-mr/RISC-V-On-FPGA-Labs",
+          icon: <Icons.github className="h-4 w-4" />,
+        },
+      ],
+      image: "",
+      video: "",
+    },
+    {
+      title: "LDPC Decoder RTL",
+      href: "https://github.com/ashuthosh-mr/LDPC-RTL",
       dates: "2020 - 2022",
       active: false,
       description:
-        "An investigation of robust GF(2^m) non-binary LDPC decoders on FPGA, benchmarking throughput, power, and area against GPU implementations. Explored high-level design strategies for high-throughput, low-power decoding as part of the ECHO Indo-Portugal project. Design strategies published in IEEE Design & Test.",
-      technologies: ["FPGA", "Verilog", "Error Correction", "Low Power"],
-      links: [],
+        "RTL implementations of non-binary LDPC decoders over GF(4), GF(8) and GF(16). Part of the NB-LDPC work benchmarking FPGA decoders against GPU implementations for throughput, power and area, carried out under the ECHO Indo-Portugal project and published at SiPS 2020 and in IEEE Design & Test.",
+      technologies: ["Verilog", "FPGA", "Error Correction", "Low Power"],
+      links: [
+        {
+          type: "GitHub",
+          href: "https://github.com/ashuthosh-mr/LDPC-RTL",
+          icon: <Icons.github className="h-4 w-4" />,
+        },
+      ],
       image: "",
       video: "",
     },
