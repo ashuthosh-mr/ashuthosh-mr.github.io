@@ -260,7 +260,7 @@ export const DATA = {
         },
       ],
       image: "",
-      video: "/project/pariscv.mp4",
+      video: "",
     },
     {
       title: "Ginger-V",
@@ -310,7 +310,7 @@ export const DATA = {
         },
       ],
       image: "",
-      video: "",
+      video: "/project/mapparat.mp4",
     },
     {
       title: "RISC-V on FPGA Labs",
@@ -335,7 +335,7 @@ export const DATA = {
         },
       ],
       image: "",
-      video: "",
+      video: "/project/riscv-labs.mp4",
     },
     {
       title: "LDPC Decoder RTL",
