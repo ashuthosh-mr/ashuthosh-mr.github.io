@@ -284,8 +284,9 @@ export const DATA = {
           icon: <Icons.github className="h-4 w-4" />,
         },
       ],
+      // The logo doubles as the video's poster frame.
       image: "/project/ginger-v.png",
-      video: "",
+      video: "/project/ginger-v.mp4",
     },
     {
       title: "MAPPARAT",

@@ -73,6 +73,10 @@ export function ProjectCard({
           {video ? (
             <video
               src={withBasePath(video)}
+              // When a card has both, the image becomes the poster: it paints
+              // immediately, covers the load, and stands in if the browser
+              // refuses to autoplay (power saving, data saver).
+              poster={image ? withBasePath(image) : undefined}
               autoPlay
               loop
               muted
