@@ -14,10 +14,13 @@ export function ModeToggle({ className }: { className?: string }) {
       variant="link"
       size="icon"
       className={cn(className)}
+      aria-label="Toggle between dark and light theme"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
-      <SunIcon className="h-full w-full" />
-      <MoonIcon className="hidden h-full w-full" />
+      {/* Show the theme you'd switch *to*. Swapped via the `dark` class rather
+          than `theme`, so the correct icon is painted before hydration. */}
+      <MoonIcon className="h-full w-full dark:hidden" />
+      <SunIcon className="hidden h-full w-full dark:block" />
     </Button>
   );
 }
