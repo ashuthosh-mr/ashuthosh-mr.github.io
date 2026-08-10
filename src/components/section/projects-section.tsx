@@ -33,7 +33,7 @@ export default function ProjectsSection() {
           <div className="flex flex-col gap-y-3 items-center justify-center">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Check out my latest work</h2>
             <p className="text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed text-balance text-center">
-              I build at the intersection of physics, hardware, and code. Here are some things I have built, broken, and learned from.
+              Accelerators, profilers, and performance models for RISC-V and FPGA platforms. Here is what I have built, measured, and learned from.
             </p>
           </div>
         </div>

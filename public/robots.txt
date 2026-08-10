@@ -5,5 +5,9 @@ Allow: /
 Disallow: /_next/
 Disallow: /api/
 
+# Placeholder routes emitted while the blog/bookshelf collections are empty
+Disallow: /blog/__empty/
+Disallow: /bookshelf/__empty/
+
 # Sitemap location
-Sitemap: https://shiwani42.github.io/sitemap.xml
+Sitemap: https://ashuthosh.de/sitemap.xml

@@ -1,5 +1,6 @@
 import { allPosts } from "content-collections";
 import { formatDate, withBasePath } from "@/lib/utils";
+import { slugParams } from "@/lib/static-params";
 import { DATA } from "@/data/resume";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -18,9 +19,9 @@ function getSortedPosts() {
 }
 
 export async function generateStaticParams() {
-  return allPosts.map((post) => ({
-    slug: post._meta.path.replace(/\.mdx$/, ""),
-  }));
+  return slugParams(
+    allPosts.map((post) => post._meta.path.replace(/\.mdx$/, ""))
+  );
 }
 
 export async function generateMetadata({

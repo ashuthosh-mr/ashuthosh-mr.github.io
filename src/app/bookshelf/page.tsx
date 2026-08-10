@@ -41,6 +41,16 @@ export default function BookshelfPage() {
         </div>
       </BlurFade>
 
+      {books.length === 0 && (
+        <BlurFade delay={BLUR_FADE_DELAY * 2}>
+          <div className="flex flex-col items-center justify-center py-12 px-4 border border-border rounded-xl">
+            <p className="text-muted-foreground text-center">
+              Nothing on the shelf yet. Check back soon!
+            </p>
+          </div>
+        </BlurFade>
+      )}
+
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 sm:gap-6">
         {books.map((book, id) => {
           const slug = getSlug(book);

@@ -7,6 +7,7 @@ import Link from "next/link";
 import Markdown from "react-markdown";
 import ContactSection from "@/components/section/contact-section";
 import ProjectsSection from "@/components/section/projects-section";
+import PublicationsSection from "@/components/section/publications-section";
 import VolunteeringSection from "@/components/section/volunteering-section";
 import WorkSection from "@/components/section/work-section";
 import { ArrowUpRight } from "lucide-react";
@@ -101,6 +102,11 @@ export default function Page() {
                       <div className="font-sans text-sm text-muted-foreground">
                         {education.degree}
                       </div>
+                      {education.description && (
+                        <div className="font-sans text-xs text-muted-foreground/80 mt-0.5">
+                          {education.description}
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="flex items-center gap-1 text-xs tabular-nums text-muted-foreground text-right flex-none">
@@ -120,14 +126,17 @@ export default function Page() {
             <h2 className="text-xl font-bold">Skills</h2>
           </BlurFade>
           <div className="flex flex-wrap gap-2">
-            {DATA.skills.map((skill, id) => (
-              <BlurFade key={skill.name} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                <div className="border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center gap-2">
-                  {skill.icon && <skill.icon className="size-4 rounded overflow-hidden object-contain" />}
-                  <span className="text-foreground text-sm font-medium">{skill.name}</span>
-                </div>
-              </BlurFade>
-            ))}
+            {DATA.skills.map((skill, id) => {
+              const Icon = skill.icon;
+              return (
+                <BlurFade key={skill.name} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
+                  <div className="border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center gap-2">
+                    {Icon && <Icon className="size-4 rounded overflow-hidden object-contain" />}
+                    <span className="text-foreground text-sm font-medium">{skill.name}</span>
+                  </div>
+                </BlurFade>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -136,10 +145,18 @@ export default function Page() {
           <ProjectsSection />
         </BlurFade>
       </section>
-      <section id="volunteering">
-        <BlurFade delay={BLUR_FADE_DELAY * 13}>
+      <section id="publications">
+        <div className="flex min-h-0 flex-col gap-y-6">
+          <BlurFade delay={BLUR_FADE_DELAY * 12}>
+            <h2 className="text-xl font-bold">Publications</h2>
+          </BlurFade>
+          <PublicationsSection baseDelay={BLUR_FADE_DELAY * 13} />
+        </div>
+      </section>
+      <section id="teaching">
+        <BlurFade delay={BLUR_FADE_DELAY * 14}>
           <div className="flex min-h-0 flex-col gap-y-6">
-            <h2 className="text-xl font-bold">Volunteering</h2>
+            <h2 className="text-xl font-bold">Teaching &amp; Mentoring</h2>
             <VolunteeringSection />
           </div>
         </BlurFade>

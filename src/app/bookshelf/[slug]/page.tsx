@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { allBooks } from "content-collections";
 import { withBasePath } from "@/lib/utils";
+import { slugParams } from "@/lib/static-params";
 import { DATA } from "@/data/resume";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -18,9 +19,7 @@ function getSortedBooks() {
 }
 
 export async function generateStaticParams() {
-  return allBooks.map((book) => ({
-    slug: getSlug(book),
-  }));
+  return slugParams(allBooks.map((book) => getSlug(book)));
 }
 
 export async function generateMetadata({

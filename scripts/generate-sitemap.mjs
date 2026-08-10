@@ -5,15 +5,16 @@
  * Usage: node scripts/generate-sitemap.mjs
  */
 
-import { readdir, writeFile } from "fs/promises";
+import { access, readdir, writeFile } from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://shiwani42.github.io";
+const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://ashuthosh.de"
+).replace(/\/$/, "");
 
 /** Resolve publishedAt from an MDX file's frontmatter */
 async function getPostMeta(filePath) {
@@ -33,8 +34,13 @@ async function generateSitemap() {
   /** Static routes */
   const staticRoutes = [
     { url: "/", priority: "1.0", changefreq: "weekly", lastmod: today },
-    { url: "/blog", priority: "0.8", changefreq: "daily", lastmod: today },
-    { url: "/bookshelf", priority: "0.8", changefreq: "weekly", lastmod: today },
+    { url: "/blog/", priority: "0.8", changefreq: "daily", lastmod: today },
+    {
+      url: "/bookshelf/",
+      priority: "0.8",
+      changefreq: "weekly",
+      lastmod: today,
+    },
   ];
 
   /** Blog post routes (from content/*.mdx) */
@@ -50,7 +56,7 @@ async function generateSitemap() {
         const filePath = path.join(contentDir, file);
         const { publishedAt, updatedAt } = await getPostMeta(filePath);
         return {
-          url: `/blog/${slug}`,
+          url: `/blog/${slug}/`,
           priority: "0.7",
           changefreq: "monthly",
           lastmod: updatedAt || publishedAt || today,
@@ -68,7 +74,7 @@ async function generateSitemap() {
     const files = await readdir(booksDir);
     const mdxFiles = files.filter((f) => f.endsWith(".mdx"));
     bookRoutes = mdxFiles.map((file) => ({
-      url: `/bookshelf/${file.replace(/\.mdx$/, "")}`,
+      url: `/bookshelf/${file.replace(/\.mdx$/, "")}/`,
       priority: "0.6",
       changefreq: "monthly",
       lastmod: today,
@@ -98,9 +104,23 @@ async function generateSitemap() {
 ${urlEntries}
 </urlset>`;
 
-  const outputPath = path.join(root, "public", "sitemap.xml");
-  await writeFile(outputPath, sitemap, "utf-8");
-  console.log(`sitemap.xml generated at ${outputPath}`);
+  // This script runs as `postbuild`, i.e. after Next has already copied
+  // public/ into out/. Write to both so the freshly built export actually
+  // ships this sitemap instead of the previous build's copy.
+  const targets = [path.join(root, "public")];
+  const outDir = path.join(root, "out");
+  try {
+    await access(outDir);
+    targets.push(outDir);
+  } catch {
+    // No export directory (e.g. running the script standalone) - public/ only.
+  }
+
+  for (const dir of targets) {
+    const outputPath = path.join(dir, "sitemap.xml");
+    await writeFile(outputPath, sitemap, "utf-8");
+    console.log(`sitemap.xml generated at ${outputPath}`);
+  }
   console.log(`   Routes: ${allRoutes.map((r) => r.url).join(", ")}`);
 }
 

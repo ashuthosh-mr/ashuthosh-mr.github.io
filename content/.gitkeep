@@ -1,0 +1,3 @@
+# Blog posts live here as `*.mdx`.
+# Required frontmatter: title, publishedAt, summary (optional: updatedAt, author, image).
+# This file keeps the directory in git so the content-collections build finds it when empty.

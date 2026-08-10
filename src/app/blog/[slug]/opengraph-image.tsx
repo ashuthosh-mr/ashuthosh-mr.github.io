@@ -2,6 +2,7 @@
 
 import { ImageResponse } from "next/og";
 import { allPosts } from "content-collections";
+import { slugParams } from "@/lib/static-params";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
@@ -15,9 +16,9 @@ export const size = {
 export const contentType = "image/png";
 
 export async function generateStaticParams() {
-    return allPosts.map((post) => ({
-        slug: post._meta.path.replace(/\.mdx$/, ""),
-    }));
+    return slugParams(
+        allPosts.map((post) => post._meta.path.replace(/\.mdx$/, ""))
+    );
 }
 
 const getFontData = async () => {
