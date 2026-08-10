@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar";
+import Oneko from "@/components/oneko";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
@@ -173,6 +174,7 @@ export default function RootLayout({
               {children}
             </div>
             <Navbar />
+            <Oneko />
           </TooltipProvider>
         </ThemeProvider>
       </body>

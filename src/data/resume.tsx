@@ -48,7 +48,7 @@ const PUBLICATIONS: Publication[] = [
     venue:
       "2025 IEEE 32nd International Conference on High Performance Computing, Data and Analytics Workshop (HiPCW), pp. 307-308",
     year: "2025",
-    badges: [],
+    badges: ["Poster"],
     href: "",
   },
   {
@@ -59,7 +59,7 @@ const PUBLICATIONS: Publication[] = [
     venue:
       "2025 IEEE 32nd International Conference on High Performance Computing, Data and Analytics Workshop (HiPCW), pp. 303-304",
     year: "2025",
-    badges: [],
+    badges: ["Poster"],
     href: "",
   },
   {
@@ -78,7 +78,7 @@ const PUBLICATIONS: Publication[] = [
     venue:
       "3rd Workshop on Open-Source Computer Architecture Research (OSCAR), ISCA'24, Buenos Aires, Argentina",
     year: "2024",
-    badges: [],
+    badges: ["Poster"],
     href: "https://ashuthosh.de/pariscv-site/",
   },
   {
