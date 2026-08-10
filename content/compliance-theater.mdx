@@ -1,0 +1,74 @@
+---
+title: "The Company Selling Compliance Was Not Compliant Itself"
+publishedAt: "2026-03-20"
+updatedAt: "2026-03-20"
+author: "Shiwani Mishra"
+summary: "A $32M AI compliance startup has been accused of producing fake SOC 2, ISO 27001, HIPAA, and GDPR reports for hundreds of clients. Here is what the investigation found, and what to ask your own platform."
+image: "/blog/bus_ad.jpeg"
+---
+
+<MediaContainer
+  src="/blog/bus_ad.jpeg"
+  alt="Picture of bus ad of keeping your CISO out of jail"
+  className="w-full h-auto"
+/>
+
+"Keeping your CISO out of jail."
+
+That was the bus ad. This week, a forensic investigation alleged the company behind it may have been doing the exact opposite.
+
+What strikes me most about this story is not the scale. It is the irony. The entire value proposition of a compliance platform is trust. You buy the report so your customers trust you, so enterprises share data with you, so you close the deal. And the company selling that trust, it turns out, had none to offer.
+
+## What Happened
+
+An AI compliance startup that raised $32 million has been accused of producing fake SOC 2, ISO 27001, HIPAA, and GDPR reports for hundreds of clients.
+
+The story had quietly been circulating for months. In December 2025, the company accidentally shared a Google spreadsheet set to "anyone with the link," containing the names, contacts, and draft audit reports of 575 clients. An employee had shared it internally. It got indexed. Archived. The CEO called it a minor "human error," assured clients they were still compliant, and described the fraud allegations as "falsified claims" from an "AI-generated email." Most people moved on.
+
+Then someone actually sat down and compared the reports.
+
+## What the Investigation Found
+
+The findings were hard to explain away.
+
+493 out of 494 SOC 2 reports contained identical boilerplate, with the same grammatical errors, the same nonsensical sentences, and the same auditor conclusions. Only the company name, logo, org chart, and signature were swapped in. Auditor conclusions and test procedures were pre-written before clients had even provided their company description, a structural violation of the AICPA independence rules that make audits meaningful in the first place.
+
+All 259 Type II reports claimed zero security incidents, zero personnel changes, and zero customer terminations during the entire monitoring period. Not one of 259 companies apparently lost a single client or made a single hire.
+
+Trust pages were published fully green before a single hour of compliance work had been done. Board meeting minutes, risk assessments, and security simulations were all pre-fabricated and adoptable with one click. Over 100 integrations were advertised. 14 actually worked. The rest were screenshot upload forms.
+
+The investigation calls it: "a SOC 2 template pack with a thin SaaS wrapper."
+
+When clients pushed back, donuts arrived. When they threatened to leave, someone showed up to redo everything manually and off-platform, which, as the author notes, only proves the platform itself was never capable of delivering real compliance.
+
+> "[They] built a machine designed to make clients complicit without their knowledge, to manufacture plausible deniability while producing exactly the opposite."
+
+## How Long the Denial Held
+
+A confident reassurance email, a friendly call, and a box of donuts bought months. The clients who pushed back were promised new features just around the corner. The ones who stayed quiet kept publishing trust pages full of security controls that were never implemented.
+
+The raw leak in December went nowhere because the company denied it, clients were reassured, and nobody had analyzed the data publicly. A single rigorous investigation changed all of that in 48 hours. That, more than anything else, is the lesson here. A well-timed denial can buy months. Until someone actually checks.
+
+## Why This Matters Right Now
+
+This is not a story happening in a vacuum.
+
+Regulators everywhere are raising the floor. SOC 2 is table stakes now, not a differentiator. HIPAA enforcement is escalating, with willful neglect carrying criminal exposure, not just fines. GDPR has already handed out billions and is not letting up. And India's DPDPA, the Digital Personal Data Protection Act, is now in force, introducing obligations around consent, breach notification, and data fiduciary duties that most startups have not even started mapping. For those building in India or handling Indian user data, this is not abstract.
+
+The compliance checkbox that founders treat as a sales unlock is actually a legal commitment. If the evidence underneath it is fabricated, that commitment becomes a liability.
+
+## Questions Worth Asking
+
+If you rely on a compliance automation platform, ask these in writing:
+
+1. **Does the auditor receive a draft report from your platform before reviewing client evidence, or do they design their own test procedures independently?**
+2. **Which tasks come pre-populated with defaults, and which actually require clients to submit real documentation?**
+3. **Of your listed integrations, which ones authenticate with a third party and pull data automatically, and which require manual screenshot uploads?**
+
+Do not accept a call as a substitute for written answers.
+
+Compliance is only as real as the evidence behind it.
+
+---
+
+*For anyone who wants to go deeper, this is the investigation that started it all: [DeepDelver on Substack](https://substack.com/home/post/p-191342187)*

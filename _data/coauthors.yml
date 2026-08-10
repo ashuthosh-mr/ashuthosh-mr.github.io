@@ -1,4 +1,0 @@
-# Maps author last names in the bibliography to first-name variants (and optional
-# profile URLs) so jekyll-scholar can render and link co-author names consistently.
-"purnaprajna":
-  - firstname: ["Madhura", "M."]

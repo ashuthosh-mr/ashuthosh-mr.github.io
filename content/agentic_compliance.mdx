@@ -1,0 +1,63 @@
+---
+title: "Why 'We'll Figure Out Compliance Later' Won't Work This Time"
+publishedAt: "2026-04-01"
+updatedAt: "2026-04-01"
+author: "Shiwani Mishra"
+summary: "Agentic AI is moving faster than enterprise governance can keep up. For regulated industries, the bottleneck has never been capability. It has always been auditability. Here is why that distinction matters more now than it ever has."
+image: "/blog/agentic_compliance.png"
+---
+
+There is a particular kind of silence that settles over a room full of compliance professionals when someone says "agentic AI." It is not the silence of confusion. It is the silence of people who have been here before, who have watched a wave of technology arrive with promises of transformation, and who already know that their real job is not to be excited about the wave but to figure out what breaks when it hits.
+
+That instinct is correct. And it is more important right now than most people in the AI conversation are willing to acknowledge.
+
+<MediaContainer
+  src="/blog/agentic_compliance.png"
+  alt="Infographics of compliance gaps in Agentic AI"
+  className="w-full h-auto"
+/>
+
+Gartner projects that by 2028, at least 15% of day-to-day work decisions will be made autonomously through agentic AI systems, up from effectively zero in 2024. That is a remarkable shift in a very short window. And across industries, the organizations moving fastest to adopt these systems are not the ones with the most complex regulatory environments. They are the ones with the most room to experiment. Regulated industries, including insurance, banking, and healthcare, are moving last, and the reason has almost nothing to do with whether the technology is capable enough. The reason is auditability. The question that compliance professionals are quietly asking, and that very few vendors are meaningfully answering, is: when an AI agent makes or influences a consequential decision, can we explain it? Can we trace it? Can we stand behind it when a regulator asks?
+
+Until that question has a satisfying answer, adoption in regulated environments will remain cautious, as it should be.
+
+
+## The Identity Problem at the Heart of Agentic Risk
+
+In December 2025, OWASP released its Top 10 for Agentic Applications, which is the first serious attempt by a credible security body to categorize the specific risks that autonomous AI systems introduce at an enterprise level. What is striking about the list, especially for anyone who spends time thinking about governance and data protection, is how prominently identity and delegation feature.
+
+The third entry, ASI03, covers Identity and Privilege Abuse. It addresses the ways in which AI agents inherit credentials from the systems and users they operate within, delegate authority across multi-agent chains, accumulate permissions through memory rather than explicit grants, and create what security practitioners call confused deputy problems, where an agent acts with the authority of one principal while serving the interests of another. What is notable is not just that this risk exists, but that three of the top four risks in the OWASP list revolve around identities, tools, and trust boundaries. This is not a coincidence. It reflects something structural about how agentic systems work.
+
+Traditional IAM infrastructure was not designed for agents that persist across sessions, that call other agents, that accumulate context over time, and that act asynchronously on behalf of users who may not even be present when decisions are made. The governance frameworks that compliance teams rely on, the ones built around defined roles, explicit authorizations, and point-in-time audit trails, were designed for a world where humans took actions and systems recorded them. Agentic AI inverts that relationship. The system takes actions, and the human may only learn about them after the fact, if the audit infrastructure was built correctly in the first place.
+
+Getting identity, delegation, and traceability right is not a feature consideration for later. It is the foundational architectural decision that determines whether a regulated enterprise can responsibly deploy these systems at all.
+
+## India's Layered Compliance Reality
+
+For organizations operating in India's regulated sectors, this architectural challenge arrives layered on top of a regulatory environment that is itself in motion.
+
+The Digital Personal Data Protection Act of 2023 establishes a framework with particular weight for any organization handling significant volumes of sensitive personal data. Financial profiles, health histories, behavioral data, long-term records of various kinds; the combination of volume and sensitivity determines where an organization falls on the spectrum of obligations. Entities that cross the threshold for designation as Significant Data Fiduciaries face requirements well beyond basic compliance: Data Protection Impact Assessments, annual audits, appointment of a Data Protection Officer, and significantly heightened accountability across the processing chain. For many organizations in regulated sectors, that designation is not a distant possibility. It is the direction the regulation is clearly pointing.
+
+DPDPA does not arrive alone. Sectoral regulators have been tightening their own cybersecurity and data governance expectations in parallel, with stricter incident reporting timelines, more rigorous third-party oversight requirements, and updates that reflect close attention to an evolving threat landscape. The result is a compliance environment where multiple frameworks are moving simultaneously, each with its own language, its own audit expectations, and its own enforcement posture.
+
+The problem is not that solutions exist for any one of these frameworks in isolation. They do. The problem is integration, specifically embedding compliant data handling into live operational workflows while simultaneously satisfying parallel regulatory requirements, without disrupting the core business processes that those workflows support. That is a systems design and governance challenge that most organizations have not yet fully resolved, and the cost of getting it wrong, through regulatory sanction, data breach, or audit failure, is growing with each update.
+
+## The Compounding Problem with Standards
+
+There is a related inefficiency that does not get enough attention in compliance circles, and it sits at the intersection of ISO 27001, ISO 27701, and SOC 2.
+
+Many organizations operating at scale have already invested significantly in ISO 27001 certification. ISO 27701, the Privacy Information Management System standard, is structurally an extension of 27001. Organizations with a mature ISMS already have somewhere between 60 and 70 percent of the controls required for 27701 embedded in their existing framework. The gap is real but it is not a complete rebuild. It is a mapping and extension exercise, which should be tractable. SOC 2 adds another overlapping layer, with its own control language and evidence requirements, but again with significant structural alignment to what a well-run 27001 program already produces.
+
+The issue is that most organizations approach each certification cycle as though it were starting from scratch. External consultants are engaged. Evidence is re-collected. Controls are re-audited. The work that was done for the previous certification does not automatically carry forward into the next one, even when the underlying controls are largely the same. The result is that compliance investment resets rather than compounds, and the teams carrying the heaviest load are exactly the ones who already did the most thorough work the last time.
+
+This is a design problem, not just an operational one. The information needed to map overlaps intelligently, to surface genuine gaps rather than re-auditing ground that was already covered, and to produce concise assessments that actually accelerate certification rather than duplicate it, is all available. What is missing is the infrastructure to make that information actionable across frameworks simultaneously and to keep it current as regulations evolve.
+
+## The Window That Is Open Right Now
+
+Compliance professionals sometimes get positioned as the people who slow things down, the friction in the system. But the more honest framing is that compliance professionals are often the first to see clearly where a technology is not ready to meet the environment it is being deployed into.
+
+Agentic AI is not unready. But the governance and auditability layer for agentic AI in regulated environments is still being built. OWASP has now formally mapped the risk surface. Gartner has laid out the trajectory of adoption. Indian regulators have raised the bar on data protection and cybersecurity in ways that will only continue to intensify. The organizations that build auditable, accountable agentic systems now, with identity, delegation, and compliance traceability embedded from the beginning rather than retrofitted later, are the ones that will be able to move decisively when their peers are still trying to figure out whether they can move at all.
+
+That window is not permanently open. The question is who is designing into it with the seriousness it deserves.
+
+I would genuinely like to hear how compliance and risk leaders in regulated industries are thinking through this. What are the specific governance gaps that feel most unresolved as agentic AI moves up the agenda? Where are the existing frameworks holding up, and where are they clearly insufficient? If this is a conversation you are already having inside your organization, I would be glad to compare notes.

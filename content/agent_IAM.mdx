@@ -1,0 +1,66 @@
+---
+title: "Who Is That Agent? The Identity Problem at the Heart of Agentic AI"
+publishedAt: "2026-03-28"
+updatedAt: "2026-03-28"
+author: "Shiwani Mishra"
+summary: "AI agents are being deployed at scale before the foundational questions of identity, authorization, and accountability have been answered. NIST is now proposing a framework to fix that, and the comment window closes April 2."
+image: "/blog/NIST_Agents_IAM.png"
+---
+
+AI agents are no longer a research curiosity. They are scheduling meetings, writing and deploying code, triaging security alerts, drafting policy documents, and executing multi-step workflows across enterprise systems with minimal human involvement. The productivity case is compelling, and adoption is accelerating fast enough that the question organizations should be asking has shifted from "should we use agents?" to "how do we govern them safely?"
+
+That second question is harder than it looks, and most organizations don't have a good answer yet.
+
+<MediaContainer
+  src="/blog/NIST_Agents_IAM.png"
+  alt="Infographics of compliance gaps in Agentic AI"
+  className="w-full h-auto"
+/>
+
+## The Problem Nobody Has Fully Solved
+
+Traditional software systems operate within predictable boundaries. A microservice has a defined scope, a fixed set of APIs it can call, and a known set of credentials it uses to authenticate. When something goes wrong, you can audit exactly what it did and why. The identity model for these systems, built on decades of standards and tooling, is well understood.
+
+AI agents break most of those assumptions. An agent doesn't just call a fixed API. It reasons about a goal, dynamically decides which tools and data sources to consult, chains multiple actions together, and adapts its behavior based on intermediate results. Its required permissions at deployment time may not be fully predictable because its required actions aren't fully predictable. It can act on behalf of a human user, sometimes across dozens of systems in a single session. And it can be manipulated through prompt injection attacks, where malicious content embedded in data it reads hijacks its behavior mid-task.
+
+This creates a set of identity and authorization challenges that existing frameworks were not designed to handle. When an agent calls an API or accesses a database, who is it? How does the receiving system verify that identity? What is it actually authorized to do, and how do those permissions get enforced dynamically as the agent's context changes? If it takes an action that causes harm, how do you trace that action back through the chain of delegation to the human who ultimately authorized it?
+
+These are not hypothetical edge ases. They are the exact challenges that security and platform teams are encountering in production right now.
+
+## What NIST Is Proposing
+
+In February 2026, NIST's National Cybersecurity Center of Excellence (NCCoE) published a concept paper outlining a proposed demonstration project focused specifically on applying identity and authorization standards to software and AI agents. The goal is practical rather than theoretical: build a reference implementation using commercially available technologies, document what works and what doesn't, and produce implementation-oriented guidelines that organizations can actually use.
+
+The project is examining how a set of existing and emerging standards can be extended or adapted for agentic architectures. OAuth 2.0/2.1 and its extensions provide the foundation for authorization, including the delegation flows needed when an agent acts on behalf of a user. OpenID Connect handles authentication and the consistent expression of identity tokens across systems. SPIFFE and SPIRE offer a framework for issuing cryptographic identities to workloads, which could apply to agent workloads the same way they apply to containerized services today. SCIM provides a mechanism for provisioning, updating, and revoking agent identities across systems at scale. Next-Generation Access Control (NGAC) brings attribute-based, fine-grained policy management with native support for delegation and least privilege, making it particularly suited to the dynamic nature of agentic systems.
+
+The paper also examines the Model Context Protocol (MCP), an emerging protocol that enables AI agents to discover and interact with external tools, data sources, and services in a structured way. MCP already relies on OAuth and OIDC for authorization and authentication, making it a natural integration point for the broader identity framework the project is exploring.
+
+## The Specific Problems the Project Is Trying to Solve
+
+The concept paper is organized around a set of questions that get to the core of what makes agent identity hard. A few of them are worth unpacking.
+
+**Identity assignment.** Should an agent have a fixed identity, or should its identity be ephemeral and task-dependent? A long-running enterprise agent that accesses HR systems probably warrants a stable, auditable identity. A short-lived agent spun up to complete a single task might be better served by a scoped, time-limited credential. The right answer likely depends on the use case, but the framework for making that determination doesn't exist yet in a standardized form.
+
+**Least privilege under uncertainty.** Least privilege is a foundational security principle: grant only the permissions required to complete the task. The problem with agents is that their required actions at deployment time are not always known in advance. How do you enforce least privilege for a system whose scope is inherently dynamic? The project is exploring how authorization policies can be updated in real time as an agent's context changes, including how to assess the sensitivity of data when an agent aggregates information from multiple sources.
+
+**Delegation and human accountability.** When an agent acts on behalf of a user, the authorization chain needs to remain intact. If an agent books a meeting, sends an email, or approves a document while operating under a user's delegated authority, there needs to be a clear, verifiable record linking that action back to the human who authorized it. This is not just an auditing concern. It is a legal and compliance concern for any regulated industry.
+
+**Prompt injection prevention.** Prompt injection is one of the more insidious risks in agentic systems. An agent reading a document, a webpage, or an email could encounter content specifically crafted to redirect its behavior. The project is examining both preventive controls and mitigation strategies for cases where injection occurs despite those controls.
+
+**Auditing and non-repudiation.** For agent actions to be auditable in a meaningful way, logs need to capture not just what the agent did but what it intended to do and why, in a tamper-proof format that can be verified after the fact. This is significantly more complex than traditional application logging and requires new thinking about what constitutes a sufficient audit trail for an autonomous system.
+
+## The Broader Context
+
+This NCCoE project sits within a larger initiative that NIST's Center for AI Standards and Innovation (CAISI) launched in February 2026: the AI Agent Standards Initiative. The initiative is focused on three areas. The first is facilitating the development of industry-led standards and ensuring U.S. leadership in international standards bodies as those standards are debated and adopted. The second is supporting community-led open-source protocol development, recognizing that protocols like MCP will be shaped as much by the open-source ecosystem as by formal standards bodies. The third is advancing research in AI agent security and identity to enable new use cases and build the technical foundation for trusted adoption across sectors including healthcare, finance, and education.
+
+CAISI is also holding sector-specific listening sessions in April 2026 focused on barriers to AI adoption in those three sectors, with the explicit goal of informing concrete projects that can accelerate confident adoption in each one.
+
+## Why This Matters and How to Contribute
+
+The comment period on the NCCoE concept paper closes on April 2, 2026. NIST is actively seeking input from organizations that are deploying or evaluating AI agents in enterprise settings, and from practitioners working in identity and access management, security architecture, and AI governance. The questions they are asking are specific and practical: what use cases are you pursuing, what challenges are you running into, and what standards or technologies are you finding useful or inadequate?
+
+This is the stage where the shape of these guidelines can still be influenced. Federal demonstration projects and the practice guides they produce become reference points for industry, procurement requirements, and eventually regulatory frameworks. Contributing now, while the scope is still being defined, is materially different from commenting on a finished document.
+
+Full details and the concept paper are available [here](https://csrc.nist.gov/pubs/other/2026/02/05/accelerating-the-adoption-of-software-and-ai-agent/ipd). Comments can also be submitted directly to [AI-Identity@nist.gov](mailto:AI-Identity@nist.gov).
+
+*Comments due: April 2, 2026.*

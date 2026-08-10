@@ -1,0 +1,122 @@
+cv:
+  name: Ashuthosh M. R.
+  label: Senior Hardware Design Engineer
+  email: ashuthoshmr25@gmail.com
+  location: Bengaluru, India
+  image: ""
+  summary: >
+    Hardware design engineer working across many-core SoC integration, computer architecture, and
+    performance modeling for compute-intensive workloads. Currently integrating a multi-core RISC-V SoC
+    for AI/ML acceleration, adapting an open-source many-core framework to production needs across
+    interface specification, cache hierarchy and memory subsystem integration, and synthesis-ready design
+    releases. Published research background in performance modeling, workload profiling, and FPGA
+    accelerators for AI kernels.
+
+  social_networks:
+    - network: GitHub
+      username: ashuthosh-mr
+    - network: LinkedIn
+      username: ashuthosh-mr
+
+  sections:
+    Experience:
+      - company: Calligo Technologies
+        position: Senior Hardware Design Engineer
+        location: Bengaluru, India
+        start_date: 2025-01-01
+        highlights:
+          - Drove platform selection for a multi-core RISC-V SoC targeting AI/ML acceleration, surveying open-source many-core frameworks and benchmarking projected core performance.
+          - Specified and documented the core-to-cache interface, validating each transaction type against RTL waveforms and supporting an external team integrating a custom core.
+          - Explored cache hierarchy configurations to improve cache performance while containing area.
+          - Built out the memory subsystem and peripherals, including controller placement and a custom AXI4 peripheral.
+          - Delivered periodic design releases and added automation scripts that simplified integration and simulation of the design.
+          - Mentored an intern on a systolic-array matrix multiplier for DNN acceleration.
+
+      - company: Centre for Heterogeneous and Intelligent Processing Systems (CHIPS), PES University
+        position: Research Assistant
+        location: Bengaluru, India
+        start_date: 2020-09-01
+        end_date: 2025-01-01
+        highlights:
+          - Designed FPGA-based accelerators for sparse-dense matrix multiplication, enabling high-throughput AI/ML kernel execution under resource constraints.
+          - Developed an analytical performance model for RISC-V many-core architectures, enabling design-space exploration for graph-algorithm workloads.
+          - Built a trace-driven profiler for RISC-V, identifying instruction-level extensions and application-specific accelerators to improve ML workload performance and efficiency (ashuthosh.de/pariscv site).
+          - Collaborated with the Semiconductor Research Corporation (SRC) on a funded project on domain-optimised RISC-V FPGA overlays.
+          - Conducted RISC-V-on-FPGA lab sessions and mentored B.Tech students through processor-design and hardware-acceleration capstone projects.
+
+      - company: Computer Architecture and High-Performance Lab, Amrita Vishwa Vidyapeetham
+        position: Research Assistant (Intern)
+        location: Remote
+        start_date: 2020-01-01
+        end_date: 2020-05-01
+        highlights:
+          - Investigated robust GF(2^m) NB-LDPC decoders on FPGA, benchmarking throughput, power, and area against GPU implementations as part of the ECHO Indo-Portugal project.
+
+    Education:
+      - institution: PES University
+        location: Bengaluru, India
+        area: Electronics and Communication Engineering
+        studyType: M.Tech (by Research)
+        start_date: 2022-05-01
+        end_date: 2026-07-01
+        score: "CGPA: 8.14/10"
+        highlights:
+          - Advised by Prof. Madhura Purnaprajna.
+          - "Thesis: Performance Prediction of Graph Algorithms on RISC-V Multi-Cores."
+
+      - institution: PESIT - Bangalore South Campus
+        location: Bengaluru, India
+        area: Electronics and Communication Engineering
+        studyType: B.E.
+        start_date: 2016-08-01
+        end_date: 2020-07-01
+        score: "CGPA: 7.96/10"
+
+    Awards:
+      - title: Best Paper Award
+        awarder: 35th International Conference on VLSI Design (VLSID)
+        date: 2022-01-01
+        summary: 'For "MAPPARAT: A resource constrained FPGA-based accelerator for sparse-dense matrix multiplication."'
+
+      - title: Best Lightning Talk Award
+        awarder: HiPC Student Research Symposium
+        date: 2023-01-01
+
+      - title: Topper's List (NPTEL)
+        awarder: NPTEL
+        date: 2021-01-01
+        summary: Topper's list in Computer Architecture and in Introduction to Parallel Programming with OpenMP and MPI.
+
+    Skills:
+      - name: Architecture & Design
+        icon: fa-solid fa-microchip
+        keywords: "RISC-V architectures, Many-core SoC integration, Cache hierarchy, Memory subsystem, NoC/AXI4 interconnect, Interface specification, Accelerator design, Performance modeling, HW/SW codesign, Sparse GEMM, Workload profiling"
+
+      - name: RTL & FPGA
+        icon: fa-solid fa-server
+        keywords: "Verilog, FPGAs, Synthesis, Timing analysis, Gate-level simulation & debug, Design releases & build automation"
+
+      - name: Programming & Tools
+        icon: fa-solid fa-code
+        keywords: "Python, C, OpenMP, Git, LaTeX, Ubuntu/Linux"
+
+    Certificates:
+      - name: Computer Architecture (NPTEL)
+        issuer: NPTEL
+        icon: fa-solid fa-certificate
+        summary: "80%, Topper's list."
+
+      - name: Introduction to Parallel Programming with OpenMP and MPI (NPTEL)
+        issuer: NPTEL
+        icon: fa-solid fa-certificate
+        summary: "75%, Topper's list."
+
+      - name: VLSI Design Flow - RTL to GDS (NPTEL)
+        issuer: NPTEL
+        icon: fa-solid fa-certificate
+        summary: "80%."
+
+      - name: C-based VLSI Design (NPTEL)
+        issuer: NPTEL
+        icon: fa-solid fa-certificate
+        summary: "75%."

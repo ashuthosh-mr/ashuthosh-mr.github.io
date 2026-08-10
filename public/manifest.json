@@ -1,0 +1,16 @@
+{
+  "name": "Shiwani Mishra",
+  "short_name": "Shiwani",
+  "description": "Co-Founder @Heisenbug | Research Intern @EPFL LPQM | Electrical Engineering @IIT Bombay",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

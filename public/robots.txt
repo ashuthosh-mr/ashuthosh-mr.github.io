@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block crawling of internal Next.js paths
+Disallow: /_next/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://shiwani42.github.io/sitemap.xml

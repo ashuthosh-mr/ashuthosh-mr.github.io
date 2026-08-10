@@ -1,0 +1,126 @@
+---
+title: "The Silent Listener: What Your Group Chat Bots Know About You"
+publishedAt: "2026-03-12"
+updatedAt: "2026-03-12"
+author: "Shiwani Mishra"
+summary: "How bots in your messaging apps can read nearly every message, and why platforms have not fixed it."
+image: "/blog/bots_can_snoop.png"
+---
+
+Bots in your group chats are reading everything. Every confession. Every coordinate. Every deleted message. Here's what the research reveals.
+
+## A Week in the Life of Your Data
+
+Here is what the bot in your group chat learned about you this week.
+
+**Monday**: Your teammate confessed he was interviewing elsewhere. He asked the group to keep it quiet. The bot heard that too.
+
+**Tuesday**: Someone pasted internal pricing by mistake and deleted it instantly. Too late. The bot had already received it.
+
+**Thursday**: Your friend dropped a pin for a meetup. The bot has the coordinates.
+
+**Friday**: Someone vented about a client by name. The bot has the name, the company, and the exact words used.
+
+You never spoke to the bot once. It was just there, in the corner, doing its actual job—posting the daily standup reminder—while reading everything else.
+
+
+<MediaContainer
+  src="/blog/bots_can_snoop.png"
+  alt="Infographics of the bots can snoop study"
+  className="w-full h-auto"
+/>
+## The Invisible Audience
+
+It is the standup bot. The scheduling assistant. The translation tool. The GIF bot someone added six months ago and nobody ever removed.
+
+None of them were invited to read everything. But they do.
+
+### The Research That Proved It
+
+Researchers at National Taiwan University tested this directly. They built working bots, deployed them on Telegram, Discord, Slack, LINE, WhatsApp, and Signal, and measured what each bot actually received.
+
+They published the results at USENIX Security 2025 in [Bots Can Snoop](https://www.usenix.org/conference/usenixsecurity25/presentation/chou).
+
+## The Numbers Don't Lie
+
+| Platform | Finding | Impact |
+|----------|---------|--------|
+| Discord Q&A Bot | 100% message access | Only 0.24% were questions for it |
+| Telegram Bots | 718 analyzed | Nearly half ran with privacy off |
+| Discord (2026) | 12M+ active bots | Present in ~75% of all servers |
+| Telegram (2026) | 10M+ active bots | Widespread deployment |
+
+The background bot in your server probably has broader access than you assume.
+
+## Cross-Platform Profiling
+
+When you join a group that already has a bot, the paper estimates a **3.6% chance** that bot has already seen your messages in another group.
+
+That lets one bot connect your identity across communities you never meant to link.
+
+## Why Platforms Can't (Won't?) Fix This
+
+Because the thing they sell you as protection is the same thing that makes the problem unsolvable.
+
+End-to-end encryption gives every group member shared cryptographic keys. Bots are added as members. They get the same keys.
+
+> "Restricting what a bot sees breaks the system. So platforms choose the path of least resistance: give the bot everything."
+
+Hiding your identity from a bot is not a setting you can toggle. It is baked into the architecture.
+
+The lock on the front door says nothing about who already has keys to every room.
+
+## The Solution That Already Exists
+
+The researchers also built a fix.
+
+**SnoopGuard** gives each bot an isolated key branch, so it sees only explicitly addressed content and cannot map messages to user identities. The code is open source.
+
+Key features:
+
+- **Isolated cryptographic branches** - Each bot gets its own key path
+- **Message filtering** - Bots receive only @mentions and commands
+- **Identity protection** - User identities remain hidden from bots
+- **Zero platform changes** - Works as a client-side modification
+```typescript title="How SnoopGuard Works"
+// Traditional approach: Bot sees everything
+groupChat.messages.forEach(msg => {
+  bot.receive(msg); // Full access to all messages
+});
+
+// SnoopGuard approach: Bot sees only relevant content
+groupChat.messages
+  .filter(msg => msg.mentions(bot) || msg.isCommand())
+  .forEach(msg => {
+    bot.receive(anonymize(msg)); // Filtered + anonymized
+  });
+```
+
+The fix exists. The will does not.
+
+## What You Can Do Right Now
+
+While we wait for platforms to adopt solutions like SnoopGuard:
+
+1. **Audit your groups** - Check which bots have access.
+2. **Remove unused bots** - Delete bots nobody needs.
+3. **Create bot-free spaces** - Keep sensitive topics there.
+4. **Assume bots can read everything** - Write with that model.
+5. **Support open solutions** - Follow and test [SnoopGuard](https://github.com/csienslab/snoopguard-artifact).
+
+## Right Now
+
+So the standup bot in your team channel is still reading everything.
+
+So is the one in your friends group.
+
+And the one in that community server you joined last month.
+
+All of them.
+
+Right now.
+
+Reading.
+---
+
+*Based on research from National Taiwan University's USENIX Security 2025 paper "Bots Can Snoop." Full paper available at [USENIX](https://www.usenix.org/conference/usenixsecurity25/presentation/chou). SnoopGuard code available on [GitHub](https://github.com/csienslab/snoopguard-artifact).*

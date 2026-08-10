@@ -1,0 +1,7 @@
+github_users:
+  - ashuthosh-mr
+
+repo_description_lines_max: 2
+
+# Add your own repositories below, e.g. - ashuthosh-mr/pariscv-site
+github_repos: []
