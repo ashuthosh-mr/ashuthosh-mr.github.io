@@ -353,7 +353,7 @@ export const DATA = {
         },
       ],
       image: "",
-      video: "",
+      video: "/project/ldpc.mp4",
     },
   ],
 
