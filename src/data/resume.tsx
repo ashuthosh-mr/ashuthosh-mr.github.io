@@ -74,7 +74,7 @@ const PUBLICATIONS: Publication[] = [
   {
     title:
       "PARISCV: A profiler for application-specific acceleration on RISC-V",
-    authors: "M. R. Ashuthosh, J. Benitto, S. S., and M. Purnaprajna",
+    authors: "M. R. Ashuthosh, J. Benitto, S. Spoorthi, and M. Purnaprajna",
     venue:
       "3rd Workshop on Open-Source Computer Architecture Research (OSCAR), ISCA'24, Buenos Aires, Argentina",
     year: "2024",
@@ -132,7 +132,7 @@ export const DATA = {
   description:
     "Senior Hardware Design Engineer at Calligo Technologies. I work on many-core RISC-V SoCs, computer architecture, and performance modeling for compute-intensive workloads.",
   summary:
-    "I am a hardware design engineer and researcher working at the intersection of computer architecture, performance modeling, and hardware–software co-design.\n\nRight now I am integrating a multi-core RISC-V SoC for AI/ML acceleration — adapting an open-source many-core framework to production needs across interface specification, cache hierarchy, memory subsystem integration, and synthesis-ready design releases.\n\nBefore that I spent four years at the Centre for Heterogeneous and Intelligent Processing Systems (CHIPS) Lab, PES University, building analytical performance models, trace-driven profilers, and FPGA accelerators for sparse and dense linear algebra and graph workloads. I am particularly drawn to microarchitectural bottleneck analysis, memory hierarchy behaviour, and compute–memory trade-offs in many-core systems — and I genuinely enjoy working hands-on with FPGAs as experimental platforms to validate architectural ideas before silicon.\n\nOutside engineering, I explore photography as a way of observing structure, light, and perspective from a different lens.",
+    "I am a hardware design engineer working across computer architecture, performance modeling, and hardware-software co-design.\n\nAt Calligo Technologies I am integrating a multi-core RISC-V SoC for AI/ML acceleration. Before that, four years at the CHIPS Lab, PES University, building performance models, trace-driven profilers, and FPGA accelerators for RISC-V and FPGA platforms.\n\nOutside engineering, I explore photography.",
   avatarUrl: "/me.jpg",
   scholarUrl: "https://scholar.google.com/citations?user=PHT5rD8AAAAJ&hl=en",
   skills: SKILLS,
