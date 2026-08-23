@@ -1,6 +1,10 @@
 /**
  * Turns `photos/<album>/*.jpg` into everything the /foto routes need.
  *
+ * `photos/featured.json` optionally curates the strip at the top of /foto as an
+ * ordered list of "<album>/<name>" refs. Without it the newest album's frames
+ * are shown instead, so the strip is never empty.
+ *
  * Drop images into a folder under `photos/` and that folder becomes an album.
  * Nothing else is required: the album title is derived from the folder name and
  * the photo order follows filename order (natural sort, so 2.jpg precedes 10.jpg).
@@ -172,12 +176,48 @@ async function main() {
     return naturalSort.compare(a.title, b.title);
   });
 
+  const byRef = new Map();
+  for (const album of albums) {
+    for (const photo of album.photos) {
+      byRef.set(`${album.slug}/${photo.name}`, {
+        ...photo,
+        albumSlug: album.slug,
+        albumTitle: album.title,
+      });
+    }
+  }
+
+  // Curated list wins; otherwise fall back to the newest album's frames so the
+  // strip is never empty on a fresh checkout.
+  const curated = await readJsonIfPresent(path.join(SRC_DIR, "featured.json"), []);
+  const resolved = [];
+  for (const ref of Array.isArray(curated) ? curated : []) {
+    const photo = byRef.get(String(ref).replace(/\.[^.]+$/, ""));
+    if (photo) resolved.push(photo);
+    else console.warn(`[photos] featured.json: no such photo "${ref}", skipped`);
+  }
+
+  const featuredMode = resolved.length > 0 ? "curated" : "latest";
+  const featured =
+    resolved.length > 0
+      ? resolved
+      : (albums[0]?.photos ?? []).slice(0, 6).map((photo) => ({
+          ...photo,
+          albumSlug: albums[0].slug,
+          albumTitle: albums[0].title,
+        }));
+
   await mkdir(path.dirname(MANIFEST), { recursive: true });
-  await writeFile(MANIFEST, `${JSON.stringify(albums, null, 2)}\n`);
+  await writeFile(
+    MANIFEST,
+    `${JSON.stringify({ albums, featured, featuredMode }, null, 2)}\n`
+  );
   await writeFile(CACHE, `${JSON.stringify(nextCache, null, 2)}\n`);
 
   const total = albums.reduce((sum, album) => sum + album.photos.length, 0);
-  console.log(`[photos] ${albums.length} album(s), ${total} photo(s)`);
+  console.log(
+    `[photos] ${albums.length} album(s), ${total} photo(s), ${featured.length} featured (${featuredMode})`
+  );
 }
 
 await main();

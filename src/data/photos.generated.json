@@ -1,45 +1,13 @@
-[
-  {
-    "slug": "bhootha-kola",
-    "title": "Bhootha Kola",
-    "location": "Karnataka",
-    "date": "2023-02",
-    "summary": null,
-    "order": null,
-    "cover": {
-      "name": "01",
-      "thumb": "/foto/bhootha-kola/01-thumb.webp",
-      "full": "/foto/bhootha-kola/01-full.webp",
-      "width": 2560,
-      "height": 1707,
-      "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADwAQCdASoQAAsABABoJZQC7AEfnTXHnXAA/u0LJzyccfWg6yWWToMgkqcEXtRf1wAAAA=="
-    },
-    "photos": [
-      {
-        "name": "01",
-        "thumb": "/foto/bhootha-kola/01-thumb.webp",
-        "full": "/foto/bhootha-kola/01-full.webp",
-        "width": 2560,
-        "height": 1707,
-        "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADwAQCdASoQAAsABABoJZQC7AEfnTXHnXAA/u0LJzyccfWg6yWWToMgkqcEXtRf1wAAAA=="
-      },
-      {
-        "name": "02",
-        "thumb": "/foto/bhootha-kola/02-thumb.webp",
-        "full": "/foto/bhootha-kola/02-full.webp",
-        "width": 1439,
-        "height": 2560,
-        "blurDataURL": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAACwAQCdASoJABAABABoJQBOgB6QRyAAAP724O/f2rvTLOyujX8Ev+ZO/AM9LIDow04ZkHxr02kZP/ChSrO/lJd5GvC5bj7dwnGoAAAA"
-      },
-      {
-        "name": "03",
-        "thumb": "/foto/bhootha-kola/03-thumb.webp",
-        "full": "/foto/bhootha-kola/03-full.webp",
-        "width": 1446,
-        "height": 2560,
-        "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADQAQCdASoJABAABABoJQBdgCHe3ZgyAAD+9W7CGJWd/A7ry1fwMUPW56wPHp/lq8PMIF19GOI2gAAA"
-      },
-      {
+{
+  "albums": [
+    {
+      "slug": "bhootha-kola",
+      "title": "Bhootha Kola",
+      "location": "Karnataka",
+      "date": "2023-02",
+      "summary": null,
+      "order": null,
+      "cover": {
         "name": "04",
         "thumb": "/foto/bhootha-kola/04-thumb.webp",
         "full": "/foto/bhootha-kola/04-full.webp",
@@ -47,73 +15,97 @@
         "height": 2560,
         "blurDataURL": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAACQAQCdASoQABAABABoJYwCdAEODGAA/vd2VU6TTEK1KpUV76kzkYbUt7CU3GMpidPR2tTzFUttMOxYwV4pAAAA"
       },
-      {
-        "name": "05",
-        "thumb": "/foto/bhootha-kola/05-thumb.webp",
-        "full": "/foto/bhootha-kola/05-full.webp",
-        "width": 2560,
-        "height": 2557,
-        "blurDataURL": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQABAABABoJaACdADROA8/eOYA/vQ7ZWLCLvUAvyfr2wxt8XHO76KSthWGGdfsWVR5ZQKDMerpUHSr5Y924OEkeC8B1KXwuQ4AAA=="
-      },
-      {
-        "name": "06",
-        "thumb": "/foto/bhootha-kola/06-thumb.webp",
-        "full": "/foto/bhootha-kola/06-full.webp",
-        "width": 2560,
-        "height": 1707,
-        "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoQAAsABABoJYwC7AEPAmqzKCAA/vaIicI3FrZeiwTr3etxhLNZLPmiIyIiUAAA"
-      },
-      {
-        "name": "07",
-        "thumb": "/foto/bhootha-kola/07-thumb.webp",
-        "full": "/foto/bhootha-kola/07-full.webp",
-        "width": 2556,
-        "height": 2560,
-        "blurDataURL": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADwAQCdASoQABAABABoJQBOgCHcqP07BIAA/vMCAKqze/QzvHO3Ar1Mb1J5a6C2S91UkZeTpA8ZguzesAA="
-      },
-      {
-        "name": "08",
-        "thumb": "/foto/bhootha-kola/08-thumb.webp",
-        "full": "/foto/bhootha-kola/08-full.webp",
-        "width": 2560,
-        "height": 2552,
-        "blurDataURL": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADwAQCdASoQABAABABoJbACdACz3+4HBQAAzinG8Pn08cc0PuL9ZoW5ZfKgK0SwHJfvPJq5WIQn2hpmzv2ZBnppOE6EYSmCe2SwZ1lMH73cQ5RVnzx4acQ86eCzNAjg+OcTP7SAAAA="
-      },
-      {
-        "name": "09",
-        "thumb": "/foto/bhootha-kola/09-thumb.webp",
-        "full": "/foto/bhootha-kola/09-full.webp",
-        "width": 1707,
-        "height": 2560,
-        "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoLABAABABoJbACdADcrG7EJAAA/s9PR6UbvNFoEHOONB84ZPGtj6ZYPWM+Pu45wLpkJKFXpCzEEotpfPlnQDMjNQA0u3krgPRgn6AA"
-      },
-      {
-        "name": "10",
-        "thumb": "/foto/bhootha-kola/10-thumb.webp",
-        "full": "/foto/bhootha-kola/10-full.webp",
-        "width": 2560,
-        "height": 2558,
-        "blurDataURL": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAQAgCdASoQABAABABoJbACdADDsuVI8jsAAP7zULfqwC8+HF/7cWgZ5NccrV9oBgsaTv76n8RS2O3QlxHQUhXrwjlMFRahP4z0ge5OSojozDiPL9HD1cYdO3Y7Ui0Wm0ZLAAAA"
-      }
-    ]
-  },
-  {
-    "slug": "banneraghatta-zoo",
-    "title": "Banneraghatta Zoo",
-    "location": "Bengaluru",
-    "date": "2020-02",
-    "summary": null,
-    "order": null,
-    "cover": {
-      "name": "01",
-      "thumb": "/foto/banneraghatta-zoo/01-thumb.webp",
-      "full": "/foto/banneraghatta-zoo/01-full.webp",
-      "width": 1707,
-      "height": 2560,
-      "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADwAQCdASoLABAABABoJZgAAucPcgPlj+AA/vDNcdy1RH7gHeqddXxjKixrvuUm9dAAAA=="
+      "photos": [
+        {
+          "name": "01",
+          "thumb": "/foto/bhootha-kola/01-thumb.webp",
+          "full": "/foto/bhootha-kola/01-full.webp",
+          "width": 2560,
+          "height": 1707,
+          "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADwAQCdASoQAAsABABoJZQC7AEfnTXHnXAA/u0LJzyccfWg6yWWToMgkqcEXtRf1wAAAA=="
+        },
+        {
+          "name": "02",
+          "thumb": "/foto/bhootha-kola/02-thumb.webp",
+          "full": "/foto/bhootha-kola/02-full.webp",
+          "width": 1439,
+          "height": 2560,
+          "blurDataURL": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAACwAQCdASoJABAABABoJQBOgB6QRyAAAP724O/f2rvTLOyujX8Ev+ZO/AM9LIDow04ZkHxr02kZP/ChSrO/lJd5GvC5bj7dwnGoAAAA"
+        },
+        {
+          "name": "03",
+          "thumb": "/foto/bhootha-kola/03-thumb.webp",
+          "full": "/foto/bhootha-kola/03-full.webp",
+          "width": 1446,
+          "height": 2560,
+          "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADQAQCdASoJABAABABoJQBdgCHe3ZgyAAD+9W7CGJWd/A7ry1fwMUPW56wPHp/lq8PMIF19GOI2gAAA"
+        },
+        {
+          "name": "04",
+          "thumb": "/foto/bhootha-kola/04-thumb.webp",
+          "full": "/foto/bhootha-kola/04-full.webp",
+          "width": 2559,
+          "height": 2560,
+          "blurDataURL": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAACQAQCdASoQABAABABoJYwCdAEODGAA/vd2VU6TTEK1KpUV76kzkYbUt7CU3GMpidPR2tTzFUttMOxYwV4pAAAA"
+        },
+        {
+          "name": "05",
+          "thumb": "/foto/bhootha-kola/05-thumb.webp",
+          "full": "/foto/bhootha-kola/05-full.webp",
+          "width": 2560,
+          "height": 2557,
+          "blurDataURL": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQABAABABoJaACdADROA8/eOYA/vQ7ZWLCLvUAvyfr2wxt8XHO76KSthWGGdfsWVR5ZQKDMerpUHSr5Y924OEkeC8B1KXwuQ4AAA=="
+        },
+        {
+          "name": "06",
+          "thumb": "/foto/bhootha-kola/06-thumb.webp",
+          "full": "/foto/bhootha-kola/06-full.webp",
+          "width": 2560,
+          "height": 1707,
+          "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoQAAsABABoJYwC7AEPAmqzKCAA/vaIicI3FrZeiwTr3etxhLNZLPmiIyIiUAAA"
+        },
+        {
+          "name": "07",
+          "thumb": "/foto/bhootha-kola/07-thumb.webp",
+          "full": "/foto/bhootha-kola/07-full.webp",
+          "width": 2556,
+          "height": 2560,
+          "blurDataURL": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADwAQCdASoQABAABABoJQBOgCHcqP07BIAA/vMCAKqze/QzvHO3Ar1Mb1J5a6C2S91UkZeTpA8ZguzesAA="
+        },
+        {
+          "name": "08",
+          "thumb": "/foto/bhootha-kola/08-thumb.webp",
+          "full": "/foto/bhootha-kola/08-full.webp",
+          "width": 2560,
+          "height": 2552,
+          "blurDataURL": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADwAQCdASoQABAABABoJbACdACz3+4HBQAAzinG8Pn08cc0PuL9ZoW5ZfKgK0SwHJfvPJq5WIQn2hpmzv2ZBnppOE6EYSmCe2SwZ1lMH73cQ5RVnzx4acQ86eCzNAjg+OcTP7SAAAA="
+        },
+        {
+          "name": "09",
+          "thumb": "/foto/bhootha-kola/09-thumb.webp",
+          "full": "/foto/bhootha-kola/09-full.webp",
+          "width": 1707,
+          "height": 2560,
+          "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoLABAABABoJbACdADcrG7EJAAA/s9PR6UbvNFoEHOONB84ZPGtj6ZYPWM+Pu45wLpkJKFXpCzEEotpfPlnQDMjNQA0u3krgPRgn6AA"
+        },
+        {
+          "name": "10",
+          "thumb": "/foto/bhootha-kola/10-thumb.webp",
+          "full": "/foto/bhootha-kola/10-full.webp",
+          "width": 2560,
+          "height": 2558,
+          "blurDataURL": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAQAgCdASoQABAABABoJbACdADDsuVI8jsAAP7zULfqwC8+HF/7cWgZ5NccrV9oBgsaTv76n8RS2O3QlxHQUhXrwjlMFRahP4z0ge5OSojozDiPL9HD1cYdO3Y7Ui0Wm0ZLAAAA"
+        }
+      ]
     },
-    "photos": [
-      {
+    {
+      "slug": "banneraghatta-zoo",
+      "title": "Banneraghatta Zoo",
+      "location": "Bengaluru",
+      "date": "2020-02",
+      "summary": null,
+      "order": null,
+      "cover": {
         "name": "01",
         "thumb": "/foto/banneraghatta-zoo/01-thumb.webp",
         "full": "/foto/banneraghatta-zoo/01-full.webp",
@@ -121,89 +113,89 @@
         "height": 2560,
         "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADwAQCdASoLABAABABoJZgAAucPcgPlj+AA/vDNcdy1RH7gHeqddXxjKixrvuUm9dAAAA=="
       },
-      {
-        "name": "02",
-        "thumb": "/foto/banneraghatta-zoo/02-thumb.webp",
-        "full": "/foto/banneraghatta-zoo/02-full.webp",
-        "width": 2560,
-        "height": 1919,
-        "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAwABABoJaACdADRt9quFuAA/tx5FQLersoEoPqBuHO+z+c2ZHfwtyKfZzYpvjl4ojjP3sovYaeWRiKBSm3DAAA="
-      },
-      {
-        "name": "03",
-        "thumb": "/foto/banneraghatta-zoo/03-thumb.webp",
-        "full": "/foto/banneraghatta-zoo/03-full.webp",
-        "width": 2560,
-        "height": 1707,
-        "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACwAQCdASoQAAsABABoJQAAR5ybS27AAMotrHGxi62fK/xNhCv9Oploic6RTJqgLwHRS9LI6JYnvZdvwQbNfPoO7+uAAA=="
-      },
-      {
-        "name": "04",
-        "thumb": "/foto/banneraghatta-zoo/04-thumb.webp",
-        "full": "/foto/banneraghatta-zoo/04-full.webp",
-        "width": 2560,
-        "height": 1707,
-        "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADQAQCdASoQAAsABABoJQBYdiFv1hYZgAD+7tpI2qoaqoQvAiEmXcZ5H3s7XkGLAOFo57HHIl+7cLpvjAAAAA=="
-      },
-      {
-        "name": "05",
-        "thumb": "/foto/banneraghatta-zoo/05-thumb.webp",
-        "full": "/foto/banneraghatta-zoo/05-full.webp",
-        "width": 2560,
-        "height": 1707,
-        "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAAAQAgCdASoQAAsABABoJQBOgB6R8O7K13AAAP70NJYKUDOlr6Jaxv/GtnQyh9yF3EEkkofZuCYAAA=="
-      },
-      {
-        "name": "06",
-        "thumb": "/foto/banneraghatta-zoo/06-thumb.webp",
-        "full": "/foto/banneraghatta-zoo/06-full.webp",
-        "width": 2560,
-        "height": 1707,
-        "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADwAQCdASoQAAsABABoJQBOgCHwsPAF2pAA/vDNv0+7dGFzOwBIDHzBJLdaeT8akUAAAA=="
-      },
-      {
-        "name": "07",
-        "thumb": "/foto/banneraghatta-zoo/07-thumb.webp",
-        "full": "/foto/banneraghatta-zoo/07-full.webp",
-        "width": 2560,
-        "height": 1707,
-        "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADQAQCdASoQAAsABABoJZQAAucYPsEAAAD+9Ckr3eKe5ATZGk5x55E7AQAAAA=="
-      },
-      {
-        "name": "08",
-        "thumb": "/foto/banneraghatta-zoo/08-thumb.webp",
-        "full": "/foto/banneraghatta-zoo/08-full.webp",
-        "width": 1707,
-        "height": 2560,
-        "blurDataURL": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoLABAABABoJbACdAC2TkW1jsAA/oebfXEF55/saeb9O6y/frxe3IZyntbmuf1omw98ErK0gcgOTlCqMQQB9cXLIq2yM+AA"
-      },
-      {
-        "name": "09",
-        "thumb": "/foto/banneraghatta-zoo/09-thumb.webp",
-        "full": "/foto/banneraghatta-zoo/09-full.webp",
-        "width": 2560,
-        "height": 1707,
-        "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAAAQAgCdASoQAAsABABoJYgCdAEfRK9dLrIUAP7pTLYgrhdaNz5dnuXrn1jyR16VbRNdA65XlaiOs2AyPbYq/esnYYAAAA=="
-      }
-    ]
-  },
-  {
-    "slug": "dance",
-    "title": "Dance",
-    "location": "Bengaluru",
-    "date": null,
-    "summary": "Bharatanatyam and Mohiniyattam.",
-    "order": null,
-    "cover": {
-      "name": "01",
-      "thumb": "/foto/dance/01-thumb.webp",
-      "full": "/foto/dance/01-full.webp",
-      "width": 2560,
-      "height": 1707,
-      "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAsABABoJbACdAEf3TUtQAAA/tqjoHsmVWCdkMPYBY+r4exWNLHSf7cvfEWmDCf+cX1ht7Pdf7WpfP1mVIVyAAA="
+      "photos": [
+        {
+          "name": "01",
+          "thumb": "/foto/banneraghatta-zoo/01-thumb.webp",
+          "full": "/foto/banneraghatta-zoo/01-full.webp",
+          "width": 1707,
+          "height": 2560,
+          "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADwAQCdASoLABAABABoJZgAAucPcgPlj+AA/vDNcdy1RH7gHeqddXxjKixrvuUm9dAAAA=="
+        },
+        {
+          "name": "02",
+          "thumb": "/foto/banneraghatta-zoo/02-thumb.webp",
+          "full": "/foto/banneraghatta-zoo/02-full.webp",
+          "width": 2560,
+          "height": 1919,
+          "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAwABABoJaACdADRt9quFuAA/tx5FQLersoEoPqBuHO+z+c2ZHfwtyKfZzYpvjl4ojjP3sovYaeWRiKBSm3DAAA="
+        },
+        {
+          "name": "03",
+          "thumb": "/foto/banneraghatta-zoo/03-thumb.webp",
+          "full": "/foto/banneraghatta-zoo/03-full.webp",
+          "width": 2560,
+          "height": 1707,
+          "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACwAQCdASoQAAsABABoJQAAR5ybS27AAMotrHGxi62fK/xNhCv9Oploic6RTJqgLwHRS9LI6JYnvZdvwQbNfPoO7+uAAA=="
+        },
+        {
+          "name": "04",
+          "thumb": "/foto/banneraghatta-zoo/04-thumb.webp",
+          "full": "/foto/banneraghatta-zoo/04-full.webp",
+          "width": 2560,
+          "height": 1707,
+          "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADQAQCdASoQAAsABABoJQBYdiFv1hYZgAD+7tpI2qoaqoQvAiEmXcZ5H3s7XkGLAOFo57HHIl+7cLpvjAAAAA=="
+        },
+        {
+          "name": "05",
+          "thumb": "/foto/banneraghatta-zoo/05-thumb.webp",
+          "full": "/foto/banneraghatta-zoo/05-full.webp",
+          "width": 2560,
+          "height": 1707,
+          "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAAAQAgCdASoQAAsABABoJQBOgB6R8O7K13AAAP70NJYKUDOlr6Jaxv/GtnQyh9yF3EEkkofZuCYAAA=="
+        },
+        {
+          "name": "06",
+          "thumb": "/foto/banneraghatta-zoo/06-thumb.webp",
+          "full": "/foto/banneraghatta-zoo/06-full.webp",
+          "width": 2560,
+          "height": 1707,
+          "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADwAQCdASoQAAsABABoJQBOgCHwsPAF2pAA/vDNv0+7dGFzOwBIDHzBJLdaeT8akUAAAA=="
+        },
+        {
+          "name": "07",
+          "thumb": "/foto/banneraghatta-zoo/07-thumb.webp",
+          "full": "/foto/banneraghatta-zoo/07-full.webp",
+          "width": 2560,
+          "height": 1707,
+          "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADQAQCdASoQAAsABABoJZQAAucYPsEAAAD+9Ckr3eKe5ATZGk5x55E7AQAAAA=="
+        },
+        {
+          "name": "08",
+          "thumb": "/foto/banneraghatta-zoo/08-thumb.webp",
+          "full": "/foto/banneraghatta-zoo/08-full.webp",
+          "width": 1707,
+          "height": 2560,
+          "blurDataURL": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoLABAABABoJbACdAC2TkW1jsAA/oebfXEF55/saeb9O6y/frxe3IZyntbmuf1omw98ErK0gcgOTlCqMQQB9cXLIq2yM+AA"
+        },
+        {
+          "name": "09",
+          "thumb": "/foto/banneraghatta-zoo/09-thumb.webp",
+          "full": "/foto/banneraghatta-zoo/09-full.webp",
+          "width": 2560,
+          "height": 1707,
+          "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAAAQAgCdASoQAAsABABoJYgCdAEfRK9dLrIUAP7pTLYgrhdaNz5dnuXrn1jyR16VbRNdA65XlaiOs2AyPbYq/esnYYAAAA=="
+        }
+      ]
     },
-    "photos": [
-      {
+    {
+      "slug": "dance",
+      "title": "Dance",
+      "location": "Bengaluru",
+      "date": null,
+      "summary": "Bharatanatyam and Mohiniyattam.",
+      "order": null,
+      "cover": {
         "name": "01",
         "thumb": "/foto/dance/01-thumb.webp",
         "full": "/foto/dance/01-full.webp",
@@ -211,49 +203,49 @@
         "height": 1707,
         "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAsABABoJbACdAEf3TUtQAAA/tqjoHsmVWCdkMPYBY+r4exWNLHSf7cvfEWmDCf+cX1ht7Pdf7WpfP1mVIVyAAA="
       },
-      {
-        "name": "02",
-        "thumb": "/foto/dance/02-thumb.webp",
-        "full": "/foto/dance/02-full.webp",
-        "width": 1707,
-        "height": 2560,
-        "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoLABAABABoJaACdAEO/j6vZIAA/ujsfco8Y5poU0RlINt2e8Wgzrv1BoUbQHYGoAA="
-      },
-      {
-        "name": "03",
-        "thumb": "/foto/dance/03-thumb.webp",
-        "full": "/foto/dance/03-full.webp",
-        "width": 2560,
-        "height": 1707,
-        "blurDataURL": "data:image/webp;base64,UklGRioAAABXRUJQVlA4IB4AAAAwAQCdASoQAAsABABoJZwAA3AA/vM/B2gV+bvoAAA="
-      },
-      {
-        "name": "04",
-        "thumb": "/foto/dance/04-thumb.webp",
-        "full": "/foto/dance/04-full.webp",
-        "width": 2560,
-        "height": 1706,
-        "blurDataURL": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoQAAsABABoJaQAAn77Mgw4AAD+7Fu/Jesm+4av9qjkR8PMt7R8IMdAg0QO9uPDUkypJKw8AAA="
-      }
-    ]
-  },
-  {
-    "slug": "nesara",
-    "title": "Nesara",
-    "location": "Bengaluru",
-    "date": null,
-    "summary": "Portraits under the blossoms.",
-    "order": null,
-    "cover": {
-      "name": "01",
-      "thumb": "/foto/nesara/01-thumb.webp",
-      "full": "/foto/nesara/01-full.webp",
-      "width": 1333,
-      "height": 2000,
-      "blurDataURL": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoLABAABABoJYwC7ADcIOCXTRBgAPpz72rU2DeEBCXKdeToOWnIrGfGv4kFGE2GqvLOF0i10mhznwRfGkWxJldZcKxCs5kbh3x3gxhNiaAAAA=="
+      "photos": [
+        {
+          "name": "01",
+          "thumb": "/foto/dance/01-thumb.webp",
+          "full": "/foto/dance/01-full.webp",
+          "width": 2560,
+          "height": 1707,
+          "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAsABABoJbACdAEf3TUtQAAA/tqjoHsmVWCdkMPYBY+r4exWNLHSf7cvfEWmDCf+cX1ht7Pdf7WpfP1mVIVyAAA="
+        },
+        {
+          "name": "02",
+          "thumb": "/foto/dance/02-thumb.webp",
+          "full": "/foto/dance/02-full.webp",
+          "width": 1707,
+          "height": 2560,
+          "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoLABAABABoJaACdAEO/j6vZIAA/ujsfco8Y5poU0RlINt2e8Wgzrv1BoUbQHYGoAA="
+        },
+        {
+          "name": "03",
+          "thumb": "/foto/dance/03-thumb.webp",
+          "full": "/foto/dance/03-full.webp",
+          "width": 2560,
+          "height": 1707,
+          "blurDataURL": "data:image/webp;base64,UklGRioAAABXRUJQVlA4IB4AAAAwAQCdASoQAAsABABoJZwAA3AA/vM/B2gV+bvoAAA="
+        },
+        {
+          "name": "04",
+          "thumb": "/foto/dance/04-thumb.webp",
+          "full": "/foto/dance/04-full.webp",
+          "width": 2560,
+          "height": 1706,
+          "blurDataURL": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoQAAsABABoJaQAAn77Mgw4AAD+7Fu/Jesm+4av9qjkR8PMt7R8IMdAg0QO9uPDUkypJKw8AAA="
+        }
+      ]
     },
-    "photos": [
-      {
+    {
+      "slug": "nesara",
+      "title": "Nesara",
+      "location": "Bengaluru",
+      "date": null,
+      "summary": "Portraits under the blossoms.",
+      "order": null,
+      "cover": {
         "name": "01",
         "thumb": "/foto/nesara/01-thumb.webp",
         "full": "/foto/nesara/01-full.webp",
@@ -261,38 +253,111 @@
         "height": 2000,
         "blurDataURL": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoLABAABABoJYwC7ADcIOCXTRBgAPpz72rU2DeEBCXKdeToOWnIrGfGv4kFGE2GqvLOF0i10mhznwRfGkWxJldZcKxCs5kbh3x3gxhNiaAAAA=="
       },
-      {
-        "name": "02",
-        "thumb": "/foto/nesara/02-thumb.webp",
-        "full": "/foto/nesara/02-full.webp",
-        "width": 1333,
-        "height": 2000,
-        "blurDataURL": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoLABAABABoJYwCsADXBEU7n3QAAPYUt+DQ5y86cSXABrSbaWLByUX69YrMvU1zhZFd2RqFD+LRLL/HY3s5kuqK0HDko9tDOAA="
-      },
-      {
-        "name": "03",
-        "thumb": "/foto/nesara/03-thumb.webp",
-        "full": "/foto/nesara/03-full.webp",
-        "width": 1333,
-        "height": 2000,
-        "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoLABAABABoJQBWACP3pu1oP3vgAP1HR2n8nCH4UmNGH7sx3eukuZI0tpwHcD+DXdI1u7U1FJKvZOk+qp5esupsK4YKJIDseq6+CGfTSRgUAAAA"
-      },
-      {
-        "name": "04",
-        "thumb": "/foto/nesara/04-thumb.webp",
-        "full": "/foto/nesara/04-full.webp",
-        "width": 1333,
-        "height": 2000,
-        "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAwAgCdASoLABAABABoJYwCdAECpvB+K+si+AD+v/WyM+S9EDpGdWDkoD3V39ZjZ+WuQfIg0XUD2bvUyMJO15BfsgcNQ6QaYjPNF+Utg8Gyi+RAAAA="
-      },
-      {
-        "name": "05",
-        "thumb": "/foto/nesara/05-thumb.webp",
-        "full": "/foto/nesara/05-full.webp",
-        "width": 1333,
-        "height": 2000,
-        "blurDataURL": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoLABAABABoJQAAXU9G7WjTogAAzDSaOHuGiEWG2skbatkAFAI1JWvsmnC1Yv4UjLZL/IAfv6v1BMOk4AnCNq7ZBFtNEAAA"
-      }
-    ]
-  }
-]
+      "photos": [
+        {
+          "name": "01",
+          "thumb": "/foto/nesara/01-thumb.webp",
+          "full": "/foto/nesara/01-full.webp",
+          "width": 1333,
+          "height": 2000,
+          "blurDataURL": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoLABAABABoJYwC7ADcIOCXTRBgAPpz72rU2DeEBCXKdeToOWnIrGfGv4kFGE2GqvLOF0i10mhznwRfGkWxJldZcKxCs5kbh3x3gxhNiaAAAA=="
+        },
+        {
+          "name": "02",
+          "thumb": "/foto/nesara/02-thumb.webp",
+          "full": "/foto/nesara/02-full.webp",
+          "width": 1333,
+          "height": 2000,
+          "blurDataURL": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoLABAABABoJYwCsADXBEU7n3QAAPYUt+DQ5y86cSXABrSbaWLByUX69YrMvU1zhZFd2RqFD+LRLL/HY3s5kuqK0HDko9tDOAA="
+        },
+        {
+          "name": "03",
+          "thumb": "/foto/nesara/03-thumb.webp",
+          "full": "/foto/nesara/03-full.webp",
+          "width": 1333,
+          "height": 2000,
+          "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoLABAABABoJQBWACP3pu1oP3vgAP1HR2n8nCH4UmNGH7sx3eukuZI0tpwHcD+DXdI1u7U1FJKvZOk+qp5esupsK4YKJIDseq6+CGfTSRgUAAAA"
+        },
+        {
+          "name": "04",
+          "thumb": "/foto/nesara/04-thumb.webp",
+          "full": "/foto/nesara/04-full.webp",
+          "width": 1333,
+          "height": 2000,
+          "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAwAgCdASoLABAABABoJYwCdAECpvB+K+si+AD+v/WyM+S9EDpGdWDkoD3V39ZjZ+WuQfIg0XUD2bvUyMJO15BfsgcNQ6QaYjPNF+Utg8Gyi+RAAAA="
+        },
+        {
+          "name": "05",
+          "thumb": "/foto/nesara/05-thumb.webp",
+          "full": "/foto/nesara/05-full.webp",
+          "width": 1333,
+          "height": 2000,
+          "blurDataURL": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoLABAABABoJQAAXU9G7WjTogAAzDSaOHuGiEWG2skbatkAFAI1JWvsmnC1Yv4UjLZL/IAfv6v1BMOk4AnCNq7ZBFtNEAAA"
+        }
+      ]
+    }
+  ],
+  "featured": [
+    {
+      "name": "03",
+      "thumb": "/foto/nesara/03-thumb.webp",
+      "full": "/foto/nesara/03-full.webp",
+      "width": 1333,
+      "height": 2000,
+      "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoLABAABABoJQBWACP3pu1oP3vgAP1HR2n8nCH4UmNGH7sx3eukuZI0tpwHcD+DXdI1u7U1FJKvZOk+qp5esupsK4YKJIDseq6+CGfTSRgUAAAA",
+      "albumSlug": "nesara",
+      "albumTitle": "Nesara"
+    },
+    {
+      "name": "05",
+      "thumb": "/foto/bhootha-kola/05-thumb.webp",
+      "full": "/foto/bhootha-kola/05-full.webp",
+      "width": 2560,
+      "height": 2557,
+      "blurDataURL": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQABAABABoJaACdADROA8/eOYA/vQ7ZWLCLvUAvyfr2wxt8XHO76KSthWGGdfsWVR5ZQKDMerpUHSr5Y924OEkeC8B1KXwuQ4AAA==",
+      "albumSlug": "bhootha-kola",
+      "albumTitle": "Bhootha Kola"
+    },
+    {
+      "name": "02",
+      "thumb": "/foto/banneraghatta-zoo/02-thumb.webp",
+      "full": "/foto/banneraghatta-zoo/02-full.webp",
+      "width": 2560,
+      "height": 1919,
+      "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAwABABoJaACdADRt9quFuAA/tx5FQLersoEoPqBuHO+z+c2ZHfwtyKfZzYpvjl4ojjP3sovYaeWRiKBSm3DAAA=",
+      "albumSlug": "banneraghatta-zoo",
+      "albumTitle": "Banneraghatta Zoo"
+    },
+    {
+      "name": "09",
+      "thumb": "/foto/bhootha-kola/09-thumb.webp",
+      "full": "/foto/bhootha-kola/09-full.webp",
+      "width": 1707,
+      "height": 2560,
+      "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoLABAABABoJbACdADcrG7EJAAA/s9PR6UbvNFoEHOONB84ZPGtj6ZYPWM+Pu45wLpkJKFXpCzEEotpfPlnQDMjNQA0u3krgPRgn6AA",
+      "albumSlug": "bhootha-kola",
+      "albumTitle": "Bhootha Kola"
+    },
+    {
+      "name": "04",
+      "thumb": "/foto/dance/04-thumb.webp",
+      "full": "/foto/dance/04-full.webp",
+      "width": 2560,
+      "height": 1706,
+      "blurDataURL": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoQAAsABABoJaQAAn77Mgw4AAD+7Fu/Jesm+4av9qjkR8PMt7R8IMdAg0QO9uPDUkypJKw8AAA=",
+      "albumSlug": "dance",
+      "albumTitle": "Dance"
+    },
+    {
+      "name": "08",
+      "thumb": "/foto/banneraghatta-zoo/08-thumb.webp",
+      "full": "/foto/banneraghatta-zoo/08-full.webp",
+      "width": 1707,
+      "height": 2560,
+      "blurDataURL": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoLABAABABoJbACdAC2TkW1jsAA/oebfXEF55/saeb9O6y/frxe3IZyntbmuf1omw98ErK0gcgOTlCqMQQB9cXLIq2yM+AA",
+      "albumSlug": "banneraghatta-zoo",
+      "albumTitle": "Banneraghatta Zoo"
+    }
+  ],
+  "featuredMode": "curated"
+}

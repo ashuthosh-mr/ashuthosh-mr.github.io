@@ -91,7 +91,7 @@ async function generateSitemap() {
     const manifest = JSON.parse(
       await readFile(path.join(root, "src", "data", "photos.generated.json"), "utf-8")
     );
-    albumRoutes = manifest.map((album) => ({
+    albumRoutes = (manifest.albums ?? []).map((album) => ({
       url: `/foto/${album.slug}/`,
       priority: "0.7",
       changefreq: "monthly",

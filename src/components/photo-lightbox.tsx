@@ -2,21 +2,29 @@
 "use client";
 
 import BlurFade from "@/components/magicui/blur-fade";
-import type { Photo } from "@/lib/photos";
-import { withBasePath } from "@/lib/utils";
+import type { FeaturedPhoto, Photo } from "@/lib/photos";
+import { cn, withBasePath } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 const BLUR_FADE_DELAY = 0.04;
 
+type LightboxPhoto = Photo &
+  Partial<Pick<FeaturedPhoto, "albumSlug" | "albumTitle">>;
+
 export default function PhotoLightbox({
   photos,
   albumTitle,
+  columns = "sm:columns-2",
 }: {
-  photos: Photo[];
+  photos: LightboxPhoto[];
+  /** Used for alt text; a photo's own `albumTitle` wins when the set spans albums. */
   albumTitle: string;
+  /** Tailwind column classes, so a featured strip can run denser than an album. */
+  columns?: string;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -58,7 +66,12 @@ export default function PhotoLightbox({
 
   return (
     <>
-      <div className="columns-1 sm:columns-2 gap-4 sm:gap-5 [column-fill:balance]">
+      <div
+        className={cn(
+          "columns-1 gap-4 sm:gap-5 [column-fill:balance]",
+          columns,
+        )}
+      >
         {photos.map((photo, id) => (
           <BlurFade
             key={photo.name}
@@ -74,7 +87,7 @@ export default function PhotoLightbox({
             >
               <img
                 src={withBasePath(photo.thumb)}
-                alt={`${albumTitle} — frame ${id + 1}`}
+                alt={`${photo.albumTitle ?? albumTitle} — frame ${id + 1}`}
                 width={photo.width}
                 height={photo.height}
                 loading={id < 4 ? "eager" : "lazy"}
@@ -156,9 +169,20 @@ export default function PhotoLightbox({
                   onClick={(event) => event.stopPropagation()}
                 />
 
-                <p className="pointer-events-none absolute top-4 left-4 rounded-full border border-border bg-card/80 px-3 py-1.5 text-xs font-mono tabular-nums text-muted-foreground backdrop-blur">
-                  {(openIndex ?? 0) + 1} / {photos.length}
-                </p>
+                <div className="absolute top-4 left-4 flex items-center gap-2">
+                  <p className="pointer-events-none rounded-full border border-border bg-card/80 px-3 py-1.5 text-xs font-mono tabular-nums text-muted-foreground backdrop-blur">
+                    {(openIndex ?? 0) + 1} / {photos.length}
+                  </p>
+                  {active.albumSlug && (
+                    <Link
+                      href={`/foto/${active.albumSlug}`}
+                      onClick={(event) => event.stopPropagation()}
+                      className="rounded-full border border-border bg-card/80 px-3 py-1.5 text-xs text-muted-foreground backdrop-blur transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      {active.albumTitle} &rarr;
+                    </Link>
+                  )}
+                </div>
               </motion.div>
             )}
           </AnimatePresence>,

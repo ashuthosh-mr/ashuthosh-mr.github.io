@@ -31,6 +31,23 @@ Every field is optional. `cover` is a filename without its extension; `order`
 pins the album's position on `/foto` (lower first) - otherwise albums sort
 newest `date` first.
 
+## The featured strip
+
+`/foto` opens with a row of individual frames, above the albums. Curate it by
+listing frames in `photos/featured.json`, in the order you want them shown:
+
+```json
+["nesara/03", "bhootha-kola/05", "banneraghatta-zoo/02"]
+```
+
+Each entry is `<album-folder>/<filename-without-extension>`. Clicking a featured
+frame opens it full screen with a link through to its album, so a single photo
+never loses its series.
+
+Delete the file (or empty the list) and the strip falls back to the newest
+album's first few frames - so it is never empty, and never needs maintaining if
+you would rather it just showed your latest work.
+
 ## Notes
 
 - Source files stay untouched; the build writes derivatives to `public/foto/`
