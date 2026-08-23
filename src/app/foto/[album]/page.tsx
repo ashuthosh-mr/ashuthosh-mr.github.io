@@ -31,7 +31,10 @@ export async function generateMetadata({
   if (!album) return {};
 
   const description =
-    album.summary ?? [albumMeta(album), `${album.photos.length} frames`].filter(Boolean).join(" · ");
+    album.summary ??
+    [albumMeta(album), `${album.photos.length} frames`]
+      .filter(Boolean)
+      .join(" · ");
   const image = withBasePath(album.cover.full);
 
   return {
@@ -43,7 +46,12 @@ export async function generateMetadata({
       type: "article",
       images: [{ url: image, alt: album.title }],
     },
-    twitter: { card: "summary_large_image", title: album.title, description, images: [image] },
+    twitter: {
+      card: "summary_large_image",
+      title: album.title,
+      description,
+      images: [image],
+    },
   };
 }
 
@@ -60,7 +68,7 @@ export default async function AlbumPage({
 
   return (
     <main className="min-h-dvh flex flex-col gap-8">
-      <BlurFade delay={BLUR_FADE_DELAY}>
+      <BlurFade delay={BLUR_FADE_DELAY} className="photo-breakout">
         <div className="flex min-h-0 flex-col gap-y-3">
           <Link
             href="/foto"
@@ -78,12 +86,18 @@ export default async function AlbumPage({
             <span>{album.photos.length} frames</span>
           </p>
           {album.summary && (
-            <p className="text-muted-foreground">{album.summary}</p>
+            <p className="text-muted-foreground max-w-2xl">{album.summary}</p>
           )}
         </div>
       </BlurFade>
 
-      <PhotoLightbox photos={album.photos} albumTitle={album.title} />
+      <div className="photo-breakout">
+        <PhotoLightbox
+          photos={album.photos}
+          albumTitle={album.title}
+          columns="sm:columns-2 lg:columns-3"
+        />
+      </div>
     </main>
   );
 }

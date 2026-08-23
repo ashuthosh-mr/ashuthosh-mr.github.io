@@ -30,12 +30,12 @@ export default function FotoPage() {
   return (
     <main className="min-h-dvh flex flex-col gap-12">
       <div className="flex flex-col gap-8">
-        <BlurFade delay={BLUR_FADE_DELAY}>
+        <BlurFade delay={BLUR_FADE_DELAY} className="photo-breakout">
           <div className="flex min-h-0 flex-col gap-y-2">
             <h1 className="text-3xl font-semibold tracking-tighter sm:text-4xl">
               Photography
             </h1>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground max-w-2xl">
               {DESCRIPTION}
               {photoCount > 0 && (
                 <span className="text-muted-foreground/70">
@@ -49,11 +49,13 @@ export default function FotoPage() {
         </BlurFade>
 
         {featured.length > 0 && (
-          <PhotoLightbox
-            photos={featured}
-            albumTitle="Photography"
-            columns="columns-2 lg:columns-3"
-          />
+          <div className="photo-breakout">
+            <PhotoLightbox
+              photos={featured}
+              albumTitle="Photography"
+              columns="columns-2 lg:columns-3"
+            />
+          </div>
         )}
       </div>
 
@@ -67,7 +69,7 @@ export default function FotoPage() {
         </BlurFade>
       ) : (
         <section className="flex flex-col gap-6">
-          <BlurFade delay={BLUR_FADE_DELAY} inView>
+          <BlurFade delay={BLUR_FADE_DELAY} inView className="photo-breakout">
             <div className="flex flex-col gap-1">
               <h2 className="text-xl font-semibold tracking-tight">Albums</h2>
               <p className="text-sm text-muted-foreground">
@@ -78,7 +80,7 @@ export default function FotoPage() {
             </div>
           </BlurFade>
 
-          <div className="columns-1 sm:columns-2 gap-5 sm:gap-6 [column-fill:balance]">
+          <div className="photo-breakout columns-1 sm:columns-2 gap-5 sm:gap-6 [column-fill:balance]">
             {albums.map((album, id) => {
               const meta = albumMeta(album);
               return (

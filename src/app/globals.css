@@ -234,3 +234,26 @@
   }
 
 }
+/**
+ * Photographs want more width than prose does. The layout centres every page in
+ * a max-w-2xl column, which is the right measure for reading but cramps a photo
+ * grid on a desktop screen, so this lets a grid break out of that column while
+ * the text around it stays put.
+ *
+ * Centred with margin arithmetic rather than a translate: `50%` of the parent is
+ * its midpoint, so pulling back half the breakout's width lands it centred, and
+ * because the parent is itself centred that is the viewport's centre too.
+ *
+ * Margin rather than `translateX(-50%)` on purpose - these blocks are often
+ * BlurFade elements, which animate via an inline `transform`, and that would
+ * override the centring and push the page sideways.
+ *
+ * Capping at `100vw - 3rem` keeps the page from ever scrolling horizontally.
+ * Only from `lg` up - below that the column is already the full screen.
+ */
+@media (width >= 64rem) {
+  .photo-breakout {
+    width: min(80rem, calc(100vw - 3rem));
+    margin-left: calc(50% - min(40rem, (100vw - 3rem) / 2));
+  }
+}
