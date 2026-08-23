@@ -132,7 +132,7 @@ export const DATA = {
   description:
     "Senior Hardware Design Engineer at Calligo Technologies. I work on many-core RISC-V SoCs, computer architecture, and performance modeling for compute-intensive workloads.",
   summary:
-    "I am a hardware design engineer working across computer architecture, performance modeling, and hardware-software co-design.\n\nAt Calligo Technologies I am integrating a multi-core RISC-V SoC for AI/ML acceleration. Before that, four years at the CHIPS Lab, PES University, building performance models, trace-driven profilers, and FPGA accelerators for RISC-V and FPGA platforms.\n\nOutside engineering, I explore photography.",
+    "I am a hardware design engineer working across computer architecture, performance modeling, and hardware-software co-design.\n\nAt Calligo Technologies I am integrating a multi-core RISC-V SoC for AI/ML acceleration. Before that, four years at the CHIPS Lab, PES University, building performance models, trace-driven profilers, and FPGA accelerators for RISC-V and FPGA platforms.\n\nOutside engineering, I explore [photography](/foto).",
   avatarUrl: "/me.jpg",
   scholarUrl: "https://scholar.google.com/citations?user=PHT5rD8AAAAJ&hl=en",
   skills: SKILLS,

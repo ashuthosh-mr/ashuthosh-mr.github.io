@@ -4,17 +4,20 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ChevronRight } from "lucide-react";
 
+const DESCRIPTION =
+  "Notes on computer architecture and performance engineering, photography, and whatever else I have been thinking about.";
+
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Notes on computer architecture, RISC-V, and performance engineering.",
+  description: DESCRIPTION,
   openGraph: {
     title: "Blog",
-    description: "Notes on computer architecture, RISC-V, and performance engineering.",
+    description: DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
     title: "Blog",
-    description: "Notes on computer architecture, RISC-V, and performance engineering.",
+    description: DESCRIPTION,
   },
 };
 
@@ -32,10 +35,13 @@ export default function BlogPage() {
   return (
     <section id="blog">
       <BlurFade delay={BLUR_FADE_DELAY}>
-        <h1 className="text-2xl font-semibold tracking-tight mb-2">Blog <span className="ml-1 bg-card border border-border rounded-md px-2 py-1 text-muted-foreground text-sm">{sortedPosts.length} posts</span></h1>
-        <p className="text-sm text-muted-foreground mb-8">
-          Notes on computer architecture, RISC-V, and performance engineering.
-        </p>
+        <h1 className="text-2xl font-semibold tracking-tight mb-2">
+          Blog{" "}
+          <span className="ml-1 bg-card border border-border rounded-md px-2 py-1 text-muted-foreground text-sm">
+            {sortedPosts.length} posts
+          </span>
+        </h1>
+        <p className="text-sm text-muted-foreground mb-8">{DESCRIPTION}</p>
       </BlurFade>
 
       {sortedPosts.length > 0 ? (
