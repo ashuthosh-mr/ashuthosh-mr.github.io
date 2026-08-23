@@ -7,14 +7,16 @@
   },
   "scripts": {
     "dev": "next dev",
-    "prebuild": "tsx scripts/generate-og.ts",
+    "prebuild": "node scripts/generate-photos.mjs && tsx scripts/generate-og.ts",
     "build": "next build",
     "postbuild": "node scripts/generate-sitemap.mjs",
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "generate:og": "tsx scripts/generate-og.ts",
-    "generate:sitemap": "node scripts/generate-sitemap.mjs"
+    "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "predev": "node scripts/generate-photos.mjs",
+    "generate:photos": "node scripts/generate-photos.mjs"
   },
   "dependencies": {
     "@content-collections/mdx": "^0.2.2",

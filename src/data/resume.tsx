@@ -140,11 +140,7 @@ export const DATA = {
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/blog", icon: PenLineIcon, label: "Blog" },
     { href: "/bookshelf", icon: BookOpenIcon, label: "Bookshelf" },
-    {
-      href: "https://ashuthosh.de/foto",
-      icon: CameraIcon,
-      label: "Photography",
-    },
+    { href: "/foto", icon: CameraIcon, label: "Photography" },
   ],
   contact: {
     email: "ashuthoshmr25@gmail.com",

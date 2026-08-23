@@ -41,6 +41,7 @@ async function generateSitemap() {
       changefreq: "weekly",
       lastmod: today,
     },
+    { url: "/foto/", priority: "0.8", changefreq: "weekly", lastmod: today },
   ];
 
   /** Blog post routes (from content/*.mdx) */
@@ -83,7 +84,24 @@ async function generateSitemap() {
     console.warn("No books directory found, skipping book routes.");
   }
 
-  const allRoutes = [...staticRoutes, ...blogRoutes, ...bookRoutes];
+  /** Album routes (from the manifest that scripts/generate-photos.mjs writes) */
+  let albumRoutes = [];
+  try {
+    const { readFile } = await import("fs/promises");
+    const manifest = JSON.parse(
+      await readFile(path.join(root, "src", "data", "photos.generated.json"), "utf-8")
+    );
+    albumRoutes = manifest.map((album) => ({
+      url: `/foto/${album.slug}/`,
+      priority: "0.7",
+      changefreq: "monthly",
+      lastmod: today,
+    }));
+  } catch {
+    console.warn("No photo manifest found, skipping album routes.");
+  }
+
+  const allRoutes = [...staticRoutes, ...blogRoutes, ...bookRoutes, ...albumRoutes];
 
   const urlEntries = allRoutes
     .map(
