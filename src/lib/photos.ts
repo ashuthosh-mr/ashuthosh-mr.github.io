@@ -28,6 +28,8 @@ export type Album = {
 
 type Manifest = {
   albums: Album[];
+  /** Photos dropped straight into `photos/`, belonging to no album. */
+  singles: Photo[];
   featured: FeaturedPhoto[];
   /** "curated" when photos/featured.json picked them, "latest" when derived. */
   featuredMode: "curated" | "latest";
@@ -37,8 +39,15 @@ type Manifest = {
 const data = manifest as Manifest;
 
 export const albums = data.albums;
-export const featured = data.featured;
+export const singles = data.singles ?? [];
 export const featuredMode = data.featuredMode;
+
+/**
+ * The individual photographs at the top of /foto: loose frames first, since
+ * they are the most recent additions, then the curated picks from albums.
+ * Loose frames carry no album, so the lightbox simply omits the album link.
+ */
+export const frames: (Photo | FeaturedPhoto)[] = [...singles, ...data.featured];
 
 export function getAlbum(slug: string) {
   return albums.find((album) => album.slug === slug);

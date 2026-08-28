@@ -297,6 +297,16 @@
       ]
     }
   ],
+  "singles": [
+    {
+      "name": "cat-in-the-sun",
+      "thumb": "/foto/_singles/cat-in-the-sun-thumb.webp",
+      "full": "/foto/_singles/cat-in-the-sun-full.webp",
+      "width": 1920,
+      "height": 2560,
+      "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAQCdASoMABAABABoJYwAAxPrNGJPwAD+6k0Bdp6H4by2hyp1ipvD+CTOSoeZlV1kYMk8puS6jGFVZ+PR8KzXI1gJxQSBkH9F8uC1uhC68vAA"
+    }
+  ],
   "featured": [
     {
       "name": "03",

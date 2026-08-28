@@ -12,6 +12,16 @@ Each folder here becomes an album at `/foto/<folder-name>`.
 That is the whole flow - it works from GitHub's web or mobile UI, no config
 file and no code change needed.
 
+## Adding a single photo, with no album
+
+Drop it straight into `photos/`, in no folder at all:
+
+    photos/cat-in-the-sun.jpg
+
+It appears on `/foto` among the individual photographs at the top and never
+becomes an album of one. Loose frames sort by filename and come before the
+curated picks, so a `2026-08-` style prefix keeps them in the order you want.
+
 ## Optional polish
 
 Add an `album.json` beside the photos to override anything derived:

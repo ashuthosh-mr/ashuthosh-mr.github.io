@@ -6,6 +6,9 @@
  * are shown instead, so the strip is never empty.
  *
  * Drop images into a folder under `photos/` and that folder becomes an album.
+ * Drop one straight into `photos/` itself, in no folder, and it is a loose frame:
+ * it shows on /foto among the individual photographs at the top, and never
+ * appears as an album of one.
  * Nothing else is required: the album title is derived from the folder name and
  * the photo order follows filename order (natural sort, so 2.jpg precedes 10.jpg).
  *
@@ -78,8 +81,8 @@ function cacheKey(stats) {
     .digest("hex");
 }
 
-async function processPhoto({ album, file, outDir, cache, nextCache }) {
-  const srcPath = path.join(SRC_DIR, album, file);
+async function processPhoto({ album, file, outDir, cache, nextCache, srcDir }) {
+  const srcPath = path.join(srcDir ?? path.join(SRC_DIR, album), file);
   const name = path.basename(file, path.extname(file));
   const stats = await stat(srcPath);
   const key = cacheKey(stats);
@@ -118,6 +121,35 @@ async function processPhoto({ album, file, outDir, cache, nextCache }) {
 
   nextCache[`${album}/${file}`] = { key, photo };
   return photo;
+}
+
+/**
+ * Images sitting directly in `photos/`, belonging to no album. They share the
+ * derivative pipeline with album photos and land in `public/foto/_singles/`,
+ * which is underscore-prefixed so it cannot collide with an album's slug.
+ */
+async function buildSingles(cache, nextCache) {
+  const outDir = path.join(OUT_DIR, "_singles");
+  let entries;
+  try {
+    entries = await readdir(SRC_DIR, { withFileTypes: true });
+  } catch {
+    return [];
+  }
+
+  const files = entries
+    .filter((entry) => entry.isFile() && IMAGE_RE.test(entry.name))
+    .map((entry) => entry.name)
+    .sort(naturalSort.compare);
+
+  if (files.length === 0) return [];
+  await mkdir(outDir, { recursive: true });
+
+  const photos = [];
+  for (const file of files) {
+    photos.push(await processPhoto({ album: "_singles", file, outDir, cache, nextCache, srcDir: SRC_DIR }));
+  }
+  return photos;
 }
 
 async function buildAlbum(album, cache, nextCache) {
@@ -165,6 +197,8 @@ async function main() {
     if (built) albums.push(built);
   }
 
+  const singles = await buildSingles(cache, nextCache);
+
   // Explicit `order` wins; the rest fall back to newest date first, then title.
   albums.sort((a, b) => {
     if (a.order !== null || b.order !== null) {
@@ -210,13 +244,14 @@ async function main() {
   await mkdir(path.dirname(MANIFEST), { recursive: true });
   await writeFile(
     MANIFEST,
-    `${JSON.stringify({ albums, featured, featuredMode }, null, 2)}\n`
+    `${JSON.stringify({ albums, singles, featured, featuredMode }, null, 2)}\n`
   );
   await writeFile(CACHE, `${JSON.stringify(nextCache, null, 2)}\n`);
 
   const total = albums.reduce((sum, album) => sum + album.photos.length, 0);
   console.log(
-    `[photos] ${albums.length} album(s), ${total} photo(s), ${featured.length} featured (${featuredMode})`
+    `[photos] ${albums.length} album(s), ${total} photo(s), ` +
+      `${singles.length} loose frame(s), ${featured.length} featured (${featuredMode})`
   );
 }
 

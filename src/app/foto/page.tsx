@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import BlurFade from "@/components/magicui/blur-fade";
 import PhotoLightbox from "@/components/photo-lightbox";
-import { albumMeta, albums, featured, featuredMode } from "@/lib/photos";
+import { albumMeta, albums, frames, featuredMode, singles } from "@/lib/photos";
 import { withBasePath } from "@/lib/utils";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -22,10 +22,9 @@ export const metadata: Metadata = {
 const BLUR_FADE_DELAY = 0.04;
 
 export default function FotoPage() {
-  const photoCount = albums.reduce(
-    (sum, album) => sum + album.photos.length,
-    0,
-  );
+  const photoCount =
+    albums.reduce((sum, album) => sum + album.photos.length, 0) +
+    singles.length;
 
   return (
     <main className="min-h-dvh flex flex-col gap-12">
@@ -48,10 +47,10 @@ export default function FotoPage() {
           </div>
         </BlurFade>
 
-        {featured.length > 0 && (
+        {frames.length > 0 && (
           <div className="photo-breakout">
             <PhotoLightbox
-              photos={featured}
+              photos={frames}
               albumTitle="Photography"
               columns="columns-2 lg:columns-3"
             />
