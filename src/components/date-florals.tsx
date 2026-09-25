@@ -113,49 +113,6 @@ export function Ornament({ className }: { className?: string }) {
   );
 }
 
-/** Wax-seal monogram. Decorative on the gate, a sign-off on the invitation. */
-export function Seal({
-  size = 64,
-  className,
-}: {
-  size?: number;
-  className?: string;
-}) {
-  return (
-    <svg
-      viewBox="0 0 64 64"
-      width={size}
-      height={size}
-      className={className}
-      aria-hidden
-      focusable="false"
-    >
-      <circle cx="32" cy="32" r="27" {...stroke} strokeWidth={1} />
-      <circle
-        cx="32"
-        cy="32"
-        r="23"
-        {...stroke}
-        strokeWidth={0.6}
-        strokeDasharray="1.5 3.5"
-      />
-      <Leaf x={32} y={13.5} rotate={-118} scale={0.5} />
-      <Leaf x={32} y={50.5} rotate={62} scale={0.5} />
-      <text
-        x="32"
-        y="37.5"
-        textAnchor="middle"
-        fontSize="13"
-        letterSpacing="0.5"
-        fill="currentColor"
-        fontFamily="var(--font-serif-invite), ui-serif, Georgia, serif"
-      >
-        A·N
-      </text>
-    </svg>
-  );
-}
-
 /** A single petal, falling once when the invitation unlocks. */
 export function Petal({ size = 14 }: { size?: number }) {
   return (

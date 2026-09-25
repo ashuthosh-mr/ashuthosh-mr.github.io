@@ -1,6 +1,6 @@
 "use client";
 
-import { Ornament, Petal, Seal, Sprig } from "@/components/date-florals";
+import { Ornament, Petal, Sprig } from "@/components/date-florals";
 import { DATE_EVENT, buildIcs, googleCalendarUrl } from "@/lib/calendar";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -179,8 +179,8 @@ function Gate({
     <div
       className={`inv-card inv-gate inv-enter${stage === "leaving" ? " inv-leaving" : ""}`}
     >
-      <div className="inv-gate-seal">
-        <Seal size={58} />
+      <div className="inv-gate-flourish">
+        <Ornament />
       </div>
 
       <p className="inv-eyebrow" style={{ marginTop: "1.125rem" }}>
@@ -388,9 +388,6 @@ function Invitation({
         className="inv-foot inv-stagger"
         style={{ "--i": 9 } as React.CSSProperties}
       >
-        <span className="inv-foot-seal">
-          <Seal size={42} />
-        </span>
         <p>
           This invitation is non-transferable and, regrettably, includes no
           slide deck. Punctuality appreciated; over-running is permitted.
