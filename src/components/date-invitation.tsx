@@ -55,6 +55,7 @@ export function DateInvitation() {
   const [shake, setShake] = useState(0);
   const [petals, setPetals] = useState<FallingPetal[]>([]);
   const [downloaded, setDownloaded] = useState(false);
+  const [archiveOpen, setArchiveOpen] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   // The page sits on a light palette while the rest of the site is dark, so
@@ -135,11 +136,16 @@ export function DateInvitation() {
 
       <div className="inv-shell">
         {stage === "invitation" ? (
-          <Invitation
-            headingRef={headingRef}
-            onDownload={downloadIcs}
-            downloaded={downloaded}
-          />
+          <>
+            <StatusBanner />
+            <MeetingMinutes headingRef={headingRef} />
+            <ArchiveSection
+              open={archiveOpen}
+              onToggle={() => setArchiveOpen((o) => !o)}
+              onDownload={downloadIcs}
+              downloaded={downloaded}
+            />
+          </>
         ) : (
           <Gate
             stage={stage}
@@ -159,6 +165,10 @@ export function DateInvitation() {
     </div>
   );
 }
+
+/* ------------------------------------------------------------------ */
+/*  Gate                                                               */
+/* ------------------------------------------------------------------ */
 
 function Gate({
   stage,
@@ -243,50 +253,339 @@ function Gate({
   );
 }
 
-function Invitation({
+/* ------------------------------------------------------------------ */
+/*  Status banner                                                      */
+/* ------------------------------------------------------------------ */
+
+function StatusBanner() {
+  return (
+    <div className="inv-status">
+      <span className="inv-status-badge">
+        <span className="inv-status-check" aria-hidden>
+          ✓
+        </span>
+        Meeting concluded
+      </span>
+      <p className="inv-status-sub">
+        Official minutes have been published.
+      </p>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Meeting minutes                                                    */
+/* ------------------------------------------------------------------ */
+
+function MeetingMinutes({
   headingRef,
+}: {
+  headingRef: React.RefObject<HTMLHeadingElement | null>;
+}) {
+  return (
+    <div className="inv-minutes">
+      {/* Header card */}
+      <div
+        className="inv-card inv-stagger"
+        style={{ "--i": 0 } as React.CSSProperties}
+      >
+        <div className="inv-minutes-header">
+          <span className="inv-minutes-confidential">
+            🔒 Confidential — Meeting Minutes
+          </span>
+
+          <div className="inv-ornament" style={{ margin: "1rem 0 0.5rem" }}>
+            <Ornament />
+          </div>
+
+          <h1
+            className="inv-title"
+            ref={headingRef}
+            tabIndex={-1}
+            style={{ textAlign: "center", marginTop: "0.5rem" }}
+          >
+            Minutes of Our First Date 🌹
+          </h1>
+        </div>
+
+        <div className="inv-minutes-meta">
+          <span>
+            <strong>Date:</strong> Sunday, September 27, 2026
+          </span>
+          <span>
+            <strong>Venue:</strong> Dual Room, Indiranagar, Bengaluru
+          </span>
+          <span>
+            <strong>Attendees:</strong> Ashuthosh &amp; Nithya
+          </span>
+          <span>
+            <strong>Meeting commenced:</strong> 12:45 PM IST
+          </span>
+          <span className="inv-minutes-status">
+            <strong>Status:</strong>
+            <span className="inv-minutes-status-dot" aria-hidden />
+            Successfully concluded
+          </span>
+        </div>
+      </div>
+
+      {/* Executive summary */}
+      <div
+        className="inv-card inv-stagger"
+        style={{ "--i": 1 } as React.CSSProperties}
+      >
+        <h2 className="inv-section-label">Executive summary</h2>
+        <div className="inv-summary">
+          <p>A highly anticipated meeting was successfully conducted.</p>
+          <p>
+            The engineer, previously known for excessive texting, experienced an
+            unexpected reduction in verbal output.
+          </p>
+          <p>
+            Preliminary investigation suggests that the attendee being
+            exceptionally cute was the primary contributing factor. 🙈
+          </p>
+        </div>
+      </div>
+
+      {/* Culinary findings */}
+      <div
+        className="inv-card inv-stagger"
+        style={{ "--i": 2 } as React.CSSProperties}
+      >
+        <h2 className="inv-section-label">Culinary findings</h2>
+
+        <div className="inv-culinary-item">
+          <p className="inv-culinary-name">
+            1. Mushroom Quesadillas
+          </p>
+          <p className="inv-culinary-verdict">
+            According to Nithya, suspiciously similar to Malabar parotta. The
+            engineer has neither confirmed nor denied these allegations.
+          </p>
+        </div>
+
+        <div className="inv-culinary-item">
+          <p className="inv-culinary-name">
+            2. Potato-Based Noodles
+          </p>
+          <p className="inv-culinary-verdict">
+            Overall assessment: Okay. A respectable supporting character in
+            today&apos;s culinary proceedings.
+          </p>
+        </div>
+
+        <div className="inv-culinary-item">
+          <p className="inv-culinary-name">
+            3. Mont Blanc
+          </p>
+          <p className="inv-culinary-verdict">
+            Cold brew, vanilla cream and orange notes. Nithya&apos;s favourite
+            discovery of the afternoon.
+          </p>
+          <p className="inv-culinary-verdict">
+            <em>Officially granted a special mention in the minutes.</em>
+          </p>
+          <div className="inv-drink-highlight">
+            ☕ Special mention — Nithya&apos;s pick of the day
+          </div>
+        </div>
+      </div>
+
+      {/* Technical incident report */}
+      <div
+        className="inv-card inv-stagger"
+        style={{ "--i": 3 } as React.CSSProperties}
+      >
+        <h2 className="inv-section-label">Technical incident report</h2>
+        <div className="inv-incident">
+          <div className="inv-incident-grid">
+            <div className="inv-incident-row">
+              <span className="inv-incident-label">Status</span>
+              <span className="inv-incident-value">
+                <span className="inv-incident-badge">
+                  <span className="inv-incident-badge-dot" aria-hidden />
+                  Unexpected system behaviour
+                </span>
+              </span>
+            </div>
+            <div className="inv-incident-row">
+              <span className="inv-incident-label">Incident</span>
+              <span className="inv-incident-value">
+                Engineer significantly quieter than his texting history
+                suggested.
+              </span>
+            </div>
+            <div className="inv-incident-row">
+              <span className="inv-incident-label">Root cause</span>
+              <span className="inv-incident-value">
+                Excessive cuteness detected.
+              </span>
+            </div>
+            <div className="inv-incident-row">
+              <span className="inv-incident-label">Impact</span>
+              <span className="inv-incident-value">
+                Temporary overheating and reduced conversational throughput.
+              </span>
+            </div>
+            <div className="inv-incident-row">
+              <span className="inv-incident-label">Resolution</span>
+              <span className="inv-incident-value">
+                Further investigation pending. Engineer currently recovering
+                from unexpected cuteness exposure. 🙈
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Action items */}
+      <div
+        className="inv-card inv-stagger"
+        style={{ "--i": 4 } as React.CSSProperties}
+      >
+        <h2 className="inv-section-label">Action items</h2>
+        <ul className="inv-actions">
+          <li className="inv-action-item">
+            <span className="inv-action-check" aria-hidden>
+              <span className="inv-action-box" />
+            </span>
+            <span>
+              Engineer to improve in-person conversational throughput.
+            </span>
+          </li>
+          <li className="inv-action-item">
+            <span className="inv-action-check" aria-hidden>
+              <span className="inv-action-box" />
+            </span>
+            <span>
+              Nithya to recover from her cold and get some proper sleep.
+            </span>
+          </li>
+          <li className="inv-action-item">
+            <span className="inv-action-check" aria-hidden>
+              <span className="inv-action-box" />
+            </span>
+            <span>
+              Both parties to remember that mushroom quesadillas are apparently
+              Malabar parotta&apos;s international cousins.
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      {/* Personal note */}
+      <div
+        className="inv-personal inv-stagger"
+        style={{ "--i": 5 } as React.CSSProperties}
+      >
+        <h2 className="inv-section-label" style={{ margin: 0 }}>
+          Personal note from the engineer
+        </h2>
+        <p className="inv-personal-quote">
+          &ldquo;You looked so cute today. 🥺❤️
+        </p>
+        <p className="inv-personal-closing">
+          I know I was quieter than I am over text, but I genuinely had a lovely
+          time with you. Thank you for making time to meet me even though you
+          weren&apos;t feeling your best.
+        </p>
+        <p className="inv-personal-closing">
+          I&apos;d love to see you again sometime. Until then, please get some
+          proper rest. 🌹&rdquo;
+        </p>
+        <span className="inv-personal-heart" aria-hidden>
+          ❤️
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Archive section (original invitation)                              */
+/* ------------------------------------------------------------------ */
+
+function ArchiveSection({
+  open,
+  onToggle,
   onDownload,
   downloaded,
 }: {
-  headingRef: React.RefObject<HTMLHeadingElement | null>;
+  open: boolean;
+  onToggle: () => void;
   onDownload: () => void;
   downloaded: boolean;
 }) {
   return (
-    <div className="inv-card inv-enter">
-      <div
-        className="inv-head inv-stagger"
-        style={{ "--i": 0 } as React.CSSProperties}
+    <div
+      className="inv-archive inv-stagger"
+      style={{ "--i": 6 } as React.CSSProperties}
+    >
+      <button
+        className="inv-archive-toggle"
+        onClick={onToggle}
+        aria-expanded={open}
+        aria-controls="inv-archive-panel"
       >
+        Archived: Original Meeting Invitation 🌹
+        <span className="inv-archive-chevron" aria-hidden>
+          ▼
+        </span>
+      </button>
+      <div
+        id="inv-archive-panel"
+        className="inv-archive-body"
+        data-open={open}
+        role="region"
+        aria-label="Original invitation"
+      >
+        <div className="inv-archive-inner">
+          <OriginalInvitation
+            onDownload={onDownload}
+            downloaded={downloaded}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Original invitation (preserved)                                    */
+/* ------------------------------------------------------------------ */
+
+function OriginalInvitation({
+  onDownload,
+  downloaded,
+}: {
+  onDownload: () => void;
+  downloaded: boolean;
+}) {
+  return (
+    <div className="inv-card">
+      <div className="inv-head">
         <span className="inv-eyebrow">Confidential</span>
         <span className="inv-ref">Ref · AMR/NR-27.09</span>
       </div>
 
-      <div
-        className="inv-ornament inv-stagger"
-        style={{ "--i": 1 } as React.CSSProperties}
-      >
+      <div className="inv-ornament">
         <Ornament />
       </div>
 
-      <div className="inv-stagger" style={{ "--i": 2 } as React.CSSProperties}>
-        <h1
+      <div>
+        <h2
           className="inv-title"
-          ref={headingRef}
-          tabIndex={-1}
           style={{ textAlign: "center" }}
         >
           A Date With a Pro 😼
-        </h1>
+        </h2>
         <p className="inv-lede" style={{ textAlign: "center" }}>
           Dear <strong>Nithya</strong>, your presence is officially requested.
         </p>
       </div>
 
-      <div
-        className="inv-slot inv-stagger"
-        style={{ "--i": 3 } as React.CSSProperties}
-      >
+      <div className="inv-slot">
         <div className="inv-slot-times">
           <span>12:00 PM</span>
           <span>1:30 PM</span>
@@ -297,10 +596,7 @@ function Invitation({
         <p className="inv-slot-note">A 90-minute slot, as negotiated</p>
       </div>
 
-      <dl
-        className="inv-details inv-stagger"
-        style={{ "--i": 4 } as React.CSSProperties}
-      >
+      <dl className="inv-details">
         <div className="inv-detail">
           <dt>Date</dt>
           <dd>Sunday, September 27, 2026</dd>
@@ -323,10 +619,7 @@ function Invitation({
         </div>
       </dl>
 
-      <section
-        className="inv-block inv-stagger"
-        style={{ "--i": 5 } as React.CSSProperties}
-      >
+      <section className="inv-block">
         <h2 className="inv-section-label">Meeting agenda</h2>
         <ol className="inv-agenda">
           <li>Investigate claims of being a pro.</li>
@@ -335,10 +628,7 @@ function Invitation({
         </ol>
       </section>
 
-      <section
-        className="inv-block inv-stagger"
-        style={{ "--i": 6 } as React.CSSProperties}
-      >
+      <section className="inv-block">
         <h2 className="inv-section-label">Dress code</h2>
         <div className="inv-chips">
           <span className="inv-chip">Dhoti</span>
@@ -350,20 +640,14 @@ function Invitation({
         </p>
       </section>
 
-      <section
-        className="inv-note inv-stagger"
-        style={{ "--i": 7 } as React.CSSProperties}
-      >
+      <section className="inv-note">
         <h2 className="inv-section-label" style={{ margin: 0 }}>
           Special note
         </h2>
         <p>Turns out, surprising you goes without saying. 🙈</p>
       </section>
 
-      <section
-        className="inv-cal inv-stagger"
-        style={{ "--i": 8 } as React.CSSProperties}
-      >
+      <section className="inv-cal">
         <p className="inv-cal-note">
           You did say I should block your calendar.
         </p>
@@ -384,10 +668,7 @@ function Invitation({
         </button>
       </section>
 
-      <div
-        className="inv-foot inv-stagger"
-        style={{ "--i": 9 } as React.CSSProperties}
-      >
+      <div className="inv-foot">
         <p>
           This invitation is non-transferable and, regrettably, includes no
           slide deck. Punctuality appreciated; over-running is permitted.
@@ -396,6 +677,10 @@ function Invitation({
     </div>
   );
 }
+
+/* ------------------------------------------------------------------ */
+/*  Petals                                                             */
+/* ------------------------------------------------------------------ */
 
 function Petals({ petals }: { petals: FallingPetal[] }) {
   return (
