@@ -483,7 +483,7 @@ function MeetingMinutes({
           Personal note from the engineer
         </h2>
         <p className="inv-personal-quote">
-          &ldquo;You looked so cute today. 🥺❤️
+          &ldquo;You looked so cute today.
         </p>
         <p className="inv-personal-closing">
           I know I was quieter than I am over text, but I genuinely had a lovely
