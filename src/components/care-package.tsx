@@ -78,7 +78,7 @@ const ITEMS: Item[] = [
     id: "food",
     icon: "🍲",
     name: "Comfort food & a Mont Blanc",
-    body: "Something warm and good to eat, on me — order whatever you actually feel like, at whatever hour you finally stop working. And a Mont Blanc too, because it is the kind of small thing that fixes a long day: cold brew, vanilla cream, orange notes.",
+    body: "A Swiggy gift card, already loaded and waiting — order whatever you actually feel like, at whatever hour you finally stop working. A Mont Blanc, maybe: cold brew, vanilla cream, orange notes. Or anything at all, it is paid for.",
     redeem: "swiggy",
   },
   {
@@ -496,8 +496,11 @@ function SwiggyRedeem() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Order on Swiggy →
+        Claim your Swiggy gift card →
       </a>
+      <p className="inv-giftcard-note">
+        ₹300, already paid — spend it on whatever you like.
+      </p>
       {GIFT_CARD.code && (
         <div>
           <span className="inv-parcel-code">

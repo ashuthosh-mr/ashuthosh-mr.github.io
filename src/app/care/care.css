@@ -331,3 +331,10 @@
     display: block;
   }
 }
+
+.inv-giftcard-note {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: #80716a;
+}
