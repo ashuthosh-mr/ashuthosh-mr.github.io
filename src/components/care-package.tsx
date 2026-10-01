@@ -1,6 +1,6 @@
 "use client";
 
-import { Ornament, Sprig } from "@/components/date-florals";
+import { HugIllustration, Ornament, Sprig } from "@/components/date-florals";
 import { useEffect, useState } from "react";
 
 /**
@@ -12,6 +12,26 @@ import { useEffect, useState } from "react";
  * late, and should not have to do anything to receive this.
  */
 
+/**
+ * Paste the gift card here and the soup becomes real.
+ *
+ * `url` is preferred: most providers issue a share link, which makes redeeming
+ * a single tap. `code` is the fallback - it renders alongside a copy button and
+ * a link to the provider. Leave both empty and the item keeps its original
+ * wording, so the page never shows a broken button.
+ *
+ * Note it is a bearer token on a public URL: anyone with this link could spend
+ * it, so send it when you mean to and keep the amount small.
+ */
+const GIFT_CARD = {
+  url: "",
+  code: "",
+  provider: "Swiggy",
+  redeemUrl: "https://www.swiggy.com/",
+};
+
+const HAS_GIFT = Boolean(GIFT_CARD.url || GIFT_CARD.code);
+
 type Item = {
   id: string;
   icon: string;
@@ -19,6 +39,10 @@ type Item = {
   /** Shown once opened. `note` is set in italic serif, as a spoken aside. */
   body: string;
   note?: string;
+  /** Rendered above the body - currently only the hug. */
+  art?: "hug";
+  /** Turns the item into something redeemable. */
+  redeemable?: boolean;
 };
 
 const ITEMS: Item[] = [
@@ -26,7 +50,10 @@ const ITEMS: Item[] = [
     id: "soup",
     icon: "🍲",
     name: "One bowl of soup",
-    body: "Imaginary, and therefore calorie-free. The real version is available on request, at an address of your choosing, with no questions asked about where that is.",
+    body: HAS_GIFT
+      ? "This one is real. Dinner is on me tonight - order whatever you actually feel like eating, at whatever hour you finally stop working."
+      : "Imaginary, and therefore calorie-free. The real version is available on request, at an address of your choosing, with no questions asked about where that is.",
+    redeemable: true,
   },
   {
     id: "montblanc",
@@ -49,9 +76,10 @@ const ITEMS: Item[] = [
   {
     id: "hugs",
     icon: "🤗",
-    name: "Two hugs",
-    body: "Amendment to the minutes of 27.09: the published record omitted two (2) hugs, one at commencement and one at conclusion. Correction filed, belatedly.",
-    note: "The oversight was mine. They were the best part of the meeting.",
+    name: "A hug",
+    body: "Sent the only way it can be from here. Hold on to it until the real one is available again.",
+    note: "You gave me two on Sunday. They were the best part of the day.",
+    art: "hug",
   },
   {
     id: "quiet",
@@ -164,6 +192,11 @@ export function CarePackage() {
                   <div className="inv-parcel-reveal" id={`parcel-${item.id}`}>
                     <div>
                       <div className="inv-parcel-body">
+                        {item.art === "hug" && (
+                          <div className="inv-hug">
+                            <HugIllustration />
+                          </div>
+                        )}
                         {item.body}
                         {item.note && (
                           <>
@@ -171,6 +204,7 @@ export function CarePackage() {
                             <em>{item.note}</em>
                           </>
                         )}
+                        {item.redeemable && HAS_GIFT && <Redeem />}
                       </div>
                     </div>
                   </div>
@@ -205,6 +239,69 @@ export function CarePackage() {
         <p className="inv-signoff">
           <a href="/date/">Minutes of 27.09</a>
         </p>
+      </div>
+    </div>
+  );
+}
+
+/** The live half of the soup: a link if we have one, otherwise a copyable code. */
+function Redeem() {
+  const [copied, setCopied] = useState(false);
+
+  if (GIFT_CARD.url) {
+    return (
+      <div className="inv-parcel-action">
+        <a
+          className="inv-button inv-button--link"
+          href={GIFT_CARD.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Claim dinner →
+        </a>
+      </div>
+    );
+  }
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(GIFT_CARD.code);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2400);
+    } catch {
+      // Clipboard can be blocked; the code is on screen to type either way.
+    }
+  };
+
+  return (
+    <div className="inv-parcel-action">
+      <a
+        className="inv-button inv-button--link"
+        href={GIFT_CARD.redeemUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open {GIFT_CARD.provider} →
+      </a>
+      <div>
+        <span className="inv-parcel-code">
+          {GIFT_CARD.code}
+          <button
+            type="button"
+            onClick={copy}
+            aria-label="Copy gift card code"
+            style={{
+              border: 0,
+              background: "none",
+              padding: 0,
+              font: "inherit",
+              color: "var(--rose)",
+              cursor: "pointer",
+            }}
+          >
+            {copied ? "copied ✓" : "copy"}
+          </button>
+        </span>
       </div>
     </div>
   );

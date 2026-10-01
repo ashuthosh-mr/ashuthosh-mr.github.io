@@ -113,6 +113,50 @@ export function Ornament({ className }: { className?: string }) {
   );
 }
 
+/**
+ * Two figures leaning into each other. Drawn rather than fetched: a stock GIF
+ * would be the only thing on the page not in this hand's style, and the gentle
+ * breathing is kinder than a three-frame loop anyway.
+ */
+export function HugIllustration({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 120 86"
+      className={className}
+      role="img"
+      aria-label="Two people hugging"
+    >
+      <g {...stroke} strokeWidth={1.3}>
+        {/* left figure, leaning right */}
+        <g className="hug-left">
+          <circle cx="44" cy="26" r="11" />
+          <path d="M33 40 C 27 48, 24 60, 24 78" />
+          <path d="M55 40 C 60 46, 62 56, 62 78" />
+        </g>
+
+        {/* right figure, leaning left */}
+        <g className="hug-right">
+          <circle cx="76" cy="26" r="11" />
+          <path d="M87 40 C 93 48, 96 60, 96 78" />
+          <path d="M65 40 C 60 46, 58 56, 58 78" />
+        </g>
+
+        {/* arms wrapping across */}
+        <path
+          className="hug-arm"
+          d="M34 46 C 46 56, 74 56, 86 46"
+          strokeWidth={1.5}
+        />
+        <path
+          className="hug-arm"
+          d="M36 54 C 48 63, 72 63, 84 54"
+          strokeWidth={1.1}
+        />
+      </g>
+    </svg>
+  );
+}
+
 /** A single petal, falling once when the invitation unlocks. */
 export function Petal({ size = 14 }: { size?: number }) {
   return (
