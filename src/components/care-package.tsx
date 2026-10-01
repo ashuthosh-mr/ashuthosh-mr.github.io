@@ -219,8 +219,6 @@ export function CarePackage() {
     unlock();
   };
 
-  const allOpen = opened.length === ITEMS.length;
-
   return (
     <div className="inv">
       <div className="inv-wash" aria-hidden />
@@ -339,15 +337,13 @@ export function CarePackage() {
               {opened.length} of {ITEMS.length} opened
             </p>
 
-            {allOpen && (
-              <div className="inv-allopen">
-                <span className="inv-section-label">Package empty</span>
-                <p>
-                  That is everything I could send without knowing where to send
-                  it. Take care of yourself, Nithya. 🌹
-                </p>
-              </div>
-            )}
+            <div className="inv-allopen">
+              <span className="inv-section-label">Note</span>
+              <p>
+                That is everything I could send without knowing where to send
+                it. Take care of yourself, Nithya. 🌹
+              </p>
+            </div>
 
             <div className="inv-flowers-cta">
               <button
