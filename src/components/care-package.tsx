@@ -8,6 +8,21 @@ import {
 } from "@/components/date-florals";
 import { useEffect, useRef, useState } from "react";
 
+type Stage = "gate" | "leaving" | "package";
+
+/**
+ * Compared in memory only - never stored, sent, or put in the URL. Punctuation
+ * and spacing are forgiven and a surname is fine, so "Nithya!", " nithya " and
+ * "Nithya R" all open it. A doorway, not authentication: the contents still
+ * exist in the page source, so the gate is for intent, not secrecy.
+ */
+function isTheRightPerson(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z]/g, "")
+    .startsWith("nithya");
+}
+
 /**
  * A care package that could not be posted, because the recipient's address is
  * classified. Each item opens on a tap - a parcel is opened one thing at a
@@ -130,6 +145,11 @@ export function CarePackage() {
   const [opened, setOpened] = useState<string[]>([]);
   const [flowers, setFlowers] = useState<FlowerPetal[]>([]);
   const nextId = useRef(0);
+  const [stage, setStage] = useState<Stage>("gate");
+  const [name, setName] = useState("");
+  const [error, setError] = useState("");
+  const [shake, setShake] = useState(0);
+  const headingRef = useRef<HTMLHeadingElement>(null);
 
   // This page keeps a light palette while the rest of the site runs dark, so it
   // paints the document itself - otherwise iOS shows dark behind the overscroll.
@@ -166,6 +186,39 @@ export function CarePackage() {
     }, 5600);
   };
 
+  const unlock = () => {
+    setError("");
+    setStage("leaving");
+    const motionOk = !window.matchMedia("(prefers-reduced-motion: reduce)")
+      .matches;
+    window.setTimeout(
+      () => {
+        setStage("package");
+        // A single welcoming shower on reveal, matching the invitation.
+        if (motionOk) showerFlowers();
+        // Move focus into the revealed content, off the vanished button.
+        window.setTimeout(() => headingRef.current?.focus(), 80);
+      },
+      motionOk ? 380 : 0,
+    );
+  };
+
+  const onSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    const entered = name.trim();
+    if (!entered) {
+      setError("A name would help. 🙂");
+      setShake((n) => n + 1);
+      return;
+    }
+    if (!isTheRightPerson(entered)) {
+      setError("Sorry, this package is reserved for someone special. 😼");
+      setShake((n) => n + 1);
+      return;
+    }
+    unlock();
+  };
+
   const allOpen = opened.length === ITEMS.length;
 
   return (
@@ -175,132 +228,149 @@ export function CarePackage() {
       <Sprig className="inv-bloom inv-bloom--br" />
 
       <div className="inv-shell">
-        <div className="inv-card inv-enter">
-          <div className="inv-head">
-            <span className="inv-eyebrow">Care package</span>
-            <span className="inv-ref">Ref · AMR/NR-01.10</span>
-          </div>
-
-          <div className="inv-ornament">
-            <Ornament />
-          </div>
-
-          <h1 className="inv-title" style={{ textAlign: "center" }}>
-            Delivery Attempted
-          </h1>
-          <p className="inv-lede" style={{ textAlign: "center" }}>
-            A package for <strong>Nithya</strong>, who has been working far too
-            hard lately and is hereby instructed to take better care of herself.
-          </p>
-
-          <div className="inv-dispatch">
-            <div className="inv-dispatch-row">
-              <span className="inv-dispatch-label">Recipient</span>
-              <span className="inv-dispatch-value">Nithya</span>
+        {stage !== "package" ? (
+          <CareGate
+            stage={stage}
+            name={name}
+            error={error}
+            shake={shake}
+            onChange={setName}
+            onSubmit={onSubmit}
+          />
+        ) : (
+          <div className="inv-card inv-enter">
+            <div className="inv-head">
+              <span className="inv-eyebrow">Care package</span>
+              <span className="inv-ref">Ref · AMR/NR-01.10</span>
             </div>
-            <div className="inv-dispatch-row">
-              <span className="inv-dispatch-label">Address</span>
-              <span className="inv-dispatch-value">
-                <strong>Classified</strong>
-              </span>
-            </div>
-            <div className="inv-dispatch-row">
-              <span className="inv-dispatch-label">Status</span>
-              <span className="inv-dispatch-value">
-                Undeliverable by post — rerouted digitally
-              </span>
-            </div>
-          </div>
 
-          <p className="inv-cal-note" style={{ marginTop: "1.25rem" }}>
-            {ITEMS.length} items enclosed. Open them in any order, or none at
-            all.
-          </p>
+            <div className="inv-ornament">
+              <Ornament />
+            </div>
 
-          <div className="inv-parcel">
-            {ITEMS.map((item) => {
-              const isOpen = opened.includes(item.id);
-              return (
-                <div
-                  key={item.id}
-                  className="inv-parcel-item"
-                  data-open={isOpen}
-                >
-                  <button
-                    type="button"
-                    className="inv-parcel-button"
-                    aria-expanded={isOpen}
-                    aria-controls={`parcel-${item.id}`}
-                    onClick={() => toggle(item.id)}
+            <h1
+              className="inv-title"
+              ref={headingRef}
+              tabIndex={-1}
+              style={{ textAlign: "center" }}
+            >
+              Delivery Attempted
+            </h1>
+            <p className="inv-lede" style={{ textAlign: "center" }}>
+              A package for <strong>Nithya</strong>, who has been working far
+              too hard lately and is hereby instructed to take better care of
+              herself.
+            </p>
+
+            <div className="inv-dispatch">
+              <div className="inv-dispatch-row">
+                <span className="inv-dispatch-label">Recipient</span>
+                <span className="inv-dispatch-value">Nithya</span>
+              </div>
+              <div className="inv-dispatch-row">
+                <span className="inv-dispatch-label">Address</span>
+                <span className="inv-dispatch-value">
+                  <strong>Classified</strong>
+                </span>
+              </div>
+              <div className="inv-dispatch-row">
+                <span className="inv-dispatch-label">Status</span>
+                <span className="inv-dispatch-value">
+                  Undeliverable by post — rerouted digitally
+                </span>
+              </div>
+            </div>
+
+            <p className="inv-cal-note" style={{ marginTop: "1.25rem" }}>
+              {ITEMS.length} items enclosed. Open them in any order, or none at
+              all.
+            </p>
+
+            <div className="inv-parcel">
+              {ITEMS.map((item) => {
+                const isOpen = opened.includes(item.id);
+                return (
+                  <div
+                    key={item.id}
+                    className="inv-parcel-item"
+                    data-open={isOpen}
                   >
-                    <span className="inv-parcel-icon" aria-hidden>
-                      {item.icon}
-                    </span>
-                    <span className="inv-parcel-name">{item.name}</span>
-                    <span className="inv-parcel-state">
-                      {isOpen ? "Opened" : "Open"}
-                    </span>
-                  </button>
-                  <div className="inv-parcel-reveal" id={`parcel-${item.id}`}>
-                    <div>
-                      <div className="inv-parcel-body">
-                        {item.art === "hug" && (
-                          <div className="inv-hug">
-                            <HugIllustration />
-                          </div>
-                        )}
-                        {item.body}
-                        {item.note && (
-                          <>
-                            <br />
-                            <em>{item.note}</em>
-                          </>
-                        )}
-                        {item.redeem === "swiggy" && <SwiggyRedeem />}
-                        {item.redeem === "spotify" && <SpotifyRedeem />}
+                    <button
+                      type="button"
+                      className="inv-parcel-button"
+                      aria-expanded={isOpen}
+                      aria-controls={`parcel-${item.id}`}
+                      onClick={() => toggle(item.id)}
+                    >
+                      <span className="inv-parcel-icon" aria-hidden>
+                        {item.icon}
+                      </span>
+                      <span className="inv-parcel-name">{item.name}</span>
+                      <span className="inv-parcel-state">
+                        {isOpen ? "Opened" : "Open"}
+                      </span>
+                    </button>
+                    <div className="inv-parcel-reveal" id={`parcel-${item.id}`}>
+                      <div>
+                        <div className="inv-parcel-body">
+                          {item.art === "hug" && (
+                            <div className="inv-hug">
+                              <HugIllustration />
+                            </div>
+                          )}
+                          {item.body}
+                          {item.note && (
+                            <>
+                              <br />
+                              <em>{item.note}</em>
+                            </>
+                          )}
+                          {item.redeem === "swiggy" && <SwiggyRedeem />}
+                          {item.redeem === "spotify" && <SpotifyRedeem />}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
 
-          <p className="inv-parcel-progress" aria-live="polite">
-            {opened.length} of {ITEMS.length} opened
-          </p>
+            <p className="inv-parcel-progress" aria-live="polite">
+              {opened.length} of {ITEMS.length} opened
+            </p>
 
-          {allOpen && (
-            <div className="inv-allopen">
-              <span className="inv-section-label">Package empty</span>
-              <p>
-                That is everything I could send without knowing where to send
-                it. Take care of yourself, Nithya. 🌹
+            {allOpen && (
+              <div className="inv-allopen">
+                <span className="inv-section-label">Package empty</span>
+                <p>
+                  That is everything I could send without knowing where to send
+                  it. Take care of yourself, Nithya. 🌹
+                </p>
+              </div>
+            )}
+
+            <div className="inv-flowers-cta">
+              <button
+                type="button"
+                className="inv-button inv-button--flowers"
+                onClick={showerFlowers}
+              >
+                Flowers for you 🌸
+              </button>
+              <p className="inv-flowers-note">
+                Press as often as the day requires.
               </p>
             </div>
-          )}
 
-          <div className="inv-flowers-cta">
-            <button
-              type="button"
-              className="inv-button inv-button--flowers"
-              onClick={showerFlowers}
-            >
-              Flowers for you 🌸
-            </button>
-            <p className="inv-flowers-note">
-              Press as often as the day requires.
-            </p>
+            <div className="inv-foot">
+              <p>
+                Contents are regrettably notional. No reply is required; this
+                package acknowledges itself. Physical delivery available on
+                provision of an address, whenever you feel like sharing one.
+              </p>
+            </div>
           </div>
-
-          <div className="inv-foot">
-            <p>
-              Contents are regrettably notional. No reply is required; this
-              package acknowledges itself. Physical delivery available on
-              provision of an address, whenever you feel like sharing one.
-            </p>
-          </div>
-        </div>
+        )}
 
         <p className="inv-signoff">
           <a href="/date/">Minutes of 27.09</a>
@@ -328,6 +398,73 @@ export function CarePackage() {
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Gate                                                               */
+/* ------------------------------------------------------------------ */
+
+function CareGate({
+  stage,
+  name,
+  error,
+  shake,
+  onChange,
+  onSubmit,
+}: {
+  stage: Stage;
+  name: string;
+  error: string;
+  shake: number;
+  onChange: (value: string) => void;
+  onSubmit: (event: React.FormEvent) => void;
+}) {
+  return (
+    <div
+      className={`inv-card inv-gate inv-enter${stage === "leaving" ? " inv-leaving" : ""}`}
+    >
+      <div className="inv-gate-flourish">
+        <Ornament />
+      </div>
+
+      <p className="inv-eyebrow" style={{ marginTop: "1.125rem" }}>
+        Private · For one person
+      </p>
+      <h1 className="inv-title inv-title--gate">Confidential Care Package</h1>
+      <p className="inv-lede">A package awaits. Please verify your identity.</p>
+
+      {/* key on `shake` restarts the animation on every failed attempt */}
+      <form className="inv-form" onSubmit={onSubmit} key={shake} noValidate>
+        <input
+          id="inv-name"
+          className={`inv-input${shake ? " inv-shake" : ""}`}
+          type="text"
+          value={name}
+          onChange={(event) => onChange(event.target.value)}
+          placeholder="Enter your name…"
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="words"
+          spellCheck={false}
+          enterKeyHint="go"
+          aria-describedby="inv-error"
+          aria-label="Your name"
+        />
+        <button className="inv-button" type="submit">
+          Unlock package <span aria-hidden>→</span>
+        </button>
+      </form>
+
+      <p className="inv-error" id="inv-error" role="alert">
+        {error}
+      </p>
+
+      <p className="inv-fineprint">
+        Nothing you type is saved or sent anywhere. It stays in this browser
+        tab.
+      </p>
     </div>
   );
 }
