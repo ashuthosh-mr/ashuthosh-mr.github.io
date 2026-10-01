@@ -34,15 +34,13 @@ const GIFT_CARD = {
   redeemUrl: "https://www.swiggy.com/",
 };
 
-const HAS_GIFT = Boolean(GIFT_CARD.url || GIFT_CARD.code);
-
 /**
  * Paste the Spotify playlist link here when it is ready. Until then the item
  * shows a gentle "coming soon" line instead of a button, so the page can be
  * sent before the playlist is finished.
  */
 const PLAYLIST = {
-  url: "",
+  url: "https://open.spotify.com/playlist/7Gu8VefWadgnIlylWGS0WO",
 };
 
 const HAS_PLAYLIST = Boolean(PLAYLIST.url);
@@ -64,10 +62,8 @@ const ITEMS: Item[] = [
   {
     id: "food",
     icon: "🍲",
-    name: "Lunch & a Mont Blanc",
-    body: HAS_GIFT
-      ? "Dinner is on me tonight — order whatever you actually feel like, at whatever hour you finally stop working. And the Mont Blanc (cold brew, vanilla cream, orange — your pick of the day) stays reserved in your name for whenever you collect it."
-      : "A proper meal, plus the Mont Blanc you picked on the 27th — cold brew, vanilla cream, orange notes. Both held in your name, redeemable whenever you like.",
+    name: "Comfort food & a Mont Blanc",
+    body: "Something warm and good to eat, on me — order whatever you actually feel like, at whatever hour you finally stop working. And a Mont Blanc too, because it is the kind of small thing that fixes a long day: cold brew, vanilla cream, orange notes.",
     redeem: "swiggy",
   },
   {
@@ -336,26 +332,14 @@ export function CarePackage() {
   );
 }
 
-/** Swiggy gift card: a link if we have one, otherwise a copyable code. */
+/**
+ * The orange Swiggy button is always shown. Until a gift card is pasted it opens
+ * Swiggy itself; set GIFT_CARD.url and it points there instead. A gift code, if
+ * given, renders below with a copy control.
+ */
 function SwiggyRedeem() {
   const [copied, setCopied] = useState(false);
-
-  if (GIFT_CARD.url) {
-    return (
-      <div className="inv-parcel-action">
-        <a
-          className="inv-button inv-button--swiggy"
-          href={GIFT_CARD.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Order dinner on Swiggy →
-        </a>
-      </div>
-    );
-  }
-
-  if (!GIFT_CARD.code) return null;
+  const href = GIFT_CARD.url || GIFT_CARD.redeemUrl;
 
   const copy = async () => {
     try {
@@ -371,32 +355,34 @@ function SwiggyRedeem() {
     <div className="inv-parcel-action">
       <a
         className="inv-button inv-button--swiggy"
-        href={GIFT_CARD.redeemUrl}
+        href={href}
         target="_blank"
         rel="noopener noreferrer"
       >
-        Open Swiggy →
+        Order on Swiggy →
       </a>
-      <div>
-        <span className="inv-parcel-code">
-          {GIFT_CARD.code}
-          <button
-            type="button"
-            onClick={copy}
-            aria-label="Copy gift card code"
-            style={{
-              border: 0,
-              background: "none",
-              padding: 0,
-              font: "inherit",
-              color: "var(--rose)",
-              cursor: "pointer",
-            }}
-          >
-            {copied ? "copied ✓" : "copy"}
-          </button>
-        </span>
-      </div>
+      {GIFT_CARD.code && (
+        <div>
+          <span className="inv-parcel-code">
+            {GIFT_CARD.code}
+            <button
+              type="button"
+              onClick={copy}
+              aria-label="Copy gift card code"
+              style={{
+                border: 0,
+                background: "none",
+                padding: 0,
+                font: "inherit",
+                color: "var(--rose)",
+                cursor: "pointer",
+              }}
+            >
+              {copied ? "copied ✓" : "copy"}
+            </button>
+          </span>
+        </div>
+      )}
     </div>
   );
 }
