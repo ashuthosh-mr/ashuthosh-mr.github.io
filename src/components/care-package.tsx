@@ -29,7 +29,7 @@ import { useEffect, useRef, useState } from "react";
  * so send it when you mean to and keep the amount small.
  */
 const GIFT_CARD = {
-  url: "",
+  url: "https://r.swiggy.com/p2p/_hQfT7Cyapdo5L75qM8q4A==",
   code: "",
   redeemUrl: "https://www.swiggy.com/",
 };
