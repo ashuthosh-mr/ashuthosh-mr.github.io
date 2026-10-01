@@ -255,3 +255,79 @@
   letter-spacing: 0.06em;
   color: var(--ink);
 }
+
+/* ---------- brand redeem buttons ---------- */
+
+.inv-button--swiggy {
+  background: linear-gradient(135deg, #ff8c2f 0%, #fc8019 55%, #e8730f 100%);
+  color: #fff;
+  box-shadow: 0 10px 24px -12px rgba(252, 128, 25, 0.75);
+}
+.inv-button--swiggy:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 14px 28px -12px rgba(252, 128, 25, 0.8);
+}
+
+.inv-button--spotify {
+  background: linear-gradient(135deg, #22d867 0%, #1db954 55%, #159c45 100%);
+  color: #fff;
+  box-shadow: 0 10px 24px -12px rgba(29, 185, 84, 0.7);
+}
+.inv-button--spotify:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 14px 28px -12px rgba(29, 185, 84, 0.78);
+}
+
+.inv-parcel-soon {
+  margin: 0.75rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.inv-parcel-soon em {
+  font-family: var(--font-serif-invite), ui-serif, Georgia, serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #80716a;
+}
+
+/* ---------- flower button ---------- */
+
+.inv-flowers-cta {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(189, 149, 95, 0.22);
+  text-align: center;
+}
+.inv-button--flowers {
+  width: auto;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--rose);
+  border: 1px solid rgba(201, 139, 144, 0.4);
+  box-shadow: 0 6px 18px -12px rgba(160, 82, 90, 0.5);
+}
+.inv-button--flowers:hover {
+  background: #fff;
+  filter: none;
+  box-shadow: 0 10px 22px -12px rgba(160, 82, 90, 0.6);
+}
+.inv-button--flowers:active {
+  transform: translateY(1px) scale(0.98);
+}
+.inv-flowers-note {
+  margin: 0.625rem 0 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: #80716a;
+}
+
+/*
+ * The flower shower is deliberate - she pressed a button - so unlike the
+ * ambient petals it still plays under reduced motion, where `.inv-petals` is
+ * otherwise hidden. It is the whole point of the control.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .inv-shower.inv-petals {
+    display: block;
+  }
+}

@@ -1,36 +1,51 @@
 "use client";
 
-import { HugIllustration, Ornament, Sprig } from "@/components/date-florals";
-import { useEffect, useState } from "react";
+import {
+  HugIllustration,
+  Ornament,
+  Petal,
+  Sprig,
+} from "@/components/date-florals";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * A care package that could not be posted, because the recipient's address is
  * classified. Each item opens on a tap - a parcel is opened one thing at a
  * time, which is what makes it a parcel rather than a list.
  *
- * Deliberately has no gate and nothing to type: the reader is ill and working
- * late, and should not have to do anything to receive this.
+ * Deliberately has no gate and nothing to type: the reader is working late and
+ * should not have to do anything to receive this.
  */
 
 /**
- * Paste the gift card here and the soup becomes real.
+ * Paste a Swiggy gift card here and the food item becomes real.
  *
- * `url` is preferred: most providers issue a share link, which makes redeeming
- * a single tap. `code` is the fallback - it renders alongside a copy button and
- * a link to the provider. Leave both empty and the item keeps its original
- * wording, so the page never shows a broken button.
+ * `url` is preferred: a share link makes redeeming a single tap. `code` is the
+ * fallback - it renders with a copy button and a link to Swiggy. Leave both
+ * empty and the item keeps its notional wording, so the page is never shown
+ * half-wired while a card is still being bought.
  *
- * Note it is a bearer token on a public URL: anyone with this link could spend
- * it, so send it when you mean to and keep the amount small.
+ * It is a bearer token on a public URL - anyone with the link could spend it -
+ * so send it when you mean to and keep the amount small.
  */
 const GIFT_CARD = {
   url: "",
   code: "",
-  provider: "Swiggy",
   redeemUrl: "https://www.swiggy.com/",
 };
 
 const HAS_GIFT = Boolean(GIFT_CARD.url || GIFT_CARD.code);
+
+/**
+ * Paste the Spotify playlist link here when it is ready. Until then the item
+ * shows a gentle "coming soon" line instead of a button, so the page can be
+ * sent before the playlist is finished.
+ */
+const PLAYLIST = {
+  url: "",
+};
+
+const HAS_PLAYLIST = Boolean(PLAYLIST.url);
 
 type Item = {
   id: string;
@@ -41,25 +56,19 @@ type Item = {
   note?: string;
   /** Rendered above the body - currently only the hug. */
   art?: "hug";
-  /** Turns the item into something redeemable. */
-  redeemable?: boolean;
+  /** Attaches a redeemable action to the item. */
+  redeem?: "swiggy" | "spotify";
 };
 
 const ITEMS: Item[] = [
   {
-    id: "soup",
+    id: "food",
     icon: "🍲",
-    name: "One bowl of soup",
+    name: "Lunch & a Mont Blanc",
     body: HAS_GIFT
-      ? "This one is real. Dinner is on me tonight - order whatever you actually feel like eating, at whatever hour you finally stop working."
-      : "Imaginary, and therefore calorie-free. The real version is available on request, at an address of your choosing, with no questions asked about where that is.",
-    redeemable: true,
-  },
-  {
-    id: "montblanc",
-    icon: "☕",
-    name: "One Mont Blanc",
-    body: "Cold brew, vanilla cream, orange notes. Officially your pick of the day on 27.09, and formally reserved in your name until you are well enough to collect it.",
+      ? "Dinner is on me tonight — order whatever you actually feel like, at whatever hour you finally stop working. And the Mont Blanc (cold brew, vanilla cream, orange — your pick of the day) stays reserved in your name for whenever you collect it."
+      : "A proper meal, plus the Mont Blanc you picked on the 27th — cold brew, vanilla cream, orange notes. Both held in your name, redeemable whenever you like.",
+    redeem: "swiggy",
   },
   {
     id: "blanket",
@@ -70,16 +79,22 @@ const ITEMS: Item[] = [
   {
     id: "leave",
     icon: "😴",
-    name: "Medical leave, approved",
+    name: "Rest, approved",
     body: "Duration: until further notice. Approved by management without review. Conditions: sleep, and absolutely no replying to this.",
   },
   {
-    id: "hugs",
+    id: "hug",
     icon: "🤗",
     name: "A hug",
     body: "Sent the only way it can be from here. Hold on to it until the real one is available again.",
-    note: "You gave me two on Sunday. They were the best part of the day.",
     art: "hug",
+  },
+  {
+    id: "playlist",
+    icon: "🎧",
+    name: "A playlist",
+    body: "A few songs for the late nights at the desk, and the quiet drive home after. On shuffle, or not.",
+    redeem: "spotify",
   },
   {
     id: "quiet",
@@ -89,8 +104,36 @@ const ITEMS: Item[] = [
   },
 ];
 
+/* ------------------------------------------------------------------ */
+/*  Falling flowers                                                    */
+/* ------------------------------------------------------------------ */
+
+type FlowerPetal = {
+  id: number;
+  left: string;
+  size: number;
+  delay: string;
+  duration: string;
+  drift: string;
+  spin: string;
+};
+
+function makeBurst(startId: number, count = 18): FlowerPetal[] {
+  return Array.from({ length: count }, (_, index) => ({
+    id: startId + index,
+    left: `${Math.random() * 96}%`,
+    size: 10 + Math.random() * 12,
+    delay: `${Math.random() * 0.5}s`,
+    duration: `${3 + Math.random() * 2.2}s`,
+    drift: `${(Math.random() - 0.5) * 11}rem`,
+    spin: `${180 + Math.random() * 460}deg`,
+  }));
+}
+
 export function CarePackage() {
   const [opened, setOpened] = useState<string[]>([]);
+  const [flowers, setFlowers] = useState<FlowerPetal[]>([]);
+  const nextId = useRef(0);
 
   // This page keeps a light palette while the rest of the site runs dark, so it
   // paints the document itself - otherwise iOS shows dark behind the overscroll.
@@ -115,6 +158,18 @@ export function CarePackage() {
         : [...current, id],
     );
 
+  const showerFlowers = () => {
+    const startId = nextId.current;
+    nextId.current += 24;
+    const burst = makeBurst(startId);
+    setFlowers((current) => [...current, ...burst]);
+    const ids = new Set(burst.map((petal) => petal.id));
+    // Clear this burst once it has fallen, leaving any later burst untouched.
+    window.setTimeout(() => {
+      setFlowers((current) => current.filter((petal) => !ids.has(petal.id)));
+    }, 5600);
+  };
+
   const allOpen = opened.length === ITEMS.length;
 
   return (
@@ -138,8 +193,8 @@ export function CarePackage() {
             Delivery Attempted
           </h1>
           <p className="inv-lede" style={{ textAlign: "center" }}>
-            A package for <strong>Nithya</strong>, who has been unwell for over
-            a week and is still at her desk at 11pm.
+            A package for <strong>Nithya</strong>, who has been working far too
+            hard lately and is hereby instructed to take better care of herself.
           </p>
 
           <div className="inv-dispatch">
@@ -162,7 +217,8 @@ export function CarePackage() {
           </div>
 
           <p className="inv-cal-note" style={{ marginTop: "1.25rem" }}>
-            Six items enclosed. Open them in any order, or none at all.
+            {ITEMS.length} items enclosed. Open them in any order, or none at
+            all.
           </p>
 
           <div className="inv-parcel">
@@ -204,7 +260,8 @@ export function CarePackage() {
                             <em>{item.note}</em>
                           </>
                         )}
-                        {item.redeemable && HAS_GIFT && <Redeem />}
+                        {item.redeem === "swiggy" && <SwiggyRedeem />}
+                        {item.redeem === "spotify" && <SpotifyRedeem />}
                       </div>
                     </div>
                   </div>
@@ -222,10 +279,23 @@ export function CarePackage() {
               <span className="inv-section-label">Package empty</span>
               <p>
                 That is everything I could send without knowing where to send
-                it. Get well, Nithya. 🌹
+                it. Take care of yourself, Nithya. 🌹
               </p>
             </div>
           )}
+
+          <div className="inv-flowers-cta">
+            <button
+              type="button"
+              className="inv-button inv-button--flowers"
+              onClick={showerFlowers}
+            >
+              Flowers for you 🌸
+            </button>
+            <p className="inv-flowers-note">
+              Press as often as the day requires.
+            </p>
+          </div>
 
           <div className="inv-foot">
             <p>
@@ -240,28 +310,52 @@ export function CarePackage() {
           <a href="/date/">Minutes of 27.09</a>
         </p>
       </div>
+
+      {flowers.length > 0 && (
+        <div className="inv-petals inv-shower" aria-hidden>
+          {flowers.map((petal) => (
+            <span
+              key={petal.id}
+              className="inv-petal"
+              style={
+                {
+                  left: petal.left,
+                  "--delay": petal.delay,
+                  "--dur": petal.duration,
+                  "--drift": petal.drift,
+                  "--spin": petal.spin,
+                } as React.CSSProperties
+              }
+            >
+              <Petal size={petal.size} />
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
-/** The live half of the soup: a link if we have one, otherwise a copyable code. */
-function Redeem() {
+/** Swiggy gift card: a link if we have one, otherwise a copyable code. */
+function SwiggyRedeem() {
   const [copied, setCopied] = useState(false);
 
   if (GIFT_CARD.url) {
     return (
       <div className="inv-parcel-action">
         <a
-          className="inv-button inv-button--link"
+          className="inv-button inv-button--swiggy"
           href={GIFT_CARD.url}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Claim dinner →
+          Order dinner on Swiggy →
         </a>
       </div>
     );
   }
+
+  if (!GIFT_CARD.code) return null;
 
   const copy = async () => {
     try {
@@ -276,12 +370,12 @@ function Redeem() {
   return (
     <div className="inv-parcel-action">
       <a
-        className="inv-button inv-button--link"
+        className="inv-button inv-button--swiggy"
         href={GIFT_CARD.redeemUrl}
         target="_blank"
         rel="noopener noreferrer"
       >
-        Open {GIFT_CARD.provider} →
+        Open Swiggy →
       </a>
       <div>
         <span className="inv-parcel-code">
@@ -303,6 +397,30 @@ function Redeem() {
           </button>
         </span>
       </div>
+    </div>
+  );
+}
+
+/** Spotify playlist: a green button once the link exists, a note until then. */
+function SpotifyRedeem() {
+  if (!HAS_PLAYLIST) {
+    return (
+      <p className="inv-parcel-soon">
+        <em>Still being put together — the link will land here soon. 🎧</em>
+      </p>
+    );
+  }
+
+  return (
+    <div className="inv-parcel-action">
+      <a
+        className="inv-button inv-button--spotify"
+        href={PLAYLIST.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open in Spotify →
+      </a>
     </div>
   );
 }
