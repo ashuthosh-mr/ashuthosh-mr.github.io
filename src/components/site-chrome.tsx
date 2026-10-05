@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
  * reading column - because they are self-contained pages with their own
  * design. They render edge to edge instead.
  */
-const BARE_ROUTES = ["/date", "/care"];
+const BARE_ROUTES = ["/date", "/care", "/aakarsh"];
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() ?? "";

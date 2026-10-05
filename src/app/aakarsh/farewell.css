@@ -1,0 +1,303 @@
+/*
+ * A send-off page at /aakarsh — one friend wishing another well as he leaves
+ * for Germany. Self-contained light palette, painted explicitly so the site's
+ * dark theme never bleeds in. Sunset-over-the-sea, with a Lufthansa-blue plane.
+ */
+
+.fw {
+  --sky-top: #fdf4e6;
+  --sky-mid: #fbe3cf;
+  --sky-low: #f6c7b6;
+  --sea: #cfe0e6;
+  --ink: #2f3a44;
+  --ink-soft: #5f6b75;
+  --luft-blue: #05164d;
+  --luft-blue-soft: #1b2f6b;
+  --luft-yellow: #f9ba00;
+  --gold: #b87a3d;
+  --card: rgba(255, 252, 247, 0.82);
+
+  position: relative;
+  min-height: 100dvh;
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--sky-top);
+  color: var(--ink);
+  color-scheme: light;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.fw-sky {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(70rem 36rem at 80% -10%, #fff3da 0%, transparent 60%),
+    linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 48%, var(--sky-low) 72%, var(--sea) 100%);
+}
+/* A low sun glow near the horizon. */
+.fw-sun {
+  position: fixed;
+  top: 16%;
+  right: 14%;
+  width: 11rem;
+  height: 11rem;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 221, 150, 0.9) 0%, rgba(255, 221, 150, 0) 70%);
+}
+
+.fw-shell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 2.5rem 1.125rem 3rem;
+}
+
+.fw-card {
+  width: 100%;
+  max-width: 34rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(184, 122, 61, 0.22);
+  background: var(--card);
+  backdrop-filter: blur(16px) saturate(115%);
+  -webkit-backdrop-filter: blur(16px) saturate(115%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    0 26px 60px -30px rgba(47, 58, 68, 0.5),
+    0 2px 10px -4px rgba(47, 58, 68, 0.12);
+  padding: 1.75rem 1.375rem 1.75rem;
+  animation: fw-rise 640ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+@media (min-width: 40rem) {
+  .fw-card { padding: 2.5rem 2.5rem 2.25rem; border-radius: 1.75rem; }
+}
+@keyframes fw-rise {
+  from { opacity: 0; transform: translateY(16px) scale(0.99); filter: blur(5px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+.fw-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.875rem;
+  border-bottom: 1px solid rgba(184, 122, 61, 0.2);
+}
+.fw-eyebrow {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.fw-ref {
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--luft-blue-soft);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.fw-title {
+  margin: 1.25rem 0 0;
+  font-family: var(--font-serif-invite), ui-serif, Georgia, serif;
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: #28323c;
+  font-size: clamp(2rem, 8.5vw, 2.9rem);
+  text-align: center;
+}
+.fw-sub {
+  margin: 0.75rem 0 0;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.fw-sub strong { color: var(--ink); font-weight: 600; }
+
+/* ---------- plane ---------- */
+
+.fw-plane-stage {
+  position: relative;
+  height: 4.5rem;
+  margin: 1.25rem 0 0.25rem;
+  overflow: hidden;
+}
+.fw-plane {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  color: var(--luft-blue);
+  animation: fw-fly 4.5s cubic-bezier(0.45, 0, 0.3, 1) 0.4s forwards;
+  transform: translate(-6rem, -50%);
+}
+@keyframes fw-fly {
+  from { transform: translate(-6rem, -50%) rotate(-2deg); }
+  to { transform: translate(calc(100% + 40rem), -160%) rotate(-7deg); }
+}
+/* A dashed vapour trail that draws itself behind the plane. */
+.fw-trail {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  transform: translateY(-50%);
+}
+.fw-trail line {
+  stroke: rgba(184, 122, 61, 0.45);
+  stroke-width: 2;
+  stroke-dasharray: 3 7;
+  stroke-dashoffset: 1200;
+  animation: fw-trail-draw 4.5s linear 0.4s forwards;
+}
+@keyframes fw-trail-draw { to { stroke-dashoffset: 0; } }
+
+/* ---------- photo ---------- */
+
+.fw-photo {
+  margin: 1.5rem 0 0;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(184, 122, 61, 0.22);
+  box-shadow: 0 14px 34px -20px rgba(47, 58, 68, 0.5);
+  background: var(--sea);
+}
+.fw-photo img { display: block; width: 100%; height: auto; }
+.fw-caption {
+  margin: 0.625rem 0 0;
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
+/* ---------- body ---------- */
+
+.fw-section-label {
+  margin: 0 0 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.fw-note {
+  margin-top: 1.75rem;
+  display: grid;
+  gap: 0.9rem;
+}
+.fw-note p {
+  margin: 0;
+  font-size: 0.975rem;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.fw-note p.soft { color: var(--ink-soft); }
+
+/* The German line, set apart like a stamp. */
+.fw-german {
+  margin: 1.75rem 0 0;
+  border-radius: 1rem;
+  border: 1px solid rgba(5, 22, 77, 0.18);
+  background: linear-gradient(180deg, rgba(5, 22, 77, 0.05), rgba(255, 255, 255, 0.4));
+  padding: 1.1rem 1.125rem;
+  text-align: center;
+}
+.fw-german-de {
+  margin: 0;
+  font-family: var(--font-serif-invite), ui-serif, Georgia, serif;
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.35;
+  color: var(--luft-blue);
+}
+.fw-german-en {
+  margin: 0.4rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- spotify ---------- */
+
+.fw-cta { margin-top: 1.75rem; display: grid; gap: 0.5rem; }
+.fw-cta-note { margin: 0 0 0.25rem; font-size: 0.8125rem; line-height: 1.5; color: var(--ink-soft); }
+.fw-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: 100%;
+  border: 0;
+  border-radius: 0.875rem;
+  padding: 0.9rem 1.25rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #22d867 0%, #1db954 55%, #159c45 100%);
+  box-shadow: 0 10px 24px -12px rgba(29, 185, 84, 0.7);
+  transition: filter 160ms ease, box-shadow 160ms ease, transform 140ms ease;
+}
+.fw-button:hover { filter: brightness(1.05); box-shadow: 0 14px 28px -12px rgba(29, 185, 84, 0.78); }
+.fw-button:active { transform: translateY(1px); }
+
+/* ---------- boarding-pass footer ---------- */
+
+.fw-pass {
+  margin-top: 1.75rem;
+  padding-top: 1.125rem;
+  border-top: 1px dashed rgba(5, 22, 77, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.fw-pass-col { display: grid; gap: 0.15rem; }
+.fw-pass-k {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--luft-blue-soft);
+}
+.fw-pass-v {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+.fw-signoff {
+  margin: 0;
+  text-align: center;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+}
+.fw-signoff a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(184, 122, 61, 0.4); }
+.fw-signoff a:hover { color: var(--gold); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fw-card, .fw-plane, .fw-trail line { animation: none; }
+  .fw-plane { transform: translate(calc(100% - 4rem), -50%) rotate(-5deg); }
+}
