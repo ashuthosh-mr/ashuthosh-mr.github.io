@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Cormorant_Garamond } from "next/font/google";
 import "./farewell.css";
 
@@ -189,7 +190,7 @@ export default function AakarshPage() {
           </div>
 
           <p className="fw-signoff">
-            <a href="/">ashuthosh.de</a>
+            <Link href="/">ashuthosh.de</Link>
           </p>
         </div>
       </div>
