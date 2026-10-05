@@ -149,9 +149,7 @@ export default function AakarshPage() {
                 Wir sehen uns auf der anderen Seite.
               </p>
               <p className="fw-german-en">
-                &ldquo;See you on the other side.&rdquo; — from the guy who
-                learned German, immersion and all, long before you ever picked
-                the country 🙈🇩🇪
+                &ldquo;See you on the other side.&rdquo; 🇩🇪
               </p>
             </div>
 
