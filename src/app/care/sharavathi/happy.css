@@ -1,0 +1,374 @@
+/*
+ * "A Little Happy Place for Sharavathi" at /care/sharavathi.
+ *
+ * Reuses the invitation/care palette and card (imported alongside this file) so
+ * it reads in the same hand. Everything specific to the happy place is prefixed
+ * .hp-. A warmer, sunnier accent is layered over the blush base.
+ */
+
+.hp {
+  --sun: #f3c969;
+  --sun-deep: #d9a63a;
+  --leaf: #6c9a5f;
+}
+
+/* A touch more sunshine in the background wash. */
+.hp .inv-wash {
+  background:
+    radial-gradient(56rem 38rem at 50% -12%, #fdeec0 0%, transparent 58%),
+    radial-gradient(60rem 40rem at 12% 4%, var(--blush) 0%, transparent 60%),
+    radial-gradient(48rem 38rem at 92% 108%, #f6e4cc 0%, transparent 58%),
+    linear-gradient(180deg, var(--ivory) 0%, var(--ivory-deep) 100%);
+}
+
+.hp-card {
+  text-align: center;
+}
+
+/* ---------- hero ---------- */
+
+.hp-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hp-title {
+  text-align: center;
+  font-size: clamp(1.9rem, 7.5vw, 2.7rem);
+}
+
+.hp-subtitle {
+  margin: 0.75rem 0 0;
+  font-family: var(--font-serif-invite), ui-serif, Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.05rem, 4.2vw, 1.25rem);
+  line-height: 1.4;
+  color: #56403f;
+}
+
+.hp-lede {
+  margin: 1.1rem 0 0;
+  font-size: 0.975rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 24rem;
+}
+
+.hp-cat-hint {
+  margin: 0.85rem 0 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: #80716a;
+}
+
+/* ---------- cat ---------- */
+
+.hp-cat-stage {
+  position: relative;
+  margin-top: 1.25rem;
+  width: 100%;
+  max-width: 17rem;
+  display: flex;
+  justify-content: center;
+}
+
+.hp-cat-button {
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 0;
+}
+.hp-cat-button:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 6px;
+  border-radius: 1rem;
+}
+
+.hp-cat-wiggle {
+  width: 11rem;
+  max-width: 60vw;
+  transform-origin: 50% 90%;
+}
+.hp-cat-wiggle[data-petting="true"] {
+  animation: hp-wiggle 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hp-cat-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 14px 22px rgba(138, 92, 84, 0.22));
+}
+
+/* Eye swap: open by default, happy arcs when petted. */
+.hp-eyes {
+  transition: opacity 180ms ease;
+}
+.hp-eyes-happy {
+  opacity: 0;
+}
+.hp-cat-blush {
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+.hp-cat-wiggle[data-happy="true"] .hp-eyes-open {
+  opacity: 0;
+}
+.hp-cat-wiggle[data-happy="true"] .hp-eyes-happy {
+  opacity: 1;
+}
+.hp-cat-wiggle[data-happy="true"] .hp-cat-blush {
+  opacity: 0.85;
+}
+
+/* A lazily swishing tail, always on but gentle. */
+.hp-cat-tail {
+  transform-origin: 150px 150px;
+  animation: hp-tail 4.2s ease-in-out infinite;
+}
+
+@keyframes hp-wiggle {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(-4deg) scale(1.04);
+  }
+  55% {
+    transform: rotate(3.5deg) scale(1.05);
+  }
+  80% {
+    transform: rotate(-1.5deg) scale(1.02);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+@keyframes hp-tail {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-9deg);
+  }
+}
+
+/* rising hearts/flowers off the cat */
+.hp-cat-floats {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+.hp-float {
+  position: absolute;
+  bottom: 28%;
+  line-height: 1;
+  opacity: 0;
+  animation: hp-float var(--dur, 1.6s) cubic-bezier(0.25, 0.6, 0.4, 1) forwards;
+  will-change: transform, opacity;
+}
+@keyframes hp-float {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.6);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift, 0), -5.5rem) scale(1.1);
+  }
+}
+
+/* speech bubble above the cat */
+.hp-bubble {
+  position: absolute;
+  bottom: calc(100% - 0.75rem);
+  left: 50%;
+  transform: translate(-50%, 6px) scale(0.96);
+  width: max-content;
+  max-width: min(18rem, 82vw);
+  padding: 0.6rem 0.85rem;
+  border-radius: 1rem;
+  background: #fffdfb;
+  border: 1px solid rgba(201, 139, 144, 0.4);
+  box-shadow: 0 12px 26px -16px rgba(138, 92, 84, 0.55);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 220ms ease,
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 3;
+}
+.hp-bubble.is-shown {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+.hp-bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: #fffdfb;
+  filter: drop-shadow(0 1px 0 rgba(201, 139, 144, 0.4));
+}
+
+/* ---------- sections ---------- */
+
+.hp-divider {
+  display: flex;
+  justify-content: center;
+  color: var(--gold);
+  margin: 1.75rem 0 0.25rem;
+  opacity: 0.8;
+}
+
+.hp-section {
+  margin-top: 1.5rem;
+}
+
+.hp-section-title {
+  margin: 0;
+  font-family: var(--font-serif-invite), ui-serif, Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(1.25rem, 5vw, 1.55rem);
+  line-height: 1.2;
+  color: #3a2c2a;
+}
+
+.hp-section-text {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.hp-action {
+  margin-top: 1rem;
+}
+.hp-action .inv-button {
+  width: auto;
+  padding: 0.75rem 1.4rem;
+}
+
+/* ---------- flowers ---------- */
+
+.hp-flowers {
+  margin-top: 1.5rem;
+}
+.hp-flower-button {
+  font-size: 1rem;
+}
+.hp-flower-msg {
+  margin: 0.85rem 0 0;
+  min-height: 1.3rem;
+  font-family: var(--font-serif-invite), ui-serif, Georgia, serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: #56403f;
+}
+
+/* ---------- chess ---------- */
+
+.hp-chess-button {
+  width: auto;
+  padding: 0.75rem 1.4rem;
+  background: linear-gradient(135deg, #5b4b45 0%, #403430 55%, #574842 100%);
+  box-shadow: 0 10px 24px -12px rgba(64, 52, 48, 0.7);
+}
+.hp-chess-reply {
+  margin: 1rem 0 0;
+  font-family: var(--font-serif-invite), ui-serif, Georgia, serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #56403f;
+}
+
+/* ---------- footer ---------- */
+
+.hp-foot {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(189, 149, 95, 0.22);
+}
+.hp-foot p {
+  margin: 0;
+  font-family: var(--font-serif-invite), ui-serif, Georgia, serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #56403f;
+}
+
+/* ---------- mute toggle ---------- */
+
+.hp-mute {
+  position: fixed;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 8;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(189, 149, 95, 0.4);
+  background: rgba(255, 253, 251, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 8px 20px -12px rgba(138, 92, 84, 0.5);
+  transition:
+    transform 140ms ease,
+    box-shadow 160ms ease;
+}
+.hp-mute:hover {
+  transform: translateY(-1px);
+}
+.hp-mute:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 2px;
+}
+
+/* ---------- reduced motion ---------- *
+ * Motion is quieted, but the deliberate flower shower (a button press) keeps
+ * playing - that is the whole point of the control, and care.css already
+ * re-enables .inv-shower under reduced motion.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .hp-cat-wiggle[data-petting="true"],
+  .hp-cat-tail,
+  .hp-float {
+    animation: none;
+  }
+  .hp-float {
+    /* Still fade in/out briefly so a tap isn't completely inert. */
+    animation: hp-float-fade 1.2s ease forwards;
+  }
+}
+@keyframes hp-float-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-2rem);
+  }
+}
