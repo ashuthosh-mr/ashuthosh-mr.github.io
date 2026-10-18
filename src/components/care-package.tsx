@@ -6,21 +6,26 @@ import {
   Petal,
   Sprig,
 } from "@/components/date-florals";
+import { HappyPlace } from "@/components/sharavathi-happy-place";
 import { useEffect, useRef, useState } from "react";
 
 type Stage = "gate" | "leaving" | "package";
 
+/** Who the entered name belongs to. The gate routes each person to their own. */
+type Who = "nithya" | "sharavathi";
+
 /**
- * Compared in memory only - never stored, sent, or put in the URL. Punctuation
+ * Normalise a typed name for comparison: lowercase, letters only. Punctuation
  * and spacing are forgiven and a surname is fine, so "Nithya!", " nithya " and
- * "Nithya R" all open it. A doorway, not authentication: the contents still
- * exist in the page source, so the gate is for intent, not secrecy.
+ * "Nithya R" all match. A doorway, not authentication: the contents still exist
+ * in the page source, so the gate is for intent, not secrecy. Nothing typed is
+ * stored, sent, or put in the URL.
  */
-function isTheRightPerson(value: string) {
-  return value
-    .toLowerCase()
-    .replace(/[^a-z]/g, "")
-    .startsWith("nithya");
+function matchName(value: string): Who | null {
+  const cleaned = value.toLowerCase().replace(/[^a-z]/g, "");
+  if (cleaned.startsWith("nithya")) return "nithya";
+  if (cleaned.startsWith("sharavathi")) return "sharavathi";
+  return null;
 }
 
 /**
@@ -146,6 +151,7 @@ export function CarePackage() {
   const [flowers, setFlowers] = useState<FlowerPetal[]>([]);
   const nextId = useRef(0);
   const [stage, setStage] = useState<Stage>("gate");
+  const [who, setWho] = useState<Who | null>(null);
   const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [shake, setShake] = useState(0);
@@ -186,18 +192,22 @@ export function CarePackage() {
     }, 5600);
   };
 
-  const unlock = () => {
+  const unlock = (person: Who) => {
     setError("");
+    setWho(person);
     setStage("leaving");
     const motionOk = !window.matchMedia("(prefers-reduced-motion: reduce)")
       .matches;
     window.setTimeout(
       () => {
         setStage("package");
-        // A single welcoming shower on reveal, matching the invitation.
-        if (motionOk) showerFlowers();
+        // Nithya's package runs its own reveal shower here; Sharavathi's happy
+        // place handles its own welcome once it mounts.
+        if (motionOk && person === "nithya") showerFlowers();
         // Move focus into the revealed content, off the vanished button.
-        window.setTimeout(() => headingRef.current?.focus(), 80);
+        if (person === "nithya") {
+          window.setTimeout(() => headingRef.current?.focus(), 80);
+        }
       },
       motionOk ? 380 : 0,
     );
@@ -211,13 +221,20 @@ export function CarePackage() {
       setShake((n) => n + 1);
       return;
     }
-    if (!isTheRightPerson(entered)) {
-      setError("Sorry, this package is reserved for someone special. 😼");
+    const person = matchName(entered);
+    if (!person) {
+      setError("Sorry, this is reserved for someone special. 😼");
       setShake((n) => n + 1);
       return;
     }
-    unlock();
+    unlock(person);
   };
+
+  // Once the gate hands off to Sharavathi, her happy place takes over the whole
+  // page. Nithya's package keeps rendering below.
+  if (stage === "package" && who === "sharavathi") {
+    return <HappyPlace />;
+  }
 
   return (
     <div className="inv">

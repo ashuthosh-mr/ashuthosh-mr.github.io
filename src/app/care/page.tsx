@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond } from "next/font/google";
 import "../date/invitation.css";
 import "./care.css";
+import "./happy.css";
 
 const serif = Cormorant_Garamond({
   subsets: ["latin"],
