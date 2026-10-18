@@ -11,10 +11,24 @@ import { useCallback, useEffect, useRef, useState } from "react";
  * invitation. Her name is used naturally in a few places - enough to feel
  * handmade, not in every line.
  *
- * Shares the /care palette and card so the two read as one hand. Nothing is
- * stored or sent; there is no gate, because this is meant to be received, not
- * unlocked.
+ * Shares the /care palette, card and name gate so the two read as one hand.
+ * Nothing is stored or sent - the gate is a doorway for intent, not security:
+ * the contents still exist in the page source.
  */
+
+type Stage = "gate" | "leaving" | "place";
+
+/**
+ * Compared in memory only - never stored, sent, or put in the URL. Punctuation
+ * and spacing are forgiven and a surname is fine, so "Sharavathi!", " sharavathi "
+ * and "Sharavathi R" all open it. The same forgiving check /care uses.
+ */
+function isTheRightPerson(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z]/g, "")
+    .startsWith("sharavathi");
+}
 
 /**
  * Paste the Spotify playlist link here once it is ready. Until then the music
@@ -374,11 +388,17 @@ export function SharavathiHappyPlace() {
   const [muted, setMuted] = useState(false);
   const [challengeOn, setChallengeOn] = useState(false);
 
+  const [stage, setStage] = useState<Stage>("gate");
+  const [name, setName] = useState("");
+  const [error, setError] = useState("");
+  const [shake, setShake] = useState(0);
+
   const flowerId = useRef(0);
   const floatId = useRef(0);
   const happyTimer = useRef<number | null>(null);
   const bubbleTimer = useRef<number | null>(null);
   const lastCatMsg = useRef("");
+  const headingRef = useRef<HTMLHeadingElement>(null);
 
   const purr = usePurr(muted);
 
@@ -422,6 +442,39 @@ export function SharavathiHappyPlace() {
     }, 5600);
   };
 
+  const unlock = () => {
+    setError("");
+    setStage("leaving");
+    const motionOk = !window.matchMedia("(prefers-reduced-motion: reduce)")
+      .matches;
+    window.setTimeout(
+      () => {
+        setStage("place");
+        // A welcoming shower on reveal, matching /care.
+        if (motionOk) showerFlowers();
+        // Move focus into the revealed page, off the vanished button.
+        window.setTimeout(() => headingRef.current?.focus(), 80);
+      },
+      motionOk ? 380 : 0,
+    );
+  };
+
+  const onSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    const entered = name.trim();
+    if (!entered) {
+      setError("A name would help. 🙂");
+      setShake((n) => n + 1);
+      return;
+    }
+    if (!isTheRightPerson(entered)) {
+      setError("Sorry, this little place is reserved for someone special. 😼");
+      setShake((n) => n + 1);
+      return;
+    }
+    unlock();
+  };
+
   const petCat = () => {
     // visual: wiggle + happy eyes
     setPets((n) => n + 1);
@@ -458,170 +511,185 @@ export function SharavathiHappyPlace() {
       <Sprig className="inv-bloom inv-bloom--tl" />
       <Sprig className="inv-bloom inv-bloom--br" />
 
-      <button
-        type="button"
-        className="hp-mute"
-        onClick={toggleMute}
-        aria-pressed={muted}
-        aria-label={muted ? "Unmute the cat" : "Mute the cat"}
-        title={muted ? "Sound off" : "Sound on"}
-      >
-        {muted ? "🔇" : "🔊"}
-      </button>
+      {stage === "place" && (
+        <button
+          type="button"
+          className="hp-mute"
+          onClick={toggleMute}
+          aria-pressed={muted}
+          aria-label={muted ? "Unmute the cat" : "Mute the cat"}
+          title={muted ? "Sound off" : "Sound on"}
+        >
+          {muted ? "🔇" : "🔊"}
+        </button>
+      )}
 
       <div className="inv-shell">
-        <div className="inv-card inv-enter hp-card">
-          {/* ---------- hero ---------- */}
-          <div className="hp-hero">
-            <span className="inv-eyebrow">A little happy place</span>
-            <h1 className="inv-title hp-title">
-              A Little Happy Place for Sharavathi <span aria-hidden>🌷</span>
-            </h1>
-            <p className="hp-subtitle">
-              A tiny corner of happiness, made just for you.
-            </p>
-
-            {/* cat, directly beneath the heading */}
-            <div className="hp-cat-stage">
-              <div
-                className={`hp-bubble${bubble ? " is-shown" : ""}`}
-                aria-live="polite"
-              >
-                {bubble}
-              </div>
-              <button
-                type="button"
-                className="hp-cat-button"
-                onClick={petCat}
-                aria-label="Pet the cat"
-              >
-                <div
-                  key={pets}
-                  className="hp-cat-wiggle"
-                  data-happy={happy}
-                  data-petting={pets > 0}
-                >
-                  <CatArt />
-                </div>
-              </button>
-              <div className="hp-cat-floats" aria-hidden>
-                {floats.map((f) => (
-                  <span
-                    key={f.id}
-                    className="hp-float"
-                    style={
-                      {
-                        left: `${f.left}%`,
-                        fontSize: `${f.size}px`,
-                        "--drift": f.drift,
-                        "--dur": f.duration,
-                      } as React.CSSProperties
-                    }
-                  >
-                    {f.glyph}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <p className="hp-cat-hint">Psst — give the cat a little pet. 🐾</p>
-
-            <p className="hp-lede">
-              Hey Sharavathi! Even busy Sundays deserve a little sunshine.{" "}
-              <span aria-hidden>☀️</span>
-            </p>
-          </div>
-
-          <div className="hp-divider">
-            <Ornament />
-          </div>
-
-          {/* ---------- unlimited flowers ---------- */}
-          <section className="hp-section hp-flowers">
-            <button
-              type="button"
-              className="inv-button inv-button--flowers hp-flower-button"
-              onClick={showerFlowers}
-            >
-              Flowers for Sharavathi 🌷
-            </button>
-            <p className="hp-flower-msg" aria-live="polite">
-              {flowerMsg}
-            </p>
-            <p className="inv-flowers-note">
-              Tap as many times as you like — the flower shop never closes.
-            </p>
-          </section>
-
-          <div className="hp-divider">
-            <Ornament />
-          </div>
-
-          {/* ---------- music corner ---------- */}
-          <section className="hp-section">
-            <h2 className="hp-section-title">
-              A little music for you, Sharavathi
-            </h2>
-            <p className="hp-section-text">
-              A few songs for a slow afternoon. Nothing plays until you press
-              it.
-            </p>
-            {HAS_PLAYLIST ? (
-              <div className="hp-action">
-                <a
-                  className="inv-button inv-button--spotify"
-                  href={PLAYLIST.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Open the playlist 🎧
-                </a>
-              </div>
-            ) : (
-              <p className="inv-parcel-soon">
-                <em>
-                  Still being put together — the playlist will land here soon.
-                  🎧
-                </em>
+        {stage !== "place" ? (
+          <HappyGate
+            stage={stage}
+            name={name}
+            error={error}
+            shake={shake}
+            onChange={setName}
+            onSubmit={onSubmit}
+          />
+        ) : (
+          <div className="inv-card inv-enter hp-card">
+            {/* ---------- hero ---------- */}
+            <div className="hp-hero">
+              <span className="inv-eyebrow">A little happy place</span>
+              <h1 className="inv-title hp-title" ref={headingRef} tabIndex={-1}>
+                A Little Happy Place for Sharavathi <span aria-hidden>🌷</span>
+              </h1>
+              <p className="hp-subtitle">
+                A tiny corner of happiness, made just for you.
               </p>
-            )}
-          </section>
 
-          <div className="hp-divider">
-            <Ornament />
-          </div>
-
-          {/* ---------- chess ---------- */}
-          <section className="hp-section">
-            <h2 className="hp-section-title">
-              Sharavathi, fancy a tiny challenge? <span aria-hidden>♟️</span>
-            </h2>
-            <p className="hp-section-text">Fancy a game of chess sometime?</p>
-            {!challengeOn ? (
-              <div className="hp-action">
+              {/* cat, directly beneath the heading */}
+              <div className="hp-cat-stage">
+                <div
+                  className={`hp-bubble${bubble ? " is-shown" : ""}`}
+                  aria-live="polite"
+                >
+                  {bubble}
+                </div>
                 <button
                   type="button"
-                  className="inv-button hp-chess-button"
-                  onClick={() => setChallengeOn(true)}
+                  className="hp-cat-button"
+                  onClick={petCat}
+                  aria-label="Pet the cat"
                 >
-                  Challenge accepted?
+                  <div
+                    key={pets}
+                    className="hp-cat-wiggle"
+                    data-happy={happy}
+                    data-petting={pets > 0}
+                  >
+                    <CatArt />
+                  </div>
                 </button>
+                <div className="hp-cat-floats" aria-hidden>
+                  {floats.map((f) => (
+                    <span
+                      key={f.id}
+                      className="hp-float"
+                      style={
+                        {
+                          left: `${f.left}%`,
+                          fontSize: `${f.size}px`,
+                          "--drift": f.drift,
+                          "--dur": f.duration,
+                        } as React.CSSProperties
+                      }
+                    >
+                      {f.glyph}
+                    </span>
+                  ))}
+                </div>
               </div>
-            ) : (
-              <p className="hp-chess-reply inv-enter">
-                Excellent. I shall prepare my very questionable opening
-                strategy. <span aria-hidden>😼</span>
+              <p className="hp-cat-hint">
+                Psst — give the cat a little pet. 🐾
               </p>
-            )}
-          </section>
 
-          {/* ---------- footer ---------- */}
-          <div className="hp-foot">
-            <p>
-              Made with a little thought, just for you, Sharavathi.{" "}
-              <span aria-hidden>☀️🌷</span>
-            </p>
+              <p className="hp-lede">
+                Hey Sharavathi! Even busy Sundays deserve a little sunshine.{" "}
+                <span aria-hidden>☀️</span>
+              </p>
+            </div>
+
+            <div className="hp-divider">
+              <Ornament />
+            </div>
+
+            {/* ---------- unlimited flowers ---------- */}
+            <section className="hp-section hp-flowers">
+              <button
+                type="button"
+                className="inv-button inv-button--flowers hp-flower-button"
+                onClick={showerFlowers}
+              >
+                Flowers for Sharavathi 🌷
+              </button>
+              <p className="hp-flower-msg" aria-live="polite">
+                {flowerMsg}
+              </p>
+              <p className="inv-flowers-note">
+                Tap as many times as you like — the flower shop never closes.
+              </p>
+            </section>
+
+            <div className="hp-divider">
+              <Ornament />
+            </div>
+
+            {/* ---------- music corner ---------- */}
+            <section className="hp-section">
+              <h2 className="hp-section-title">
+                A little music for you, Sharavathi
+              </h2>
+              <p className="hp-section-text">
+                A few songs for a slow afternoon. Nothing plays until you press
+                it.
+              </p>
+              {HAS_PLAYLIST ? (
+                <div className="hp-action">
+                  <a
+                    className="inv-button inv-button--spotify"
+                    href={PLAYLIST.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Open the playlist 🎧
+                  </a>
+                </div>
+              ) : (
+                <p className="inv-parcel-soon">
+                  <em>
+                    Still being put together — the playlist will land here soon.
+                    🎧
+                  </em>
+                </p>
+              )}
+            </section>
+
+            <div className="hp-divider">
+              <Ornament />
+            </div>
+
+            {/* ---------- chess ---------- */}
+            <section className="hp-section">
+              <h2 className="hp-section-title">
+                Sharavathi, fancy a tiny challenge? <span aria-hidden>♟️</span>
+              </h2>
+              <p className="hp-section-text">Fancy a game of chess sometime?</p>
+              {!challengeOn ? (
+                <div className="hp-action">
+                  <button
+                    type="button"
+                    className="inv-button hp-chess-button"
+                    onClick={() => setChallengeOn(true)}
+                  >
+                    Challenge accepted?
+                  </button>
+                </div>
+              ) : (
+                <p className="hp-chess-reply inv-enter">
+                  Excellent. I shall prepare my very questionable opening
+                  strategy. <span aria-hidden>😼</span>
+                </p>
+              )}
+            </section>
+
+            {/* ---------- footer ---------- */}
+            <div className="hp-foot">
+              <p>
+                Made with a little thought, just for you, Sharavathi.{" "}
+                <span aria-hidden>☀️🌷</span>
+              </p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {flowers.length > 0 && (
@@ -645,6 +713,75 @@ export function SharavathiHappyPlace() {
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Gate - the same name step /care uses                               */
+/* ------------------------------------------------------------------ */
+
+function HappyGate({
+  stage,
+  name,
+  error,
+  shake,
+  onChange,
+  onSubmit,
+}: {
+  stage: Stage;
+  name: string;
+  error: string;
+  shake: number;
+  onChange: (value: string) => void;
+  onSubmit: (event: React.FormEvent) => void;
+}) {
+  return (
+    <div
+      className={`inv-card inv-gate inv-enter hp-card${stage === "leaving" ? " inv-leaving" : ""}`}
+    >
+      <div className="inv-gate-flourish">
+        <Ornament />
+      </div>
+
+      <p className="inv-eyebrow" style={{ marginTop: "1.125rem" }}>
+        Private · For one person
+      </p>
+      <h1 className="inv-title inv-title--gate">A Little Happy Place</h1>
+      <p className="inv-lede">
+        Made for one person. Pop your name in to come inside. 🌷
+      </p>
+
+      {/* key on `shake` restarts the animation on every failed attempt */}
+      <form className="inv-form" onSubmit={onSubmit} key={shake} noValidate>
+        <input
+          id="hp-name"
+          className={`inv-input${shake ? " inv-shake" : ""}`}
+          type="text"
+          value={name}
+          onChange={(event) => onChange(event.target.value)}
+          placeholder="Enter your name…"
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="words"
+          spellCheck={false}
+          enterKeyHint="go"
+          aria-describedby="hp-error"
+          aria-label="Your name"
+        />
+        <button className="inv-button" type="submit">
+          Come on in <span aria-hidden>→</span>
+        </button>
+      </form>
+
+      <p className="inv-error" id="hp-error" role="alert">
+        {error}
+      </p>
+
+      <p className="inv-fineprint">
+        Nothing you type is saved or sent anywhere. It stays in this browser
+        tab.
+      </p>
     </div>
   );
 }
