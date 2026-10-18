@@ -22,7 +22,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
  * be sent before the playlist is finished. Never autoplays either way.
  */
 const PLAYLIST = {
-  url: "",
+  url: "https://open.spotify.com/playlist/4bBPZofM7orCJyFBvIiL6k",
 };
 
 const HAS_PLAYLIST = Boolean(PLAYLIST.url);
