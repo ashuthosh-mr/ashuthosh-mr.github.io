@@ -842,6 +842,52 @@
   margin-top: 0.75rem;
 }
 
+.inv-archive-inner > .inv-minutes {
+  margin-top: 0.75rem;
+}
+
+/* The minutes are already on screen when opened; no second entrance. */
+.inv-archive-inner .inv-stagger {
+  animation: none;
+}
+
+.inv-venue-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(189, 149, 95, 0.55);
+  text-underline-offset: 3px;
+}
+.inv-venue-link:hover { text-decoration-color: var(--rose); }
+
+.inv-progress {
+  display: inline-block;
+  margin-left: 0.125rem;
+  padding: 0.05rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(189, 149, 95, 0.35);
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 0.6875rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.inv-progress--done {
+  border-color: rgba(107, 142, 95, 0.4);
+  background: rgba(232, 245, 228, 0.8);
+  color: #4f6b45;
+}
+
+.inv-action-box--done {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  line-height: 1;
+  color: #4f6b45;
+  border-color: rgba(107, 142, 95, 0.55);
+  background: rgba(232, 245, 228, 0.9);
+}
+
 /* ---------- reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {

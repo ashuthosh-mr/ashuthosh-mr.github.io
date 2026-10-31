@@ -28,6 +28,20 @@ export const DATE_EVENT: CalendarEvent = {
   uid: "lunch-20260927-ashuthosh@ashuthosh.de",
 };
 
+export const SECOND_DATE_VENUE_URL =
+  "https://maps.app.goo.gl/ALxrvg15QQ8i815S6?g_st=ic";
+
+export const SECOND_DATE_EVENT: CalendarEvent = {
+  title: "Second Date With the Pro 🌹",
+  description:
+    "Follow-up meeting. Agenda: review last meeting's action items, more talking from the engineer, and dessert. Venue: " +
+    SECOND_DATE_VENUE_URL,
+  location: "DIHA Café, JP Nagar, Bengaluru",
+  startUtc: "20261101T143000Z", // Sun 1 Nov 2026, 20:00 IST
+  endUtc: "20261101T163000Z", //   Sun 1 Nov 2026, 22:00 IST
+  uid: "dinner-20261101-ashuthosh@ashuthosh.de",
+};
+
 export function googleCalendarUrl(event: CalendarEvent) {
   const params = new URLSearchParams({
     action: "TEMPLATE",

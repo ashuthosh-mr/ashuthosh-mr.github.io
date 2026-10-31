@@ -1,7 +1,14 @@
 "use client";
 
 import { Ornament, Petal, Sprig } from "@/components/date-florals";
-import { DATE_EVENT, buildIcs, googleCalendarUrl } from "@/lib/calendar";
+import {
+  DATE_EVENT,
+  SECOND_DATE_EVENT,
+  SECOND_DATE_VENUE_URL,
+  buildIcs,
+  googleCalendarUrl,
+  type CalendarEvent,
+} from "@/lib/calendar";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -18,7 +25,8 @@ function isTheRightPerson(value: string) {
     .startsWith("nithya");
 }
 
-const GOOGLE_URL = googleCalendarUrl(DATE_EVENT);
+const FIRST_GOOGLE_URL = googleCalendarUrl(DATE_EVENT);
+const SECOND_GOOGLE_URL = googleCalendarUrl(SECOND_DATE_EVENT);
 
 type FallingPetal = {
   id: number;
@@ -54,7 +62,9 @@ export function DateInvitation() {
   const [error, setError] = useState("");
   const [shake, setShake] = useState(0);
   const [petals, setPetals] = useState<FallingPetal[]>([]);
-  const [downloaded, setDownloaded] = useState(false);
+  // Which .ics was just downloaded, so only that button says "Downloaded".
+  const [downloaded, setDownloaded] = useState<string | null>(null);
+  const [minutesOpen, setMinutesOpen] = useState(false);
   const [archiveOpen, setArchiveOpen] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -112,20 +122,20 @@ export function DateInvitation() {
     unlock();
   };
 
-  const downloadIcs = () => {
-    const blob = new Blob([buildIcs(DATE_EVENT)], {
+  const downloadIcs = (event: CalendarEvent, filename: string) => {
+    const blob = new Blob([buildIcs(event)], {
       type: "text/calendar;charset=utf-8",
     });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "lunch-with-ashuthosh.ics";
+    link.download = filename;
     document.body.appendChild(link);
     link.click();
     link.remove();
     URL.revokeObjectURL(url);
-    setDownloaded(true);
-    window.setTimeout(() => setDownloaded(false), 2600);
+    setDownloaded(event.uid);
+    window.setTimeout(() => setDownloaded(null), 2600);
   };
 
   return (
@@ -138,13 +148,36 @@ export function DateInvitation() {
         {stage === "invitation" ? (
           <>
             <StatusBanner />
-            <MeetingMinutes headingRef={headingRef} />
+            <SecondInvitation
+              headingRef={headingRef}
+              onDownload={() =>
+                downloadIcs(SECOND_DATE_EVENT, "second-date-with-the-pro.ics")
+              }
+              downloaded={downloaded === SECOND_DATE_EVENT.uid}
+            />
             <ArchiveSection
+              id="inv-archive-minutes"
+              label="Archived: Minutes of Our First Date 📝"
+              index={2}
+              open={minutesOpen}
+              onToggle={() => setMinutesOpen((o) => !o)}
+            >
+              <MeetingMinutes />
+            </ArchiveSection>
+            <ArchiveSection
+              id="inv-archive-panel"
+              label="Archived: Original Meeting Invitation 🌹"
+              index={3}
               open={archiveOpen}
               onToggle={() => setArchiveOpen((o) => !o)}
-              onDownload={downloadIcs}
-              downloaded={downloaded}
-            />
+            >
+              <OriginalInvitation
+                onDownload={() =>
+                  downloadIcs(DATE_EVENT, "lunch-with-ashuthosh.ics")
+                }
+                downloaded={downloaded === DATE_EVENT.uid}
+              />
+            </ArchiveSection>
           </>
         ) : (
           <Gate
@@ -264,11 +297,207 @@ function StatusBanner() {
         <span className="inv-status-check" aria-hidden>
           ✓
         </span>
-        Meeting concluded
+        Follow-up meeting requested
       </span>
       <p className="inv-status-sub">
-        Official minutes have been published.
+        As per the action items of the previous meeting.
       </p>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Second invitation                                                  */
+/* ------------------------------------------------------------------ */
+
+function SecondInvitation({
+  headingRef,
+  onDownload,
+  downloaded,
+}: {
+  headingRef: React.RefObject<HTMLHeadingElement | null>;
+  onDownload: () => void;
+  downloaded: boolean;
+}) {
+  return (
+    <div
+      className="inv-card inv-stagger"
+      style={{ "--i": 1 } as React.CSSProperties}
+    >
+      <div className="inv-head">
+        <span className="inv-eyebrow">Confidential</span>
+        <span className="inv-ref">Ref · AMR/NR-01.11</span>
+      </div>
+
+      <div className="inv-ornament">
+        <Ornament />
+      </div>
+
+      <div>
+        <h1
+          className="inv-title"
+          ref={headingRef}
+          tabIndex={-1}
+          style={{ textAlign: "center" }}
+        >
+          Second Date With the Pro 😼
+        </h1>
+        <p className="inv-lede" style={{ textAlign: "center" }}>
+          Dear <strong>Nithya</strong>, following the successful conclusion of
+          our first meeting, a follow-up session is officially requested.
+        </p>
+      </div>
+
+      <div className="inv-slot">
+        <div className="inv-slot-times">
+          <span>8:00 PM</span>
+          <span>10:00 PM</span>
+        </div>
+        <div className="inv-slot-bar">
+          <span className="inv-slot-fill" />
+        </div>
+        <p className="inv-slot-note">
+          Two hours this time. Extensions will be looked upon favourably.
+        </p>
+      </div>
+
+      <dl className="inv-details">
+        <div className="inv-detail">
+          <dt>Date</dt>
+          <dd>Sunday, November 1, 2026</dd>
+        </div>
+        <div className="inv-detail">
+          <dt>Time</dt>
+          <dd>8:00 PM IST onwards</dd>
+        </div>
+        <div className="inv-detail inv-detail--wide">
+          <dt>Venue</dt>
+          <dd>
+            <a
+              className="inv-venue-link"
+              href={SECOND_DATE_VENUE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              DIHA Café, JP Nagar, Bengaluru
+            </a>
+          </dd>
+        </div>
+        <div className="inv-detail">
+          <dt>Attendees</dt>
+          <dd>Ashuthosh &amp; Nithya</dd>
+        </div>
+        <div className="inv-detail">
+          <dt>Occasion</dt>
+          <dd>Our second date</dd>
+        </div>
+      </dl>
+
+      <section className="inv-block">
+        <h2 className="inv-section-label">Meeting agenda</h2>
+        <ol className="inv-agenda">
+          <li>Review the action items from our first meeting.</li>
+          <li>
+            Engineer to demonstrate improved in-person conversational
+            throughput. Results not guaranteed.
+          </li>
+          <li>
+            Dinner, dessert and a search for this venue&apos;s answer to the
+            Mont Blanc.
+          </li>
+          <li>Continue investigating claims of being a pro. Still unverified.</li>
+        </ol>
+      </section>
+
+      <section className="inv-block">
+        <h2 className="inv-section-label">Carried forward from last time</h2>
+        <ul className="inv-actions">
+          <li className="inv-action-item">
+            <span className="inv-action-check" aria-hidden>
+              <span className="inv-action-box" />
+            </span>
+            <span>
+              Engineer to improve in-person conversational throughput.{" "}
+              <span className="inv-progress">In progress</span>
+            </span>
+          </li>
+          <li className="inv-action-item">
+            <span className="inv-action-check" aria-hidden>
+              <span className="inv-action-box inv-action-box--done">✓</span>
+            </span>
+            <span>
+              Nithya to recover from her cold and get some proper sleep.{" "}
+              <span className="inv-progress inv-progress--done">
+                Hopefully done
+              </span>
+            </span>
+          </li>
+          <li className="inv-action-item">
+            <span className="inv-action-check" aria-hidden>
+              <span className="inv-action-box" />
+            </span>
+            <span>
+              Settle whether quesadillas are just Malabar parotta abroad.{" "}
+              <span className="inv-progress">Research ongoing</span>
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <section className="inv-block">
+        <h2 className="inv-section-label">Dress code</h2>
+        <div className="inv-chips">
+          <span className="inv-chip">Your call</span>
+          <span className="inv-chip">Still your call</span>
+        </div>
+        <p className="inv-lede" style={{ margin: 0 }}>
+          The engineer will try not to get distracted. No promises. 🙈
+        </p>
+      </section>
+
+      <section className="inv-note">
+        <h2 className="inv-section-label" style={{ margin: 0 }}>
+          Risk assessment
+        </h2>
+        <p>
+          Last time&apos;s root cause, excessive cuteness, is expected to
+          happen again. The engineer has been warned and is attending anyway. 🌹
+        </p>
+      </section>
+
+      <section className="inv-cal">
+        <p className="inv-cal-note">Blocking your calendar again, as agreed.</p>
+        <a
+          className="inv-button inv-button--link"
+          href={SECOND_GOOGLE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Add to Google Calendar
+        </a>
+        <button
+          className="inv-button inv-button--ghost"
+          type="button"
+          onClick={onDownload}
+        >
+          {downloaded ? "Downloaded ✓" : "Apple / Outlook (.ics)"}
+        </button>
+        <a
+          className="inv-button inv-button--ghost inv-button--link"
+          href={SECOND_DATE_VENUE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open in Google Maps
+        </a>
+      </section>
+
+      <div className="inv-foot">
+        <p>
+          This invitation is non-transferable. Talking more than last time is
+          allowed, encouraged and honestly overdue.
+        </p>
+      </div>
     </div>
   );
 }
@@ -277,11 +506,7 @@ function StatusBanner() {
 /*  Meeting minutes                                                    */
 /* ------------------------------------------------------------------ */
 
-function MeetingMinutes({
-  headingRef,
-}: {
-  headingRef: React.RefObject<HTMLHeadingElement | null>;
-}) {
+function MeetingMinutes() {
   return (
     <div className="inv-minutes">
       {/* Header card */}
@@ -298,14 +523,12 @@ function MeetingMinutes({
             <Ornament />
           </div>
 
-          <h1
+          <h2
             className="inv-title"
-            ref={headingRef}
-            tabIndex={-1}
             style={{ textAlign: "center", marginTop: "0.5rem" }}
           >
             Minutes of Our First Date 🌹
-          </h1>
+          </h2>
         </div>
 
         <div className="inv-minutes-meta">
@@ -507,45 +730,46 @@ function MeetingMinutes({
 /* ------------------------------------------------------------------ */
 
 function ArchiveSection({
+  id,
+  label,
+  index,
   open,
   onToggle,
-  onDownload,
-  downloaded,
+  children,
 }: {
+  id: string;
+  label: string;
+  index: number;
   open: boolean;
   onToggle: () => void;
-  onDownload: () => void;
-  downloaded: boolean;
+  children: React.ReactNode;
 }) {
   return (
     <div
       className="inv-archive inv-stagger"
-      style={{ "--i": 6 } as React.CSSProperties}
+      style={{ "--i": index } as React.CSSProperties}
     >
       <button
         className="inv-archive-toggle"
         onClick={onToggle}
         aria-expanded={open}
-        aria-controls="inv-archive-panel"
+        aria-controls={id}
       >
-        Archived: Original Meeting Invitation 🌹
+        {label}
         <span className="inv-archive-chevron" aria-hidden>
           ▼
         </span>
       </button>
       <div
-        id="inv-archive-panel"
+        id={id}
         className="inv-archive-body"
         data-open={open}
         role="region"
-        aria-label="Original invitation"
+        aria-label={label}
+        // Collapsed content stays out of the tab order and screen readers.
+        inert={!open}
       >
-        <div className="inv-archive-inner">
-          <OriginalInvitation
-            onDownload={onDownload}
-            downloaded={downloaded}
-          />
-        </div>
+        <div className="inv-archive-inner">{children}</div>
       </div>
     </div>
   );
@@ -653,7 +877,7 @@ function OriginalInvitation({
         </p>
         <a
           className="inv-button inv-button--link"
-          href={GOOGLE_URL}
+          href={FIRST_GOOGLE_URL}
           target="_blank"
           rel="noopener noreferrer"
         >
