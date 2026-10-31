@@ -28,19 +28,66 @@ export const DATE_EVENT: CalendarEvent = {
   uid: "lunch-20260927-ashuthosh@ashuthosh.de",
 };
 
-export const SECOND_DATE_VENUE_URL =
-  "https://maps.app.goo.gl/ALxrvg15QQ8i815S6?g_st=ic";
+/**
+ * The second date is dinner at 8 PM, but the day and the restaurant are
+ * Nithya's call, so the event is built from whichever she picks.
+ */
+export const SECOND_DATE_DAYS = [
+  {
+    id: "sun",
+    label: "Sunday, Nov 1",
+    long: "Sunday, November 1, 2026",
+    startUtc: "20261101T143000Z", // 20:00 IST
+    endUtc: "20261101T163000Z", //   22:00 IST
+  },
+  {
+    id: "mon",
+    label: "Monday, Nov 2",
+    long: "Monday, November 2, 2026",
+    startUtc: "20261102T143000Z", // 20:00 IST
+    endUtc: "20261102T163000Z", //   22:00 IST
+  },
+] as const;
 
-export const SECOND_DATE_EVENT: CalendarEvent = {
-  title: "Second Date With the Pro 🌹",
-  description:
-    "Follow-up meeting. Agenda: review last meeting's action items, more talking from the engineer, and dessert. Venue: " +
-    SECOND_DATE_VENUE_URL,
-  location: "DIHA Café, JP Nagar, Bengaluru",
-  startUtc: "20261101T143000Z", // Sun 1 Nov 2026, 20:00 IST
-  endUtc: "20261101T163000Z", //   Sun 1 Nov 2026, 22:00 IST
-  uid: "dinner-20261101-ashuthosh@ashuthosh.de",
-};
+export const SECOND_DATE_VENUES = [
+  {
+    id: "kalpaney",
+    label: "Kalpaney",
+    long: "Kalpaney, JP Nagar, Bengaluru",
+    blurb: "Playful vegetarian comfort food",
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Kalpaney+JP+Nagar+Bengaluru",
+  },
+  {
+    id: "neemsi",
+    label: "Neemsi",
+    long: "Neemsi, JP Nagar, Bengaluru",
+    blurb: "Classic vegetarian, very cosy",
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Neemsi+Restaurant+JP+Nagar+Bengaluru",
+  },
+] as const;
+
+export type SecondDateDay = (typeof SECOND_DATE_DAYS)[number];
+export type SecondDateVenue = (typeof SECOND_DATE_VENUES)[number];
+
+export function secondDateEvent(
+  day: SecondDateDay,
+  venue: SecondDateVenue,
+): CalendarEvent {
+  return {
+    title: "Second Date With the Pro 🌹",
+    description:
+      "Follow-up dinner. Agenda: review last meeting's action items, more talking from the engineer, and dessert. Map: " +
+      venue.mapUrl,
+    location: venue.long,
+    startUtc: day.startUtc,
+    endUtc: day.endUtc,
+    // Stable per day, so re-importing after changing the venue updates the
+    // same calendar entry instead of adding a second one.
+    uid: `dinner-${day.startUtc.slice(0, 8)}-ashuthosh@ashuthosh.de`,
+  };
+}
 
 export function googleCalendarUrl(event: CalendarEvent) {
   const params = new URLSearchParams({

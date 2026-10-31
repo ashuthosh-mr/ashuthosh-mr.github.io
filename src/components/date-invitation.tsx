@@ -3,10 +3,11 @@
 import { Ornament, Petal, Sprig } from "@/components/date-florals";
 import {
   DATE_EVENT,
-  SECOND_DATE_EVENT,
-  SECOND_DATE_VENUE_URL,
+  SECOND_DATE_DAYS,
+  SECOND_DATE_VENUES,
   buildIcs,
   googleCalendarUrl,
+  secondDateEvent,
   type CalendarEvent,
 } from "@/lib/calendar";
 import Link from "next/link";
@@ -26,7 +27,6 @@ function isTheRightPerson(value: string) {
 }
 
 const FIRST_GOOGLE_URL = googleCalendarUrl(DATE_EVENT);
-const SECOND_GOOGLE_URL = googleCalendarUrl(SECOND_DATE_EVENT);
 
 type FallingPetal = {
   id: number;
@@ -150,10 +150,10 @@ export function DateInvitation() {
             <StatusBanner />
             <SecondInvitation
               headingRef={headingRef}
-              onDownload={() =>
-                downloadIcs(SECOND_DATE_EVENT, "second-date-with-the-pro.ics")
+              onDownload={(event) =>
+                downloadIcs(event, "second-date-with-the-pro.ics")
               }
-              downloaded={downloaded === SECOND_DATE_EVENT.uid}
+              downloadedUid={downloaded}
             />
             <ArchiveSection
               id="inv-archive-minutes"
@@ -297,7 +297,7 @@ function StatusBanner() {
         <span className="inv-status-check" aria-hidden>
           ✓
         </span>
-        Follow-up meeting requested
+        Follow-up dinner requested
       </span>
       <p className="inv-status-sub">
         As per the action items of the previous meeting.
@@ -313,12 +313,18 @@ function StatusBanner() {
 function SecondInvitation({
   headingRef,
   onDownload,
-  downloaded,
+  downloadedUid,
 }: {
   headingRef: React.RefObject<HTMLHeadingElement | null>;
-  onDownload: () => void;
-  downloaded: boolean;
+  onDownload: (event: CalendarEvent) => void;
+  downloadedUid: string | null;
 }) {
+  const [dayId, setDayId] = useState<string>(SECOND_DATE_DAYS[0].id);
+  const [venueId, setVenueId] = useState<string>(SECOND_DATE_VENUES[0].id);
+  const day = SECOND_DATE_DAYS.find((d) => d.id === dayId)!;
+  const venue = SECOND_DATE_VENUES.find((v) => v.id === venueId)!;
+  const event = secondDateEvent(day, venue);
+
   return (
     <div
       className="inv-card inv-stagger"
@@ -326,7 +332,7 @@ function SecondInvitation({
     >
       <div className="inv-head">
         <span className="inv-eyebrow">Confidential</span>
-        <span className="inv-ref">Ref · AMR/NR-01.11</span>
+        <span className="inv-ref">Ref · AMR/NR-02</span>
       </div>
 
       <div className="inv-ornament">
@@ -344,7 +350,7 @@ function SecondInvitation({
         </h1>
         <p className="inv-lede" style={{ textAlign: "center" }}>
           Dear <strong>Nithya</strong>, following the successful conclusion of
-          our first meeting, a follow-up session is officially requested.
+          our first meeting, a follow-up dinner is officially requested.
         </p>
       </div>
 
@@ -357,14 +363,42 @@ function SecondInvitation({
           <span className="inv-slot-fill" />
         </div>
         <p className="inv-slot-note">
-          Two hours this time. Extensions will be looked upon favourably.
+          Dinner time. Extensions will be looked upon favourably.
         </p>
       </div>
+
+      <section className="inv-block">
+        <h2 className="inv-section-label">Your call, ma&apos;am</h2>
+        <p className="inv-lede" style={{ marginTop: 0 }}>
+          The engineer has narrowed it down. The final decision rests with the
+          pro.
+        </p>
+
+        <ChoiceGroup
+          label="Day"
+          options={SECOND_DATE_DAYS.map((d) => ({ id: d.id, title: d.label }))}
+          value={dayId}
+          onChange={setDayId}
+        />
+        <ChoiceGroup
+          label="Venue"
+          options={SECOND_DATE_VENUES.map((v) => ({
+            id: v.id,
+            title: v.label,
+            sub: v.blurb,
+          }))}
+          value={venueId}
+          onChange={setVenueId}
+        />
+        <p className="inv-choice-note">
+          Text the engineer your pick. He&apos;ll be there at 8.
+        </p>
+      </section>
 
       <dl className="inv-details">
         <div className="inv-detail">
           <dt>Date</dt>
-          <dd>Sunday, November 1, 2026</dd>
+          <dd>{day.long}</dd>
         </div>
         <div className="inv-detail">
           <dt>Time</dt>
@@ -375,11 +409,11 @@ function SecondInvitation({
           <dd>
             <a
               className="inv-venue-link"
-              href={SECOND_DATE_VENUE_URL}
+              href={venue.mapUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
-              DIHA Café, JP Nagar, Bengaluru
+              {venue.long}
             </a>
           </dd>
         </div>
@@ -389,7 +423,7 @@ function SecondInvitation({
         </div>
         <div className="inv-detail">
           <dt>Occasion</dt>
-          <dd>Our second date</dd>
+          <dd>Our second date, dinner edition</dd>
         </div>
       </dl>
 
@@ -402,7 +436,7 @@ function SecondInvitation({
             throughput. Results not guaranteed.
           </li>
           <li>
-            Dinner, dessert and a search for this venue&apos;s answer to the
+            Dinner, followed by a serious search for a dessert worthy of the
             Mont Blanc.
           </li>
           <li>Continue investigating claims of being a pro. Still unverified.</li>
@@ -428,7 +462,7 @@ function SecondInvitation({
             <span>
               Nithya to recover from her cold and get some proper sleep.{" "}
               <span className="inv-progress inv-progress--done">
-                Hopefully done
+                Cold: done. Sleep: pending
               </span>
             </span>
           </li>
@@ -447,11 +481,24 @@ function SecondInvitation({
       <section className="inv-block">
         <h2 className="inv-section-label">Dress code</h2>
         <div className="inv-chips">
-          <span className="inv-chip">Your call</span>
-          <span className="inv-chip">Still your call</span>
+          <span className="inv-chip">Comfy</span>
+          <span className="inv-chip">Comfier</span>
+          <span className="inv-chip">Whatever you&apos;re already wearing</span>
         </div>
         <p className="inv-lede" style={{ margin: 0 }}>
           The engineer will try not to get distracted. No promises. 🙈
+        </p>
+      </section>
+
+      <section className="inv-note">
+        <h2 className="inv-section-label" style={{ margin: 0 }}>
+          Comfort clause
+        </h2>
+        <p>
+          Driving class, a family event, a friend, and then me. That&apos;s a
+          full day for a pro. Zero pressure: if you&apos;re tired, Monday works
+          just as well, and this meeting may be shortened, moved or turned into
+          dessert only at your discretion. 🌹
         </p>
       </section>
 
@@ -461,15 +508,17 @@ function SecondInvitation({
         </h2>
         <p>
           Last time&apos;s root cause, excessive cuteness, is expected to
-          happen again. The engineer has been warned and is attending anyway. 🌹
+          happen again. The engineer has been warned and is attending anyway.
         </p>
       </section>
 
       <section className="inv-cal">
-        <p className="inv-cal-note">Blocking your calendar again, as agreed.</p>
+        <p className="inv-cal-note">
+          {day.label} at {venue.label}. Blocking your calendar, as agreed.
+        </p>
         <a
           className="inv-button inv-button--link"
-          href={SECOND_GOOGLE_URL}
+          href={googleCalendarUrl(event)}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -478,17 +527,17 @@ function SecondInvitation({
         <button
           className="inv-button inv-button--ghost"
           type="button"
-          onClick={onDownload}
+          onClick={() => onDownload(event)}
         >
-          {downloaded ? "Downloaded ✓" : "Apple / Outlook (.ics)"}
+          {downloadedUid === event.uid ? "Downloaded ✓" : "Apple / Outlook (.ics)"}
         </button>
         <a
           className="inv-button inv-button--ghost inv-button--link"
-          href={SECOND_DATE_VENUE_URL}
+          href={venue.mapUrl}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Open in Google Maps
+          Open {venue.label} in Google Maps
         </a>
       </section>
 
@@ -497,6 +546,39 @@ function SecondInvitation({
           This invitation is non-transferable. Talking more than last time is
           allowed, encouraged and honestly overdue.
         </p>
+      </div>
+    </div>
+  );
+}
+
+function ChoiceGroup({
+  label,
+  options,
+  value,
+  onChange,
+}: {
+  label: string;
+  options: { id: string; title: string; sub?: string }[];
+  value: string;
+  onChange: (id: string) => void;
+}) {
+  return (
+    <div className="inv-choice" role="radiogroup" aria-label={label}>
+      <span className="inv-choice-label">{label}</span>
+      <div className="inv-choice-options">
+        {options.map((option) => (
+          <button
+            key={option.id}
+            type="button"
+            role="radio"
+            aria-checked={value === option.id}
+            className="inv-choice-option"
+            onClick={() => onChange(option.id)}
+          >
+            <span className="inv-choice-title">{option.title}</span>
+            {option.sub && <span className="inv-choice-sub">{option.sub}</span>}
+          </button>
+        ))}
       </div>
     </div>
   );
