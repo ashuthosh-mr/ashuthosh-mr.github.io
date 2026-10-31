@@ -4,7 +4,7 @@ import { Ornament, Petal, Sprig } from "@/components/date-florals";
 import {
   DATE_EVENT,
   SECOND_DATE_DAYS,
-  SECOND_DATE_VENUES,
+  SECOND_DATE_VENUE,
   buildIcs,
   googleCalendarUrl,
   secondDateEvent,
@@ -320,10 +320,9 @@ function SecondInvitation({
   downloadedUid: string | null;
 }) {
   const [dayId, setDayId] = useState<string>(SECOND_DATE_DAYS[0].id);
-  const [venueId, setVenueId] = useState<string>(SECOND_DATE_VENUES[0].id);
   const day = SECOND_DATE_DAYS.find((d) => d.id === dayId)!;
-  const venue = SECOND_DATE_VENUES.find((v) => v.id === venueId)!;
-  const event = secondDateEvent(day, venue);
+  const venue = SECOND_DATE_VENUE;
+  const event = secondDateEvent(day);
 
   return (
     <div
@@ -363,15 +362,15 @@ function SecondInvitation({
           <span className="inv-slot-fill" />
         </div>
         <p className="inv-slot-note">
-          Dinner time. Extensions will be looked upon favourably.
+          Dinner time. Extensions subject to Neemsi&apos;s closing time.
         </p>
       </div>
 
       <section className="inv-block">
         <h2 className="inv-section-label">Your call, ma&apos;am</h2>
         <p className="inv-lede" style={{ marginTop: 0 }}>
-          The engineer has narrowed it down. The final decision rests with the
-          pro.
+          Dinner is at Neemsi, JP Nagar. The engineer has picked the place;
+          the day is entirely up to the pro.
         </p>
 
         <ChoiceGroup
@@ -380,18 +379,8 @@ function SecondInvitation({
           value={dayId}
           onChange={setDayId}
         />
-        <ChoiceGroup
-          label="Venue"
-          options={SECOND_DATE_VENUES.map((v) => ({
-            id: v.id,
-            title: v.label,
-            sub: v.blurb,
-          }))}
-          value={venueId}
-          onChange={setVenueId}
-        />
         <p className="inv-choice-note">
-          Text the engineer your pick. He&apos;ll be there at 8.
+          Text the engineer which day. He&apos;ll be there at 8.
         </p>
       </section>
 

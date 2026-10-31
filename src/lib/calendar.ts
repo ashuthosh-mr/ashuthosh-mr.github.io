@@ -29,8 +29,8 @@ export const DATE_EVENT: CalendarEvent = {
 };
 
 /**
- * The second date is dinner at 8 PM, but the day and the restaurant are
- * Nithya's call, so the event is built from whichever she picks.
+ * The second date is dinner at 8 PM at Neemsi, but the day is Nithya's call,
+ * so the event is built from whichever she picks.
  */
 export const SECOND_DATE_DAYS = [
   {
@@ -49,32 +49,17 @@ export const SECOND_DATE_DAYS = [
   },
 ] as const;
 
-export const SECOND_DATE_VENUES = [
-  {
-    id: "kalpaney",
-    label: "Kalpaney",
-    long: "Kalpaney, JP Nagar, Bengaluru",
-    blurb: "Playful vegetarian comfort food",
-    mapUrl:
-      "https://www.google.com/maps/search/?api=1&query=Kalpaney+JP+Nagar+Bengaluru",
-  },
-  {
-    id: "neemsi",
-    label: "Neemsi",
-    long: "Neemsi, JP Nagar, Bengaluru",
-    blurb: "Classic vegetarian, very cosy",
-    mapUrl:
-      "https://www.google.com/maps/search/?api=1&query=Neemsi+Restaurant+JP+Nagar+Bengaluru",
-  },
-] as const;
+export const SECOND_DATE_VENUE = {
+  label: "Neemsi",
+  long: "Neemsi, JP Nagar 6th Phase, Bengaluru",
+  mapUrl:
+    "https://www.google.com/maps/search/?api=1&query=Neemsi+Restaurant+JP+Nagar+Bengaluru",
+};
 
 export type SecondDateDay = (typeof SECOND_DATE_DAYS)[number];
-export type SecondDateVenue = (typeof SECOND_DATE_VENUES)[number];
 
-export function secondDateEvent(
-  day: SecondDateDay,
-  venue: SecondDateVenue,
-): CalendarEvent {
+export function secondDateEvent(day: SecondDateDay): CalendarEvent {
+  const venue = SECOND_DATE_VENUE;
   return {
     title: "Second Date With the Pro 🌹",
     description:
@@ -83,8 +68,6 @@ export function secondDateEvent(
     location: venue.long,
     startUtc: day.startUtc,
     endUtc: day.endUtc,
-    // Stable per day, so re-importing after changing the venue updates the
-    // same calendar entry instead of adding a second one.
     uid: `dinner-${day.startUtc.slice(0, 8)}-ashuthosh@ashuthosh.de`,
   };
 }
